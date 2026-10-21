@@ -1,0 +1,956 @@
+{
+  "address": {
+    "label": "The Only Address",
+    "head": [
+      "The only address",
+      "on the main",
+      "Nathia road."
+    ],
+    "body": "The only private residence estate on the main Nathia Gali road, alone on the ridge line and bordered by the protected forests of Ayubia National Park. The outlook is protected by law, not by a neighbour’s goodwill.",
+    "headB": [
+      "There will never",
+      "be another."
+    ],
+    "note": "Approximate driving distances, which vary with weather and season."
+  },
+  "ascent": {
+    "words": [
+      {
+        "text": "Khyber Pakhtunkhwa",
+        "at": 0.04
+      },
+      {
+        "text": "The Galiyat",
+        "at": 0.17
+      },
+      {
+        "text": "Nathia Gali",
+        "at": 0.3
+      }
+    ],
+    "mistLine": "The mist line",
+    "eyebrow": "Nathia Gali · The Galiyat · 7,900 ft",
+    "title": [
+      "The Exceptional,",
+      "Reserved For You."
+    ],
+    "sub": [
+      "Pakistan’s most premium apartment hotel",
+      "By Elevate Holdings"
+    ],
+    "cta": "Register priority interest",
+    "cue": "Scroll to climb"
+  },
+  "chapters": [
+    {
+      "id": "ascent",
+      "no": "01",
+      "name": "The Ascent"
+    },
+    {
+      "id": "manifesto",
+      "no": "02",
+      "name": "The Reserve"
+    },
+    {
+      "id": "numbers",
+      "no": "03",
+      "name": "The Measure"
+    },
+    {
+      "id": "address",
+      "no": "04",
+      "name": "The Only Address"
+    },
+    {
+      "id": "day",
+      "no": "05",
+      "name": "One Day"
+    },
+    {
+      "id": "residences",
+      "no": "06",
+      "name": "The Residences"
+    },
+    {
+      "id": "estate",
+      "no": "07",
+      "name": "The Estate"
+    },
+    {
+      "id": "gallery",
+      "no": "08",
+      "name": "First Look"
+    },
+    {
+      "id": "snow",
+      "no": "09",
+      "name": "First Snow"
+    },
+    {
+      "id": "ownership",
+      "no": "10",
+      "name": "Ownership"
+    },
+    {
+      "id": "elevate",
+      "no": "11",
+      "name": "Elevate Holdings"
+    },
+    {
+      "id": "register",
+      "no": "12",
+      "name": "Register"
+    }
+  ],
+  "day": {
+    "label": "One day at the Reserve",
+    "moments": [
+      {
+        "time": "07:00",
+        "minutes": 420,
+        "label": "First light",
+        "line": "Breakfast above the mist line.",
+        "img": "day-0700"
+      },
+      {
+        "time": "13:00",
+        "minutes": 780,
+        "label": "Midday",
+        "line": "Laps in the open mountain air.",
+        "img": "day-1300"
+      },
+      {
+        "time": "18:30",
+        "minutes": 1110,
+        "label": "Golden hour",
+        "line": "The water curtain catches the last sun.",
+        "img": "day-1830"
+      },
+      {
+        "time": "22:00",
+        "minutes": 1320,
+        "label": "Nightfall",
+        "line": "Stars over the ridge. Silence below.",
+        "img": "day-2200"
+      }
+    ]
+  },
+  "elevate": {
+    "label": "Elevate Holdings",
+    "head": [
+      "Three reserves.",
+      "Five years."
+    ],
+    "headEm": "One standard.",
+    "body": [
+      "Six million people visit the Galyat every year, and find almost nothing built to receive them. Elevate Holdings builds only in Northern Pakistan: mountain reserves designed, built and then operated by the same company. The Nathia Reserve is the first of three.",
+      "Founded by Ahmed Khilji, an operator before a developer, whose team has run 24/7 guest operations for 4,000+ properties worldwide."
+    ],
+    "quote": [
+      "We are building the addresses",
+      "Pakistan deserves. It begins",
+      "on the Nathia road."
+    ],
+    "cite": "Ahmed Khilji",
+    "citeRole": "Founder · Elevate Holdings",
+    "credits": [
+      {
+        "k": "Architecture",
+        "v": "Noor Khan Design Studio"
+      },
+      {
+        "k": "Principal contractor",
+        "v": "ZKB"
+      }
+    ],
+    "more": "The full story"
+  },
+  "estate": {
+    "label": "The Estate",
+    "head": [
+      "Everything you need",
+      "at 7,900 feet."
+    ],
+    "headEm": "Nothing you don’t.",
+    "body": "More than 25,000 sq ft given over to amenities across four dedicated levels: staffed and open through all four seasons, including the snow months.",
+    "towers": [
+      "Tower A",
+      "Tower B"
+    ],
+    "towersLink": "Glass skywalk",
+    "chapters": [
+      {
+        "no": "I",
+        "kicker": "The Infinity Edge",
+        "title": "The Water",
+        "img": "pool-sunset",
+        "video": "pool-hold",
+        "focus": "50% 60%",
+        "alt": "The heated infinity pool at sunset, overlooking the valley",
+        "body": "A heated pool held above the valley with its own swim up bar, a candlelit hydrotherapy hall, and plunge pools fed by a waterfall skylight. Open through the snow.",
+        "list": [
+          "Heated outdoor pool & swim up bar",
+          "Hydrotherapy fountain hall",
+          "Waterfall plunge pools"
+        ]
+      },
+      {
+        "no": "II",
+        "kicker": "The Spa",
+        "title": "The Alpine Spa",
+        "img": "spa-curtain",
+        "video": "",
+        "focus": "35% 60%",
+        "alt": "Candlelit spa treatment hall with linen curtains and a carved rock wall",
+        "body": "A spa hall wrapped in a curtain of falling water, facing the peaks. Cedar saunas, steam rooms and treatment suites in the quiet of the hillside.",
+        "list": [
+          "The water curtain relaxation hall",
+          "Cedar sauna & steam",
+          "Private treatment suites"
+        ]
+      },
+      {
+        "no": "III",
+        "kicker": "Between the towers",
+        "title": "The Skywalk",
+        "img": "skywalk-corridor",
+        "video": "",
+        "focus": "32% 55%",
+        "alt": "The glazed skywalk corridor between the two towers, forest on both sides",
+        "body": "A glass bridge floating between the towers: the forest sixty feet below your feet, the sky lobby at either end.",
+        "list": []
+      },
+      {
+        "no": "IV",
+        "kicker": "The Pods",
+        "title": "The Forest Pods",
+        "img": "pod-deck",
+        "video": "pod-loop",
+        "focus": "36% 55%",
+        "alt": "Woven dining pod suspended over the forest canopy",
+        "body": "Woven dining pods cantilevered over the canopy: a private table in the treetops, reached by a suspended walkway. A seat you will find nowhere else.",
+        "list": [
+          "Suspended canopy walkways",
+          "Private dining in the treetops",
+          "Morning tea above the mist"
+        ]
+      },
+      {
+        "no": "V",
+        "kicker": "The Table",
+        "title": "The Table",
+        "img": "dining-night",
+        "video": "",
+        "focus": "45% 60%",
+        "alt": "Signature restaurant interior at night",
+        "body": "A signature restaurant in stone and brass, twilight terraces under the deodars, and an all day café facing the peaks, morning to late.",
+        "list": [
+          "Signature dining room",
+          "Twilight forest terraces",
+          "All day terrace café"
+        ]
+      }
+    ],
+    "skywalkGauge": "The forest, sixty feet below your feet",
+    "roomsLabel": "And the rooms between",
+    "rooms": [
+      {
+        "kicker": "Movement",
+        "title": "The Fitness Pavilion",
+        "img": "gym",
+        "alt": "Fitness pavilion with mountain views"
+      },
+      {
+        "kicker": "Stillness",
+        "title": "The Yoga Garden",
+        "img": "yoga-zen",
+        "alt": "Yoga studio with sculpted stone wall and valley view glass"
+      },
+      {
+        "kicker": "Arrival",
+        "title": "The Grand Lobby",
+        "img": "reception",
+        "alt": "Marble arrival lobby with chandelier"
+      },
+      {
+        "kicker": "Ritual",
+        "title": "The Cigar Lounge",
+        "img": "cigar-lounge",
+        "alt": "Wood panelled cigar lounge with lit humidor cabinets"
+      },
+      {
+        "kicker": "Beauty",
+        "title": "The Salon",
+        "img": "salon",
+        "alt": "Salon with a stone wall, arched mirrors and forest view glass"
+      },
+      {
+        "kicker": "Summits",
+        "title": "The Boardroom",
+        "img": "boardroom",
+        "alt": "Boardroom with a long walnut table facing the valley windows"
+      }
+    ],
+    "towerB": [
+      "Across the skywalk,",
+      "Tower B."
+    ],
+    "towerBBody": "The second tower holds everything that makes owning here easy: owners’ concierge and housekeeping, covered arrival and valet parking, a rooftop event terrace at 7,900 ft, and a full rental management desk.",
+    "more": "Every amenity, listed"
+  },
+  "explorer": {
+    "label": "3D Explorer",
+    "head": [
+      "Tour both towers",
+      "in 360°."
+    ],
+    "body": "Browse studios, apartments and penthouses, and view floor plans in interactive 3D.",
+    "cta": "Enter the explorer",
+    "newTab": "Open in a new tab"
+  },
+  "footer": {
+    "line": "7,900 ft. One address.",
+    "lineEm": "The next chapter begins here.",
+    "disclaimer": "Every residence at The Nathia Reserve is operated within the Reserve's managed hotel programme: the building runs as a single hotel and residences are not let or operated outside it. The programme's terms, and any owner returns, are defined solely in the signed buyer documentation, which prevails over all marketing material. Rental income depends on occupancy, achieved room rates, operating costs and market conditions, all of which vary, and no return is guaranteed or represented in marketing. Any contractual minimum, where offered, applies only from Year 2 of hotel operations. Registration of interest does not constitute an offer for sale, a reservation or a contract. Figures, specifications, dates and releases may change without notice.",
+    "copyright": "© MMXXVI Elevate Holdings. All rights reserved. The Nathia Reserve is a development by Elevate Holdings.",
+    "explore": [
+      {
+        "label": "The Residences",
+        "href": "/residences"
+      },
+      {
+        "label": "Location",
+        "href": "/location"
+      },
+      {
+        "label": "Amenities",
+        "href": "/amenities"
+      },
+      {
+        "label": "The Developer",
+        "href": "/developer"
+      },
+      {
+        "label": "FAQ",
+        "href": "/faq"
+      },
+      {
+        "label": "The Market",
+        "href": "/market"
+      },
+      {
+        "label": "Investing",
+        "href": "/investing"
+      },
+      {
+        "label": "Privacy",
+        "href": "/privacy"
+      }
+    ],
+    "map": {
+      "label": "Find us on Google Maps",
+      "href": "https://www.google.com/maps/place/The+Nathia+Reserve/@34.0725156,73.3815342,17z/data=!4m6!3m5!1s0x38de2b002e43469d:0xc97b7b8f6e1bb2d8!8m2!3d34.0725156!4d73.3815342"
+    }
+  },
+  "gallery": {
+    "label": "First Look",
+    "head": "Inside the",
+    "headEm": "Reserve.",
+    "hint": "Drag",
+    "items": [
+      {
+        "img": "facade-tower-sunset",
+        "caption": "Golden hour",
+        "alt": "The tower at sunset"
+      },
+      {
+        "img": "facade-terraces-pool",
+        "caption": "The terraces",
+        "alt": "Cascading terraces and pool"
+      },
+      {
+        "img": "facade-snow-night",
+        "caption": "First snow",
+        "alt": "The Reserve in snowfall at night"
+      },
+      {
+        "img": "hydro-night",
+        "caption": "Hydrotherapy",
+        "alt": "Hydrotherapy hall against the night peaks"
+      },
+      {
+        "img": "plunge",
+        "caption": "The plunge",
+        "alt": "Plunge pool beneath the waterfall skylight"
+      },
+      {
+        "img": "pod-bridge",
+        "caption": "The pods",
+        "alt": "Suspended walkway to the forest pod"
+      },
+      {
+        "img": "dining-terrace",
+        "caption": "The terrace",
+        "alt": "Twilight dining terraces"
+      },
+      {
+        "img": "aerial-curve",
+        "caption": "The ridge",
+        "alt": "Aerial view of the Reserve on the ridge"
+      },
+      {
+        "img": "int-1bed-kitchen",
+        "caption": "Pinewood · The kitchen",
+        "alt": "Kitchen island in a one bedroom residence"
+      },
+      {
+        "img": "int-penthouse-bedroom",
+        "caption": "Sky Penthouse · Panoramic",
+        "alt": "Sky Penthouse panoramic bedroom with curved glazing"
+      },
+      {
+        "img": "int-penthouse-master",
+        "caption": "Sky Penthouse · The master",
+        "alt": "Sky Penthouse master bedroom"
+      },
+      {
+        "img": "cafe-day",
+        "caption": "The café",
+        "alt": "Morning on the stone terrace café"
+      }
+    ]
+  },
+  "manifesto": {
+    "label": "The Reserve",
+    "head": [
+      "Slower days.",
+      "Deeper breaths.",
+      "True rest."
+    ],
+    "lede": [
+      "High on the main road of Nathia Gali,",
+      "composed in stone, timber and glass",
+      "above an unbroken sweep",
+      "of protected pine forest."
+    ],
+    "body": [
+      "The Nathia Reserve is built to the highest standard of luxury Pakistan has ever seen: the most premium apartment hotel in the country.",
+      "Both a private residence and a fully managed retreat: staffed, serviced and alive through all four seasons."
+    ]
+  },
+  "menuLinks": [
+    {
+      "no": "01",
+      "title": "The Reserve",
+      "sub": "Above the mist line",
+      "href": "/#manifesto",
+      "img": "cloudsea"
+    },
+    {
+      "no": "02",
+      "title": "Residences",
+      "sub": "133 · Studio to Penthouse",
+      "href": "/residences",
+      "img": "int-suite-living"
+    },
+    {
+      "no": "03",
+      "title": "The Estate",
+      "sub": "25,000+ sq ft · four levels",
+      "href": "/amenities",
+      "img": "pool-sunset"
+    },
+    {
+      "no": "04",
+      "title": "Location",
+      "sub": "The main Nathia Gali road",
+      "href": "/location",
+      "img": "aerial-curve"
+    },
+    {
+      "no": "05",
+      "title": "Elevate",
+      "sub": "Operator before developer",
+      "href": "/developer",
+      "img": "founder"
+    },
+    {
+      "no": "06",
+      "title": "Questions",
+      "sub": "Direct answers",
+      "href": "/faq",
+      "img": "facade-night"
+    }
+  ],
+  "nightlyRate": {
+    "1 Bedroom": 70000,
+    "2 Bedroom": 160000,
+    "3 Bedroom": 250000
+  },
+  "numbers": [
+    {
+      "value": 7900,
+      "unit": "FT",
+      "label": "Above sea level",
+      "note": "Roughly 2,400 metres. Above the mist line.",
+      "img": "cloudsea"
+    },
+    {
+      "value": 133,
+      "unit": "",
+      "label": "Private residences",
+      "note": "Two towers, joined by a glass skywalk.",
+      "img": "day-1830"
+    },
+    {
+      "value": 365,
+      "unit": "",
+      "label": "Days a year · hotel operated",
+      "note": "Staffed and serviced through all four seasons.",
+      "img": "day-1300"
+    },
+    {
+      "value": 1,
+      "unit": "",
+      "label": "Development on the main road",
+      "note": "The only private residence estate on the main Nathia Gali road.",
+      "img": "aerial-curve",
+      "focus": [
+        0.84,
+        0.25
+      ],
+      "zoom": 1.5
+    }
+  ],
+  "ownership": {
+    "label": "A commercial asset",
+    "head": "Own it. Earn from it.",
+    "headEm": "Never worry about it.",
+    "lede": "This is an income asset, not a second home. After handover the Reserve operates as a single full service apartment hotel, open all four seasons and staffed all year, and every one of the 133 residences is run inside that operation by the Reserve’s own team. You hold the title and use your residence when you wish; the rest of the year it works.",
+    "list": [
+      "Every residence is managed within the Reserve’s hotel operation",
+      "Bookings, housekeeping and maintenance: all handled",
+      "One operator, one standard, year round: no caretaker, no chowkidar",
+      "Overseas buyers welcome: routes set out in the buyer pack"
+    ],
+    "structureTitle": "The structure",
+    "structure": [
+      {
+        "value": "10%",
+        "label": "To book"
+      },
+      {
+        "value": "1%",
+        "label": "Monthly"
+      },
+      {
+        "value": "10%",
+        "label": "On possession"
+      },
+      {
+        "value": "2030",
+        "label": "Handover"
+      }
+    ],
+    "pricesTitle": "The prices",
+    "pricing": "Starting prices. The full payment schedule is released privately to the founders’ list ahead of public launch. Any price quoted on a third party website is not issued by Elevate Holdings.",
+    "approvalsTitle": "Approvals held",
+    "approvals": [
+      "Galiyat Development Authority (GDA) approval",
+      "EPA Khyber Pakhtunkhwa environmental approval",
+      "Forest Department clearance"
+    ],
+    "works": "Site works are underway."
+  },
+  "pageCta": {
+    "label": "Public release",
+    "head": "Plans and founders’ pricing",
+    "headEm": "go to the priority list first.",
+    "cta": "Register priority interest"
+  },
+  "places": [
+    {
+      "id": "ayubia",
+      "name": "Ayubia",
+      "km": "~7 km",
+      "drive": "~20 minutes"
+    },
+    {
+      "id": "murree",
+      "name": "Murree",
+      "km": "~35 km",
+      "drive": "~1 to 1.5 hours"
+    },
+    {
+      "id": "abbottabad",
+      "name": "Abbottabad",
+      "km": "~35 km",
+      "drive": "~1 to 1.5 hours"
+    },
+    {
+      "id": "islamabad",
+      "name": "Islamabad / Rawalpindi",
+      "km": "~80 km",
+      "drive": "~2.5 to 3 hours"
+    },
+    {
+      "id": "airport",
+      "name": "Islamabad Intl. Airport",
+      "km": "~100 km",
+      "drive": "~3 hours"
+    }
+  ],
+  "project": {
+    "name": "The Nathia Reserve",
+    "developer": "Elevate Holdings",
+    "founder": "Ahmed Khilji",
+    "locationLine": "Nathia Gali · The Galiyat · 7,900 ft",
+    "road": "The main Nathia Gali road",
+    "address": "Nathia Gali · Khyber Pakhtunkhwa · Pakistan",
+    "elevationFt": 7900,
+    "email": "elevateholdings11@gmail.com",
+    "instagram": [
+      "@thenathiareserve",
+      "@khilji.11",
+      "@ahmed.khiljii"
+    ],
+    "design": "Noor Khan Design Studio",
+    "contractor": "ZKB",
+    "handover": "2030",
+    "explorerUrl": "https://nathia-reserve-explorer.vercel.app"
+  },
+  "register": {
+    "label": "Public release",
+    "head": "Register",
+    "headEm": "your interest.",
+    "body": "A limited number of residences are released first, at founders’ terms, to those who register before the public launch.",
+    "promises": [
+      {
+        "no": "I.",
+        "title": "First allocation.",
+        "text": "Priority choice of residence and floor before public release."
+      },
+      {
+        "no": "II.",
+        "title": "Founders’ pricing.",
+        "text": "The most favourable terms the Reserve will ever offer."
+      },
+      {
+        "no": "III.",
+        "title": "The full particulars.",
+        "text": "Floor plans, specifications and payment plans, sent privately."
+      }
+    ],
+    "formTitle": "Join the founders’ list",
+    "interests": [
+      "Studio",
+      "1 Bedroom",
+      "2 Bedroom",
+      "3 Bedroom",
+      "Penthouse",
+      "Advise me"
+    ],
+    "soldOut": [
+      "Studio"
+    ],
+    "timingQ": "And when are you looking?",
+    "timings": [
+      "Ready now",
+      "Next few months",
+      "Just exploring"
+    ],
+    "steps": [
+      "I’m interested in",
+      "And you are",
+      "Where we reach you"
+    ],
+    "fields": {
+      "name": "Full name *",
+      "city": "City *",
+      "whatsapp": "WhatsApp number *",
+      "email": "Email *"
+    },
+    "placeholders": {
+      "whatsapp": "3XX XXXXXXX",
+      "email": "you@email.com"
+    },
+    "dialCodes": [
+      {
+        "code": "92",
+        "label": "🇵🇰 +92"
+      },
+      {
+        "code": "44",
+        "label": "🇬🇧 +44"
+      },
+      {
+        "code": "971",
+        "label": "🇦🇪 +971"
+      },
+      {
+        "code": "966",
+        "label": "🇸🇦 +966"
+      },
+      {
+        "code": "1",
+        "label": "🇺🇸 +1"
+      },
+      {
+        "code": "974",
+        "label": "🇶🇦 +974"
+      },
+      {
+        "code": "968",
+        "label": "🇴🇲 +968"
+      },
+      {
+        "code": "965",
+        "label": "🇰🇼 +965"
+      },
+      {
+        "code": "973",
+        "label": "🇧🇭 +973"
+      },
+      {
+        "code": "61",
+        "label": "🇦🇺 +61"
+      },
+      {
+        "code": "49",
+        "label": "🇩🇪 +49"
+      },
+      {
+        "code": "47",
+        "label": "🇳🇴 +47"
+      },
+      {
+        "code": "65",
+        "label": "🇸🇬 +65"
+      },
+      {
+        "code": "60",
+        "label": "🇲🇾 +60"
+      }
+    ],
+    "errors": {
+      "interest": "Choose one to continue.",
+      "timing": "And roughly when?",
+      "nameCity": "Your name and city, please.",
+      "whatsapp": "A WhatsApp number we can reach you on.",
+      "email": "A valid email address.",
+      "network": "We could not send that just now. Please try again, or write to us at elevateholdings11@gmail.com."
+    },
+    "continue": "Continue",
+    "back": "Back",
+    "submit": "Register interest",
+    "small": "It takes twenty seconds. Your progress saves as you go. Your details remain private to The Nathia Reserve and Elevate Holdings, and are used only to contact you about this project.",
+    "done": {
+      "label": "Received",
+      "title": "You’re on the founders’ list",
+      "body": "Our team will reach you personally on WhatsApp. Plans and founders’ pricing are released to the priority list first.",
+      "whatsappCta": "Message us on WhatsApp now",
+      "whatsappNote": "Faster than waiting for us to call.",
+      "whatsappPrefill": "Hello — I have just registered on thenathiareserve.com and would like the details."
+    }
+  },
+  "rentalBasis": {
+    "occupancy": 60,
+    "managementPct": 30
+  },
+  "residenceFilm": [
+    {
+      "img": "res-studio",
+      "label": "Studio"
+    },
+    {
+      "img": "int-suite-living",
+      "label": "Studio"
+    },
+    {
+      "img": "int-1bed-living",
+      "label": "Pinewood · 1 Bedroom"
+    },
+    {
+      "img": "int-1bed-fireplace",
+      "label": "Pinewood · 1 Bedroom"
+    },
+    {
+      "img": "int-1bed-kitchen",
+      "label": "Pinewood · 1 Bedroom"
+    },
+    {
+      "img": "res-2bed",
+      "label": "Cedar · 2 Bedroom"
+    },
+    {
+      "img": "int-2bed",
+      "label": "Cedar · 2 Bedroom"
+    },
+    {
+      "img": "res-3bed",
+      "label": "Summit · 3 Bedroom"
+    },
+    {
+      "img": "int-3bed",
+      "label": "Summit · 3 Bedroom"
+    },
+    {
+      "img": "res-pent",
+      "label": "Sky · Penthouse"
+    },
+    {
+      "img": "res-pent-living",
+      "label": "Sky · Penthouse"
+    },
+    {
+      "img": "int-penthouse-bedroom",
+      "label": "Sky · Penthouse"
+    },
+    {
+      "img": "int-penthouse-master",
+      "label": "Sky · Penthouse"
+    }
+  ],
+  "residences": [
+    {
+      "id": "studio",
+      "name": "Studio",
+      "collection": "Forest Studios",
+      "units": 12,
+      "area": "390 to 416",
+      "line": "Intimate studios opening straight into the pine canopy.",
+      "note": "A single, efficient mountain room: the entry into the Reserve.",
+      "hero": "res-studio",
+      "plate": "int-suite-living",
+      "heroAlt": "Studio bedroom opening to a valley view",
+      "plateAlt": "Suite living room with valley glazing",
+      "interest": "Studio",
+      "soldOut": true,
+      "price": ""
+    },
+    {
+      "id": "1-bedroom",
+      "name": "1 Bedroom",
+      "collection": "Pinewood Suites",
+      "units": 74,
+      "area": "607 to 1,170",
+      "line": "Framed valley views: the heart of the Reserve.",
+      "note": "The core of the building, and the most flexible to let.",
+      "hero": "int-1bed-living",
+      "plate": "int-1bed-fireplace",
+      "heroAlt": "Open plan one bedroom living space",
+      "plateAlt": "Bedroom with linear fireplace and valley view",
+      "interest": "1 Bedroom",
+      "soldOut": false,
+      "price": "3.9"
+    },
+    {
+      "id": "2-bedroom",
+      "name": "2 Bedroom",
+      "collection": "Cedar Residences",
+      "units": 27,
+      "area": "1,056 to 2,305",
+      "line": "For the families who summer, and now winter, in the hills.",
+      "note": "Family scale residences with dual aspect on most floors.",
+      "hero": "res-2bed",
+      "plate": "int-2bed",
+      "heroAlt": "Two bedroom living and dining room with full height windows",
+      "plateAlt": "Two bedroom Cedar residence interior",
+      "interest": "2 Bedroom",
+      "soldOut": false,
+      "price": "7.1"
+    },
+    {
+      "id": "3-bedroom",
+      "name": "3 Bedroom",
+      "collection": "Summit Residences",
+      "units": 12,
+      "area": "1,856 to 2,189",
+      "line": "The widest valley frontage in the Reserve.",
+      "note": "The deepest plates in the building.",
+      "hero": "res-3bed",
+      "plate": "int-3bed",
+      "heroAlt": "Three bedroom living and dining room with valley windows",
+      "plateAlt": "Three bedroom Summit residence interior",
+      "interest": "3 Bedroom",
+      "soldOut": false,
+      "price": "12.5"
+    },
+    {
+      "id": "penthouse",
+      "name": "Penthouse",
+      "collection": "Sky Penthouses",
+      "units": 8,
+      "area": "2,291 to 3,714",
+      "line": "A private plunge pool, high above the pines.",
+      "note": "Each carries its own heated terrace pool, held over the valley: the highest private residences in the Galiyat.",
+      "hero": "res-pent",
+      "plate": "res-pent-living",
+      "heroAlt": "Sky Penthouse private plunge pool terrace overlooking the valley at dusk",
+      "plateAlt": "Penthouse living room at dusk",
+      "interest": "Penthouse",
+      "soldOut": false,
+      "price": "20"
+    }
+  ],
+  "residencesIntro": {
+    "label": "The Residences",
+    "head": [
+      "From studios",
+      "to penthouses."
+    ],
+    "body": "One hundred and thirty three residences across two towers. Every unit is sold: Elevate Holdings retains none for itself.",
+    "cta": "Request the floor plate",
+    "more": "The full mix"
+  },
+  "returns": {
+    "label": "What it earns",
+    "head": [
+      "It is not a second home."
+    ],
+    "headEm": "It is a business.",
+    "lede": "Every residence is run inside the Reserve’s own hotel operation, so it works all year rather than sitting shut for eleven months. The two numbers below are the ones that decide the answer: what a night sells for, and how full the building is. Both start where we expect to run them. Move either and watch the figure change.",
+    "calcTitle": "Your residence, as an asset",
+    "fields": {
+      "unit": "Residence",
+      "rate": "Nightly rate",
+      "occupancy": "Occupancy across the year"
+    },
+    "rateNote": "Starts at the Reserve’s own planned nightly rate for this residence type.",
+    "occNote": "Starts at our planning figure of 60% of the year let.",
+    "rows": {
+      "nights": "Nights let a year",
+      "gross": "Gross room income a year",
+      "fee": "Less hotel management",
+      "net": "Net to you a year",
+      "monthly": "Net to you a month",
+      "yield": "Net yield on the starting price",
+      "payback": "Years to pay back the purchase"
+    },
+    "crossover": "At these assumptions the residence earns",
+    "crossoverTail": "what its own monthly instalment costs.",
+    "assumptionsTitle": "The assumptions, stated",
+    "assumptions": [
+      "Nightly rates start at the Reserve’s own planned operating card — PKR 70,000 for a one bedroom, PKR 160,000 for a two bedroom and PKR 250,000 for a three bedroom — and you can move them.",
+      "Occupancy is the share of the year let, starting at our planning figure of 60%. The Reserve is staffed and open through all four seasons, including the snow season, when most of Nathia Gali closes.",
+      "Hotel management is 30% of gross room income, all in, and it is deducted in front of you in the table above. There is no separate owner service charge on top.",
+      "The purchase figure used is the published starting price for that residence type. A specific residence is priced individually, and those figures go to the founders’ list."
+    ],
+    "caveat": "Illustration only. These figures are produced from the inputs you set and are not a forecast, a projection, or any guarantee, offer or representation of return by The Nathia Reserve or Elevate Holdings. No rental return is promised. Actual income depends on occupancy, achieved room rates, operating costs and market conditions, all of which vary and may differ materially from the figures shown. The terms of the hotel programme, and any owner returns, are defined solely in the signed buyer documentation, which prevails over all marketing material.",
+    "cta": "Get the figures for a specific residence"
+  },
+  "snow": {
+    "label": "Four seasons high",
+    "head": [
+      "Snow falls.",
+      "The Reserve"
+    ],
+    "headEm": "stays warm.",
+    "body": "Heated interiors, covered arrival and a staffed estate through the winter: while the hill stations close, the Reserve is at its most beautiful. The heated outdoor pool stays open in the snow.",
+    "kicker": "Post handover",
+    "count": 365,
+    "countLabel": "Days a year · fully managed"
+  },
+  "topYield": null
+}
