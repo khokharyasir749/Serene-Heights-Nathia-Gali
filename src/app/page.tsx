@@ -6,7 +6,7 @@ import { HeroAscent } from '@/components/HeroAscent';
 import { ManifestoSection } from '@/components/ManifestoSection';
 import { ExplorerSection } from '@/components/ExplorerSection';
 import { ExplorerModal } from '@/components/ExplorerModal';
-import { MeasureNumbers } from '@/components/MeasureNumbers';
+import { MeasureSection } from '@/components/MeasureSection';
 import { AddressMap } from '@/components/AddressMap';
 import { DayCycle } from '@/components/DayCycle';
 import { ResidencesGrid } from '@/components/ResidencesGrid';
@@ -25,12 +25,13 @@ export default function Home() {
   const [isAscentRevealed, setIsAscentRevealed] = useState(true);
   const [headerTheme, setHeaderTheme] = useState<'dark' | 'light'>('dark');
   const [isManifestoInView, setIsManifestoInView] = useState(false);
+  const [isMeasureInView, setIsMeasureInView] = useState(false);
 
   const isLightChapter =
     activeChapterId === 'manifesto' ||
     activeChapterId === 'explorer' ||
     (activeChapterId === 'ascent' && headerTheme === 'light');
-  const isHeaderVisible = !isManifestoInView;
+  const isHeaderVisible = !isManifestoInView && !isMeasureInView;
 
   // Smooth scroll to register section
   const handleRegisterClick = () => {
@@ -89,14 +90,20 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto Section
+  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto or Measure sections
   useEffect(() => {
     const manifestoEl = document.getElementById('manifesto');
-    if (!manifestoEl) return;
+    const measureEl = document.getElementById('numbers');
 
-    const manifestoObserver = new IntersectionObserver(
-      ([entry]) => {
-        setIsManifestoInView(entry.isIntersecting);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.target.id === 'manifesto') {
+            setIsManifestoInView(entry.isIntersecting);
+          } else if (entry.target.id === 'numbers') {
+            setIsMeasureInView(entry.isIntersecting);
+          }
+        });
       },
       {
         rootMargin: '-40px 0px -40px 0px',
@@ -104,8 +111,10 @@ export default function Home() {
       }
     );
 
-    manifestoObserver.observe(manifestoEl);
-    return () => manifestoObserver.disconnect();
+    if (manifestoEl) observer.observe(manifestoEl);
+    if (measureEl) observer.observe(measureEl);
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -131,8 +140,8 @@ export default function Home() {
       {/* 3D 360° Explorer Trigger Banner */}
       <ExplorerSection onOpenExplorer={() => setIsExplorerOpen(true)} />
 
-      {/* Chapter 03: The Measure (Four Core Statistics) */}
-      <MeasureNumbers />
+      {/* Chapter 03: The Measure (Scale, Altitude & Metrics Pinned Scrollytelling) */}
+      <MeasureSection onOpenExplorer={() => setIsExplorerOpen(true)} />
 
       {/* Chapter 04: The Only Address (Elevation profile & travel distances) */}
       <AddressMap />
