@@ -3,7 +3,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 import { Compass } from 'lucide-react';
-import siteData from '@/data/siteData';
 
 interface MeasureSectionProps {
   onOpenExplorer?: () => void;
@@ -42,35 +41,32 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
     },
   ];
 
-  // Track scroll position across the locked 250vh sticky track
+  // Track scroll position across the extended 380vh runway
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Smooth lag-free scrubbing with stiffness: 80, damping: 25
+  // Softened, luxurious spring physics for slow and controlled scrubbing
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 80,
-    damping: 25,
-    restDelta: 0.001,
+    stiffness: 45,
+    damping: 30,
+    mass: 0.8,
+    restDelta: 0.0005,
   });
 
-  // Parallax subtle scale & y-shift on the sunset cloud-sea backdrop
-  const bgScale = useTransform(smoothProgress, [0, 1], [1.08, 1.0]);
-  const bgY = useTransform(smoothProgress, [0, 1], ['0%', '6%']);
+  // Parallax subtle scale on the sunset cloud-sea backdrop (origin-center, zero downward shift)
+  const bgScale = useTransform(smoothProgress, [0, 1], [1.1, 1.02]);
 
-  // Digits counter: strictly 0 -> 7006 across scroll progress [0.10 -> 0.85]
-  const altitudeValue = useTransform(smoothProgress, [0.1, 0.85], [0, 7006]);
+  // Digits counter: strictly 0 -> 7006 across comfortable range [0.08, 0.82]
+  const altitudeValue = useTransform(smoothProgress, [0.08, 0.82], [0, 7006]);
 
-  // Formatter enforcing 0,000.0 -> 7,006.0 with lining-nums and tabular numbers
+  // Pure integer formatting: "0,000" -> "7,006" with zero decimals
   const formatAltitude = (val: number): string => {
-    const clamped = Math.min(7006, Math.max(0, val));
+    const clamped = Math.min(7006, Math.max(0, Math.floor(val)));
     const thousands = Math.floor(clamped / 1000);
-    const remainder = Math.floor(clamped % 1000)
-      .toString()
-      .padStart(3, '0');
-    const tenths = Math.floor((clamped * 10) % 10);
-    return `${thousands},${remainder}.${tenths}`;
+    const remainder = (clamped % 1000).toString().padStart(3, '0');
+    return `${thousands},${remainder}`;
   };
 
   // Direct DOM ref updates to eliminate React re-render stutter and lock 60FPS
@@ -92,9 +88,9 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
     }
   }, [activeStep, altitudeValue, metrics]);
 
-  // Staggered reveal of text below main counter as count approaches 7,006 (0.65 -> 0.85)
-  const infoOpacity = useTransform(smoothProgress, [0.65, 0.85], [0, 1]);
-  const infoY = useTransform(smoothProgress, [0.65, 0.85], [24, 0]);
+  // Staggered reveal of text below main counter as count approaches 7,006 (0.65 -> 0.82)
+  const infoOpacity = useTransform(smoothProgress, [0.65, 0.82], [0, 1]);
+  const infoY = useTransform(smoothProgress, [0.65, 0.82], [24, 0]);
 
   const currentMetric = metrics[activeStep] || metrics[0];
 
@@ -103,17 +99,16 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
       ref={containerRef}
       id="numbers"
       data-chapter="numbers"
-      className="relative w-full h-[250vh] bg-[#121614] text-[#efe9df]"
+      className="relative w-full min-h-[380vh] h-[380vh] bg-[#121614] text-[#efe9df]"
     >
-      {/* Pinned Sticky Stage: Locks firmly in place while traversing the 250vh scroll track */}
+      {/* Pinned Sticky Stage: Locks firmly in place flush at top-0 */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between items-center z-10 select-none">
-        {/* Full-bleed sunset cloud-sea backdrop with subtle depth scale */}
+        {/* Full-bleed sunset cloud-sea backdrop with safe overscan to eliminate top gap */}
         <motion.div
           style={{
             scale: bgScale,
-            y: bgY,
           }}
-          className="absolute inset-0 w-full h-full pointer-events-none will-change-transform z-0"
+          className="absolute -top-[6%] -bottom-[6%] -left-[6%] -right-[6%] w-[112%] h-[112%] pointer-events-none will-change-transform z-0 origin-center"
         >
           <img
             src="/img/the%20nathi.png"
@@ -166,7 +161,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
               }}
               className="text-[16vw] md:text-[20vw] leading-none font-serif tracking-tight font-normal text-center select-none will-change-transform inline-block tabular-nums lining-nums"
             >
-              0,000.0
+              0,000
             </span>
 
             {/* Pinned "FT" Unit Label */}
