@@ -28,12 +28,17 @@ export default function Home() {
   const [isMeasureInView, setIsMeasureInView] = useState(false);
   const [isLocationInView, setIsLocationInView] = useState(false);
   const [isDayInView, setIsDayInView] = useState(false);
+  const [isResidencesInView, setIsResidencesInView] = useState(false);
+
+  const isResidencesActive = activeChapterId === 'residences' || isResidencesInView;
 
   const isLightChapter =
     activeChapterId === 'manifesto' ||
     activeChapterId === 'explorer' ||
+    activeChapterId === 'residences' ||
     (activeChapterId === 'ascent' && headerTheme === 'light');
-  const isHeaderVisible = !isManifestoInView && !isMeasureInView && !isLocationInView;
+  const isHeaderVisible =
+    !isManifestoInView && !isMeasureInView && !isLocationInView && !isResidencesActive;
 
   // Smooth scroll to register section
   const handleRegisterClick = () => {
@@ -93,11 +98,12 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto, Measure, or Location Map sections
+  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto, Measure, Location Map, or Residences sections
   useEffect(() => {
     const manifestoEl = document.getElementById('manifesto');
     const measureEl = document.getElementById('numbers');
     const locationEl = document.getElementById('location-map');
+    const residencesEl = document.getElementById('residences');
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -108,6 +114,8 @@ export default function Home() {
             setIsMeasureInView(entry.isIntersecting);
           } else if (entry.target.id === 'location-map') {
             setIsLocationInView(entry.isIntersecting);
+          } else if (entry.target.id === 'residences') {
+            setIsResidencesInView(entry.isIntersecting);
           }
         });
       },
@@ -120,6 +128,7 @@ export default function Home() {
     if (manifestoEl) observer.observe(manifestoEl);
     if (measureEl) observer.observe(measureEl);
     if (locationEl) observer.observe(locationEl);
+    if (residencesEl) observer.observe(residencesEl);
 
     return () => observer.disconnect();
   }, []);
@@ -131,6 +140,7 @@ export default function Home() {
         onRegisterClick={handleRegisterClick}
         onSelectChapter={handleSelectChapter}
         isVisible={isHeaderVisible}
+        hidden={isResidencesActive}
         theme={isLightChapter ? 'light' : 'dark'}
       />
 

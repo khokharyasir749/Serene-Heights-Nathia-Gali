@@ -8,6 +8,7 @@ interface HeaderProps {
   onRegisterClick: () => void;
   onSelectChapter: (id: string) => void;
   isVisible?: boolean;
+  hidden?: boolean;
   theme?: 'dark' | 'light';
 }
 
@@ -15,18 +16,20 @@ export const Header: React.FC<HeaderProps> = ({
   onRegisterClick,
   onSelectChapter,
   isVisible = true,
+  hidden = false,
   theme = 'dark',
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const isLight = theme === 'light';
+  const shouldShow = isVisible && !hidden;
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-40 w-full bg-transparent px-8 md:px-16 pt-8 pb-4 transition-all duration-500 ease-in-out ${
-          isVisible
+          shouldShow
             ? 'opacity-100 pointer-events-auto translate-y-0'
-            : 'opacity-0 pointer-events-none -translate-y-5'
+            : 'opacity-0 pointer-events-none -translate-y-full'
         }`}
       >
         <div className="w-full flex justify-between items-center">
