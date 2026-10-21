@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Compass, ExternalLink, Box, Sparkles } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import siteData from '@/data/siteData';
 
 interface ExplorerSectionProps {
@@ -10,93 +9,159 @@ interface ExplorerSectionProps {
 }
 
 export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer }) => {
-  const { explorer, project } = siteData;
+  const containerRef = useRef<HTMLElement>(null);
+  const [isMuted, setIsMuted] = useState(true);
+
+  // Track scroll position through this section
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start 75%', 'end end'],
+  });
+
+  // Smooth lerp for buttery 60fps animations
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 60,
+    damping: 25,
+    restDelta: 0.001,
+  });
+
+  // Top Typography reveal (early entry)
+  const headerY = useTransform(smoothProgress, [0, 0.22], [30, 0]);
+  const headerOpacity = useTransform(smoothProgress, [0, 0.18], [0, 1]);
+
+  // Expanding Image Frame (Smooth Scroll Zoom)
+  // Initial State: Compact centered card frame (w-[42vw] max-w-[560px] h-[48vh] rounded-[24px])
+  // Scrolled State: Full cinematic view (w-[92vw] max-w-[1400px] h-[74vh] rounded-[16px])
+  const cardWidth = useTransform(smoothProgress, [0.18, 0.75], ['42vw', '92vw']);
+  const cardHeight = useTransform(smoothProgress, [0.18, 0.75], ['48vh', '74vh']);
+  const cardRadius = useTransform(smoothProgress, [0.18, 0.75], ['24px', '16px']);
+
+  // Parallax subtle zoom on the building image inside
+  const imageScale = useTransform(smoothProgress, [0.18, 0.75], [1.12, 1.0]);
+
+  // Overlay CTA Elements reveal when card expands
+  const ctaOpacity = useTransform(smoothProgress, [0.45, 0.75], [0, 1]);
+  const ctaY = useTransform(smoothProgress, [0.45, 0.75], [24, 0]);
+
+  const explorerUrl = siteData?.project?.explorerUrl || 'https://nathia-reserve-explorer.vercel.app';
 
   return (
     <section
+      ref={containerRef}
       id="explorer"
       data-chapter="explorer"
-      className="relative py-24 md:py-36 bg-[#0c0f0d] text-[#efe9df] border-t border-[#253129]/40 overflow-hidden"
+      className="relative w-full min-h-[150vh] bg-[#F4F1EA] text-[#121614] overflow-hidden"
     >
-      <div className="max-w-6xl mx-auto px-6 md:px-12">
+      {/* Pinned Sticky Stage */}
+      <div className="sticky top-0 left-0 w-full h-screen flex flex-col items-center justify-between pt-16 md:pt-20 pb-8 px-6 md:px-12 overflow-hidden z-10">
+        {/* Top Typography & Reveal Animation */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="relative rounded-3xl border border-[#253129] bg-gradient-to-b from-[#141c17] to-[#0c0f0d] p-8 md:p-14 overflow-hidden shadow-2xl"
+          style={{
+            y: headerY,
+            opacity: headerOpacity,
+          }}
+          className="flex flex-col items-center text-center max-w-4xl z-20 will-change-transform shrink-0"
         >
-          {/* Subtle background ambient glow */}
-          <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-[#c3a78e]/10 blur-[100px] pointer-events-none" />
+          {/* Eyebrow Tag */}
+          <span className="font-mono text-xs tracking-[0.3em] text-[#121614]/60 uppercase mb-3 sm:mb-4">
+            3D — 3D EXPLORER
+          </span>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative z-10">
-            {/* Left text column */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center space-x-2 font-mono text-xs uppercase tracking-luxury text-[#c3a78e] px-3 py-1 rounded-full border border-[#253129] bg-[#0c0f0d]/60">
-                <Box className="w-3.5 h-3.5 text-[#c3a78e]" />
-                <span>3D Explorer</span>
-              </div>
+          {/* Main Editorial Headline */}
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] text-[#1A221C] tracking-tight max-w-3xl mb-3 sm:mb-4 font-normal">
+            Tour both towers{' '}
+            <span className="font-serif italic font-light">in 360°.</span>
+          </h2>
 
-              <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#efe9df] leading-tight font-normal">
-                Tour both towers{' '}
-                <span className="font-serif italic text-[#c3a78e]">in 360°.</span>
-              </h2>
-
-              <p className="font-sans text-base md:text-lg text-[#efe9df]/75 font-light max-w-lg leading-relaxed">
-                Browse studios, apartments and penthouses, and view floor plans in interactive 3D.
-                Fly over the ridge, walk through the skywalk and inspect unit layouts.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <button
-                  onClick={onOpenExplorer}
-                  className="group flex items-center space-x-3 px-7 py-3.5 rounded-full bg-[#c3a78e] hover:bg-[#d9c2ad] text-[#0c0f0d] font-mono text-xs uppercase tracking-luxury font-medium transition-all shadow-xl hover:shadow-[#c3a78e]/30"
-                >
-                  <Compass className="w-4 h-4 text-[#0c0f0d] group-hover:rotate-45 transition-transform" />
-                  <span>Enter the explorer</span>
-                </button>
-
-                <a
-                  href={project?.explorerUrl || 'https://nathia-reserve-explorer.vercel.app'}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center space-x-2 px-5 py-3.5 rounded-full border border-[#253129] hover:border-[#c3a78e] text-[#efe9df] font-mono text-xs uppercase tracking-luxury transition-colors"
-                >
-                  <span>Open in a new tab</span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#c3a78e]" />
-                </a>
-              </div>
-            </div>
-
-            {/* Right preview poster */}
-            <div className="lg:col-span-5 relative">
-              <div
-                onClick={onOpenExplorer}
-                className="group cursor-pointer relative rounded-2xl overflow-hidden border border-[#253129] hover:border-[#c3a78e]/60 transition-all duration-500 shadow-2xl"
-              >
-                <img
-                  src="/explorer/poster.webp"
-                  alt="3D Building model preview of The Nathia Reserve"
-                  className="w-full h-[280px] sm:h-[340px] object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-[#0c0f0d]/30 group-hover:bg-[#0c0f0d]/10 transition-colors" />
-
-                {/* Central Play/Explore Badge */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="p-4 rounded-full bg-[#0c0f0d]/80 border border-[#c3a78e] backdrop-blur-md text-[#c3a78e] group-hover:scale-110 group-hover:bg-[#c3a78e] group-hover:text-[#0c0f0d] transition-all shadow-2xl">
-                    <Compass className="w-8 h-8 animate-spin-slow" />
-                  </div>
-                </div>
-
-                <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-[11px] font-mono text-[#efe9df]/80 bg-[#0c0f0d]/80 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-[#253129]">
-                  <span>Interactive 3D Engine</span>
-                  <span className="text-[#c3a78e]">Click to Launch</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* Subtitle */}
+          <p className="font-sans text-xs sm:text-sm md:text-base text-[#121614]/70 font-light tracking-wide text-center max-w-xl">
+            Browse studios, apartments and penthouses, and view floor plans
+          </p>
         </motion.div>
+
+        {/* Center Expanding Image Frame */}
+        <div className="w-full flex items-center justify-center relative my-auto z-10">
+          <motion.div
+            style={{
+              width: cardWidth,
+              height: cardHeight,
+              borderRadius: cardRadius,
+              minWidth: '310px',
+              maxWidth: '1400px',
+            }}
+            className="relative overflow-hidden shadow-2xl border border-[#121614]/10 bg-[#121614]/5 will-change-[width,height,border-radius]"
+          >
+            {/* High-Resolution Daytime Architectural Facade Render */}
+            <motion.div
+              style={{ scale: imageScale }}
+              className="w-full h-full relative overflow-hidden will-change-transform"
+            >
+              <img
+                src="/img/day-1300-lg.webp"
+                alt="The Nathia Reserve Dual Towers 360 Exterior View"
+                className="w-full h-full object-cover object-center pointer-events-none select-none"
+                loading="eager"
+              />
+            </motion.div>
+
+            {/* Cinematic Bottom Vignette Scrim for CTA contrast */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent pointer-events-none" />
+
+            {/* Overlay CTA Elements (Revealed on Card Expansion) */}
+            <motion.div
+              style={{
+                opacity: ctaOpacity,
+                y: ctaY,
+              }}
+              className="absolute bottom-8 md:bottom-12 inset-x-0 flex flex-col items-center justify-center z-20 px-4 will-change-transform"
+            >
+              {/* Warm Champagne/Sand Pill Button */}
+              <button
+                onClick={onOpenExplorer}
+                type="button"
+                className="group bg-[#d5c3a5] text-[#121614] hover:bg-[#e4d5be] px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl inline-flex items-center gap-3 active:scale-95 cursor-pointer"
+              >
+                <span>ENTER THE EXPLORER</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1 font-mono">
+                  →
+                </span>
+              </button>
+
+              {/* Helper Text Link */}
+              <a
+                href={explorerUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="font-mono text-[10px] tracking-[0.25em] text-[#efe9df]/85 hover:text-[#efe9df] uppercase mt-2.5 text-center drop-shadow transition-colors block"
+              >
+                OPEN IN A NEW TAB
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {/* Persistent Bottom Bar */}
+        <div className="w-full flex items-end justify-between pointer-events-none select-none z-20 pt-2 shrink-0">
+          {/* Bottom-Left: Chapter index "03 / 12" + slender line */}
+          <div className="flex items-center pointer-events-auto">
+            <span className="font-mono text-xs md:text-sm tracking-[0.2em] text-[#121614] uppercase font-medium">
+              03 / 12
+            </span>
+            <span className="w-12 md:w-16 h-[1.5px] bg-[#121614]/30 ml-4 inline-block align-middle" />
+          </div>
+
+          {/* Bottom-Right: Audio Indicator */}
+          <div className="flex items-center pointer-events-auto ml-auto">
+            <button
+              onClick={() => setIsMuted((prev) => !prev)}
+              type="button"
+              className="font-mono text-[10px] md:text-xs tracking-[0.25em] text-[#121614]/75 hover:text-[#121614] uppercase transition-colors"
+            >
+              {isMuted ? '.... SOUND OFF' : '.... SOUND ON'}
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
