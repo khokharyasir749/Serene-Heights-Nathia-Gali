@@ -313,9 +313,9 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
         className="relative w-full h-[550vh] bg-[#F4F1EA] text-[#1E2621] select-none z-10"
       >
         {/* Sticky Stage Viewport with Balanced Top Padding */}
-        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between pt-5 md:pt-7 pb-2 bg-[#F4F1EA]">
+        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between bg-[#F4F1EA]">
           {/* ================= TOP BAR ================= */}
-          <div className="w-full flex justify-between items-center z-20 shrink-0 mb-1 md:mb-2 px-6 md:px-12">
+          <div className="w-full flex justify-between items-center z-20 shrink-0 pt-6 md:pt-8 px-8 md:px-14">
             <div className="flex items-center space-x-3">
               <span className="font-mono text-xs tracking-[0.25em] text-[#1E2621]/70 uppercase">
                 06
@@ -333,7 +333,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
           </div>
 
           {/* ================= HORIZONTAL SLIDER TRACK (PARALLAX LAYER 1) ================= */}
-          <div className="relative w-full flex-1 flex items-center overflow-hidden my-auto py-1 mb-2 md:mb-3 pb-2 md:pb-3 px-6 md:px-12">
+          <div className="relative w-full flex-1 flex items-center overflow-hidden my-auto px-8 md:px-14">
             <motion.div
               style={{ x: xHigh }}
               className="flex items-center pl-2 md:pl-4 will-change-transform"
@@ -369,78 +369,80 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                     key={res.id}
                     className="w-[90vw] sm:w-[86vw] md:w-[82vw] lg:w-[80vw] shrink-0 mr-12 md:mr-20 flex items-center"
                   >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 w-full items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-12 w-full items-center lg:items-stretch">
                       {/* Left Column: Editorial Copy, Watermark, Specs, CTAs */}
-                      <div className="lg:col-span-5 relative flex flex-col justify-center">
+                      <div className="lg:col-span-5 relative flex flex-col justify-between py-1 md:py-2">
                         {/* Giant Watermark Numeral Floating in Background */}
                         <span
-                          className="absolute right-0 -top-8 md:-top-12 font-serif text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light text-transparent select-none pointer-events-none leading-none z-0"
+                          className="absolute right-0 -top-6 md:-top-10 font-serif text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light text-transparent select-none pointer-events-none leading-none z-0"
                           style={{
-                            WebkitTextStroke: '1px rgba(30, 38, 33, 0.2)',
+                            WebkitTextStroke: '1px rgba(30, 38, 33, 0.18)',
                           }}
                         >
                           {res.watermark}
                         </span>
 
-                        <div className="relative z-10">
-                          {/* Top Category Eyebrow */}
-                          <div className="font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-1">
-                            {res.category}
+                        <div className="relative z-10 flex flex-col justify-between h-full">
+                          {/* Top: Category Eyebrow, Main Title & Subtitle */}
+                          <div>
+                            <div className="font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-1.5 md:mb-2">
+                              {res.category}
+                            </div>
+
+                            <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1E2621] tracking-tight leading-[1.05]">
+                              {res.title}
+                            </h3>
+
+                            <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#1E2621]/75 font-light mt-1.5 mb-2">
+                              {res.subtitle}
+                            </p>
                           </div>
 
-                          {/* Main Title */}
-                          <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1E2621] tracking-tight leading-[1.05] mt-0.5">
-                            {res.title}
-                          </h3>
-
-                          {/* Italic Subtitle */}
-                          <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#1E2621]/75 font-light mt-0.5 mb-3">
-                            {res.subtitle}
-                          </p>
-
-                          {/* Specifications Grid */}
-                          <div className="grid grid-cols-3 gap-2 sm:gap-4 py-2.5 my-2.5 border-y border-[#1E2621]/15">
-                            <div>
-                              <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase">
-                                RESIDENCES
-                              </span>
-                              <span className="font-serif text-xl sm:text-2xl md:text-3xl text-[#1E2621] font-light mt-0.5 block tabular-nums lining-nums">
-                                {res.residencesCount}
-                              </span>
-                            </div>
-
-                            <div>
-                              <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase">
-                                AREA · SQ FT
-                              </span>
-                              <span className="font-mono text-xs sm:text-sm text-[#1E2621] font-medium mt-1 block tabular-nums lining-nums">
-                                {res.area}
-                              </span>
-                            </div>
-
-                            <div>
-                              <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase">
-                                {res.isSoldOut ? 'AVAILABILITY' : 'FROM · PKR CRORE'}
-                              </span>
-                              {res.isSoldOut ? (
-                                <span className="inline-block mt-1 font-mono text-xs text-red-700 font-semibold uppercase tracking-wider">
-                                  Sold out
+                          {/* Middle: Specifications Grid & Footnote */}
+                          <div className="my-auto py-3 md:py-4">
+                            <div className="grid grid-cols-3 gap-3 sm:gap-4 py-3 sm:py-4 md:py-5 border-y border-[#1E2621]/15">
+                              <div>
+                                <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase mb-1">
+                                  RESIDENCES
                                 </span>
-                              ) : (
-                                <span className="font-mono text-xs sm:text-sm text-[#8C7A6B] font-semibold mt-1 block tabular-nums lining-nums">
-                                  {res.priceOrStatus}
+                                <span className="font-serif text-2xl sm:text-3xl md:text-4xl text-[#1E2621] font-light block tabular-nums lining-nums leading-none">
+                                  {res.residencesCount}
                                 </span>
-                              )}
+                              </div>
+
+                              <div>
+                                <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase mb-1">
+                                  AREA · SQ FT
+                                </span>
+                                <span className="font-mono text-xs sm:text-sm md:text-base text-[#1E2621] font-medium block tabular-nums lining-nums leading-tight">
+                                  {res.area}
+                                </span>
+                              </div>
+
+                              <div>
+                                <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase mb-1">
+                                  {res.isSoldOut ? 'AVAILABILITY' : 'FROM · PKR CRORE'}
+                                </span>
+                                {res.isSoldOut ? (
+                                  <span className="inline-block font-mono text-xs sm:text-sm text-red-700 font-semibold uppercase tracking-wider leading-tight">
+                                    Sold out
+                                  </span>
+                                ) : (
+                                  <span className="font-mono text-xs sm:text-sm md:text-base text-[#8C7A6B] font-semibold block tabular-nums lining-nums leading-tight">
+                                    {res.priceOrStatus}
+                                  </span>
+                                )}
+                              </div>
                             </div>
+
+                            {/* Editorial Footnote */}
+                            <p className="font-sans font-light text-xs sm:text-sm md:text-base text-[#1E2621]/80 leading-relaxed mt-3.5 md:mt-4 max-w-sm lg:max-w-md">
+                              {res.caption}
+                            </p>
                           </div>
 
-                          {/* Editorial Footnote */}
-                          <p className="font-sans font-light text-xs sm:text-sm text-[#1E2621]/80 leading-relaxed mt-2.5 max-w-sm">
-                            {res.caption}
-                          </p>
-
-                          {/* Action CTA Row */}
-                          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-3.5">
+                          {/* Bottom: Action CTA Row */}
+                          <div className="flex flex-wrap items-center gap-3 sm:gap-4 pt-3 md:pt-4">
                             {!res.isSoldOut && (
                               <button
                                 onClick={() => setModalResName(res.title)}
@@ -466,7 +468,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
 
                       {/* Right Column: Dual Architectural Image Showcase (60% / 40% Split) */}
                       <div className="lg:col-span-7 relative flex flex-col justify-center">
-                        <div className="grid grid-cols-12 gap-3 sm:gap-4 w-full h-[260px] sm:h-[300px] md:h-[340px] max-h-[42vh]">
+                        <div className="grid grid-cols-12 gap-3 sm:gap-4 md:gap-5 w-full h-[380px] sm:h-[440px] md:h-[500px] lg:h-[540px] max-h-[58vh]">
                           {/* Primary Hero Render (60% / col-span-7) */}
                           <div className="col-span-7 relative h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E3DDD2] group">
                             <img
@@ -532,7 +534,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
           </div>
 
           {/* ================= BOTTOM INTERACTIVE FILMSTRIP CAROUSEL (SLEEK & COMPACT) ================= */}
-          <div className="flex items-center justify-between w-full pt-2 pb-3 px-6 md:px-12 z-20 shrink-0 bg-transparent">
+          <div className="flex items-center justify-between w-full pb-4 md:pb-6 px-8 md:px-14 z-20 shrink-0 bg-transparent">
             {/* Bottom-Left: Chapter index */}
             <div className="flex items-center shrink-0">
               <span className="font-mono text-xs md:text-sm tracking-[0.25em] text-[#1E2621] uppercase font-semibold">
