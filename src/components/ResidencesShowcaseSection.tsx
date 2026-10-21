@@ -18,6 +18,7 @@ interface ResidenceUnit {
   caption: string;
   primaryImage: string;
   secondaryImage: string;
+  secondaryTag: string;
   unitIdx: number;
 }
 
@@ -35,6 +36,7 @@ const RESIDENCES: ResidenceUnit[] = [
     caption: 'A single, efficient mountain room; the entry into the Reserve.',
     primaryImage: '/img/res-studio-lg.webp',
     secondaryImage: '/img/int-suite-living-lg.webp',
+    secondaryTag: 'SUITE LIVING',
     unitIdx: 0,
   },
   {
@@ -50,6 +52,7 @@ const RESIDENCES: ResidenceUnit[] = [
     caption: 'The core of the building, and the most flexible to let.',
     primaryImage: '/img/int-1bed-living-lg.webp',
     secondaryImage: '/img/int-1bed-fireplace-lg.webp',
+    secondaryTag: 'FIREPLACE LOUNGE',
     unitIdx: 1,
   },
   {
@@ -65,6 +68,7 @@ const RESIDENCES: ResidenceUnit[] = [
     caption: 'Family scale residences with dual aspect on most floors.',
     primaryImage: '/img/res-2bed-lg.webp',
     secondaryImage: '/img/int-2bed-lg.webp',
+    secondaryTag: 'MASTER SUITE',
     unitIdx: 2,
   },
   {
@@ -80,6 +84,7 @@ const RESIDENCES: ResidenceUnit[] = [
     caption: 'The deepest plates in the building.',
     primaryImage: '/img/res-3bed-lg.webp',
     secondaryImage: '/img/int-3bed-lg.webp',
+    secondaryTag: 'CORNER BEDROOM',
     unitIdx: 3,
   },
   {
@@ -96,58 +101,101 @@ const RESIDENCES: ResidenceUnit[] = [
       'Each carries its own heated terrace pool, held over the valley: the highest private residences in the Galiyat.',
     primaryImage: '/img/res-pent-lg.webp',
     secondaryImage: '/img/res-pent-living-lg.webp',
+    secondaryTag: 'TERRACE SALON',
     unitIdx: 4,
   },
 ];
 
-// Filmstrip items matching exact image_7aa4e3.png sequence & verified assets
+// Exactly 13 relevant, verified architectural renders from public/img
 const FILMSTRIP_ITEMS = [
   {
-    id: 'summit-master',
-    tag: 'SUMMIT · 3 BEDROOM',
+    id: 'studio-forest',
+    tag: 'STUDIO · FOREST SUITE',
+    image: '/img/res-studio-lg.webp',
+    targetRatio: 0.18,
+    unitIdx: 0,
+  },
+  {
+    id: 'pinewood-lounge',
+    tag: 'PINEWOOD · LIVING LOUNGE',
+    image: '/img/int-1bed-living-lg.webp',
+    targetRatio: 0.35,
+    unitIdx: 1,
+  },
+  {
+    id: 'murree-fireplace',
+    tag: 'MURREE · FIREPLACE SUITE',
+    image: '/img/int-1bed-fireplace-lg.webp',
+    targetRatio: 0.35,
+    unitIdx: 1,
+  },
+  {
+    id: 'cedar-master',
+    tag: 'CEDAR · MASTER BEDROOM',
+    image: '/img/res-2bed-lg.webp',
+    targetRatio: 0.52,
+    unitIdx: 2,
+  },
+  {
+    id: 'cedar-balcony',
+    tag: 'CEDAR · PANORAMIC BALCONY',
+    image: '/img/int-2bed-lg.webp',
+    targetRatio: 0.52,
+    unitIdx: 2,
+  },
+  {
+    id: 'summit-living',
+    tag: 'SUMMIT · VALLEY LIVING',
+    image: '/img/res-3bed-lg.webp',
+    targetRatio: 0.69,
+    unitIdx: 3,
+  },
+  {
+    id: 'summit-corner',
+    tag: 'SUMMIT · CORNER SUITE',
     image: '/img/int-3bed-lg.webp',
     targetRatio: 0.69,
     unitIdx: 3,
   },
   {
     id: 'summit-dining',
-    tag: 'SUMMIT · 3 BEDROOM',
-    image: '/img/res-3bed-lg.webp',
+    tag: 'SUMMIT · ALPINE DINING',
+    image: '/img/dining-terrace-lg.webp',
     targetRatio: 0.69,
     unitIdx: 3,
   },
   {
-    id: 'cedar-master',
-    tag: 'CEDAR · 2 BEDROOM',
-    image: '/img/res-2bed-lg.webp',
-    targetRatio: 0.52,
-    unitIdx: 2,
+    id: 'sky-terrace',
+    tag: 'SKY · PENTHOUSE TERRACE',
+    image: '/img/res-pent-lg.webp',
+    targetRatio: 0.86,
+    unitIdx: 4,
   },
   {
-    id: 'cedar-living',
-    tag: 'CEDAR · 2 BEDROOM',
-    image: '/img/int-suite-living-lg.webp',
-    targetRatio: 0.52,
-    unitIdx: 2,
+    id: 'sky-pool',
+    tag: 'SKY · HEATED PLUNGE POOL',
+    image: '/img/plunge-lg.webp',
+    targetRatio: 0.86,
+    unitIdx: 4,
   },
   {
-    id: 'pinewood-living',
-    tag: 'PINEWOOD · 1 BEDROOM',
-    image: '/img/int-1bed-living-lg.webp',
-    targetRatio: 0.35,
-    unitIdx: 1,
-  },
-  {
-    id: 'studio-forest',
-    tag: 'STUDIO · FOREST',
-    image: '/img/res-studio-lg.webp',
+    id: 'valley-mist',
+    tag: 'VALLEY · MORNING MIST',
+    image: '/img/day-0700-lg.webp',
     targetRatio: 0.18,
     unitIdx: 0,
   },
   {
-    id: 'sky-penthouse',
-    tag: 'SKY · PENTHOUSE',
-    image: '/img/res-pent-lg.webp',
+    id: 'facade-golden',
+    tag: 'FACADE · GOLDEN HOUR',
+    image: '/img/day-1830-lg.webp',
+    targetRatio: 0.52,
+    unitIdx: 2,
+  },
+  {
+    id: 'reserve-starlit',
+    tag: 'RESERVE · STARLIT NIGHT',
+    image: '/img/day-2200-lg.webp',
     targetRatio: 0.86,
     unitIdx: 4,
   },
@@ -182,14 +230,14 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
   // Primary horizontal translation driving upper residence cards (translates left)
   const xHigh = useTransform(smoothProgress, [0, 1], ['0%', '-78%']);
 
-  // Dynamic counter-parallel parallax translation for the bottom filmstrip carousel
-  const xLow = useTransform(smoothProgress, [0, 1], ['0%', '14%']);
+  // Dynamic counter-parallel parallax translation for the 13-item filmstrip carousel
+  const xLow = useTransform(smoothProgress, [0, 1], ['0%', '-42%']);
 
   // Dynamic active unit index tracking for bottom filmstrip highlight
   useMotionValueEvent(smoothProgress, 'change', (latest) => {
     let idx = 0;
     if (latest >= 0.78) idx = 4;
-    else if (latest >= 0.60) idx = 3;
+    else if (latest >= 0.6) idx = 3;
     else if (latest >= 0.43) idx = 2;
     else if (latest >= 0.26) idx = 1;
     else idx = 0;
@@ -213,7 +261,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
     });
   };
 
-  // Safe image error handler
+  // Safe image error fallback handler
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.currentTarget;
     if (!target.src.includes('res-studio-lg.webp')) {
@@ -279,16 +327,16 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                 </div>
               </div>
 
-              {/* --- PANELS 1–5: THE 5 RESIDENCES --- */}
+              {/* --- PANELS 1–5: THE 5 RESIDENCES (DUAL-IMAGE ARCHITECTURAL LAYOUT) --- */}
               {RESIDENCES.map((res) => {
                 return (
                   <div
                     key={res.id}
-                    className="w-[88vw] sm:w-[82vw] md:w-[78vw] lg:w-[74vw] shrink-0 mr-12 md:mr-20 flex items-center"
+                    className="w-[90vw] sm:w-[86vw] md:w-[82vw] lg:w-[80vw] shrink-0 mr-12 md:mr-20 flex items-center"
                   >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 w-full items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 w-full items-center">
                       {/* Left Column: Editorial Copy, Watermark, Specs, CTAs */}
-                      <div className="lg:col-span-6 relative flex flex-col justify-center">
+                      <div className="lg:col-span-5 relative flex flex-col justify-center">
                         {/* Giant Watermark Numeral Floating in Background */}
                         <span
                           className="absolute right-0 -top-10 md:-top-14 font-serif text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-light text-transparent select-none pointer-events-none leading-none z-0"
@@ -306,7 +354,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                           </div>
 
                           {/* Main Title */}
-                          <h3 className="font-serif text-5xl sm:text-6xl md:text-7xl font-light text-[#1E2621] tracking-tight leading-[1.05] mt-1">
+                          <h3 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1E2621] tracking-tight leading-[1.05] mt-1">
                             {res.title}
                           </h3>
 
@@ -316,7 +364,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                           </p>
 
                           {/* Specifications Grid */}
-                          <div className="grid grid-cols-3 gap-3 sm:gap-5 py-4 my-4 border-y border-[#1E2621]/15">
+                          <div className="grid grid-cols-3 gap-2 sm:gap-4 py-3.5 my-3.5 border-y border-[#1E2621]/15">
                             <div>
                               <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase">
                                 RESIDENCES
@@ -352,12 +400,12 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                           </div>
 
                           {/* Editorial Footnote */}
-                          <p className="font-sans font-light text-xs sm:text-sm text-[#1E2621]/80 leading-relaxed mt-4 max-w-sm">
+                          <p className="font-sans font-light text-xs sm:text-sm text-[#1E2621]/80 leading-relaxed mt-3 max-w-sm">
                             {res.caption}
                           </p>
 
                           {/* Action CTA Row */}
-                          <div className="flex flex-wrap items-center gap-4 mt-6">
+                          <div className="flex flex-wrap items-center gap-4 mt-5">
                             {!res.isSoldOut && (
                               <button
                                 onClick={() => setModalResName(res.title)}
@@ -381,37 +429,46 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                         </div>
                       </div>
 
-                      {/* Right Column: Architectural Imagery & Picture-in-Picture Floating Inset */}
-                      <div className="lg:col-span-6 relative flex flex-col justify-center">
-                        <div className="relative w-full h-[260px] sm:h-[320px] md:h-[380px] lg:h-[400px] rounded-2xl overflow-hidden shadow-lg border border-[#E3DDD2] group">
-                          {/* Main Image */}
-                          <img
-                            src={res.primaryImage}
-                            alt={`${res.title} - The Nathia Reserve`}
-                            className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
-                            loading="lazy"
-                            onError={handleImageError}
-                          />
+                      {/* Right Column: Dual Architectural Image Showcase (60% / 40% Split) */}
+                      <div className="lg:col-span-7 relative flex flex-col justify-center">
+                        <div className="grid grid-cols-12 gap-3 sm:gap-4 w-full h-[260px] sm:h-[320px] md:h-[380px] lg:h-[410px]">
+                          {/* Primary Hero Render (60% / col-span-7) */}
+                          <div className="col-span-7 relative h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E3DDD2] group">
+                            <img
+                              src={res.primaryImage}
+                              alt={`${res.title} Primary View`}
+                              className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
+                              loading="lazy"
+                              onError={handleImageError}
+                            />
+                            <div className="bg-gradient-to-t from-black/40 via-transparent to-transparent absolute inset-0 pointer-events-none opacity-60" />
 
-                          {/* Sold Out Badge */}
-                          {res.isSoldOut && (
-                            <div className="absolute top-4 right-4 bg-[#F4F1EA]/95 border border-[#8C7A6B]/30 text-[#1E2621] font-mono text-[10px] tracking-[0.2em] uppercase px-3.5 py-1.5 rounded-full shadow-sm z-10">
-                              SOLD OUT
-                            </div>
-                          )}
+                            {/* Sold Out Badge if applicable */}
+                            {res.isSoldOut && (
+                              <div className="absolute top-3.5 right-3.5 bg-[#F4F1EA]/95 border border-[#8C7A6B]/30 text-[#1E2621] font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full shadow-sm z-10 font-semibold">
+                                SOLD OUT
+                              </div>
+                            )}
+                          </div>
 
-                          {/* Floating Inset Picture-in-Picture (.rs-plate) */}
-                          {res.secondaryImage && (
-                            <div className="absolute -bottom-2 -right-2 sm:bottom-3 sm:right-3 w-32 sm:w-40 md:w-44 h-24 sm:h-28 md:h-32 rounded-xl overflow-hidden shadow-2xl border-2 border-white z-10 group-hover:scale-105 transition-transform duration-300">
-                              <img
-                                src={res.secondaryImage}
-                                alt={`${res.title} alternate view`}
-                                className="w-full h-full object-cover"
-                                loading="lazy"
-                                onError={handleImageError}
-                              />
+                          {/* Secondary Detail Render (40% / col-span-5) */}
+                          <div className="col-span-5 relative h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E3DDD2] group">
+                            <img
+                              src={res.secondaryImage}
+                              alt={`${res.title} Detail View`}
+                              className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
+                              loading="lazy"
+                              onError={handleImageError}
+                            />
+                            <div className="bg-gradient-to-t from-black/60 via-transparent to-transparent absolute inset-0 pointer-events-none" />
+
+                            {/* Detail Micro Badge */}
+                            <div className="absolute bottom-3 left-3.5 right-3.5 pointer-events-none z-10">
+                              <span className="font-mono text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-[#efe9df]/90 font-medium truncate block drop-shadow-sm">
+                                {res.secondaryTag}
+                              </span>
                             </div>
-                          )}
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -439,7 +496,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
             </motion.div>
           </div>
 
-          {/* ================= BOTTOM INTERACTIVE FILMSTRIP CAROUSEL (MATCHING image_7aa4e3.png) ================= */}
+          {/* ================= BOTTOM INTERACTIVE FILMSTRIP CAROUSEL (EXACTLY 13 ARCHITECTURAL RENDERS) ================= */}
           <div className="w-full flex items-center justify-between gap-4 z-20 shrink-0 pt-2 pb-1">
             {/* Bottom-Left: Chapter index */}
             <div className="flex items-center shrink-0">
@@ -449,8 +506,8 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
               <span className="w-8 md:w-12 h-[1px] bg-[#1E2621]/30 ml-3 inline-block" />
             </div>
 
-            {/* Bottom-Center: Wide Landscape Proportions Filmstrip Row */}
-            <div className="relative overflow-hidden py-1 max-w-full lg:max-w-[74vw] xl:max-w-[78vw]">
+            {/* Bottom-Center: 13 Architectural Renders Filmstrip Row with Smooth Scrolling Parallax */}
+            <div className="relative overflow-hidden py-1 max-w-full lg:max-w-[75vw] xl:max-w-[78vw]">
               <motion.div
                 style={{ x: xLow }}
                 className="flex items-center space-x-3 md:space-x-4 will-change-transform"
@@ -462,7 +519,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                       key={item.id}
                       onClick={() => handleThumbnailClick(item.targetRatio)}
                       type="button"
-                      className={`group w-60 sm:w-72 md:w-80 h-32 sm:h-38 md:h-44 flex-shrink-0 relative overflow-hidden rounded-xl md:rounded-2xl border transition-all duration-300 cursor-pointer shadow-md ${
+                      className={`group w-56 sm:w-64 md:w-72 h-30 sm:h-34 md:h-38 flex-shrink-0 relative overflow-hidden rounded-xl md:rounded-2xl border transition-all duration-300 cursor-pointer shadow-md ${
                         isActive
                           ? 'ring-2 ring-[#8C7A6B] border-transparent scale-[1.02] shadow-xl'
                           : 'border-[#1E2621]/10 opacity-85 hover:opacity-100 hover:scale-[1.01]'
@@ -481,8 +538,8 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                       <div className="bg-gradient-to-t from-black/75 via-black/25 to-transparent absolute inset-0 pointer-events-none" />
 
                       {/* Bottom-Left Anchored Tracked Typography */}
-                      <div className="absolute bottom-3 left-4 md:bottom-4 md:left-5 z-10 pointer-events-none text-left">
-                        <p className="font-mono text-[10px] sm:text-xs tracking-[0.22em] text-[#efe9df] uppercase font-medium drop-shadow-md">
+                      <div className="absolute bottom-3 left-4 md:bottom-3.5 md:left-4 z-10 pointer-events-none text-left">
+                        <p className="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#efe9df] font-medium drop-shadow-md truncate">
                           {item.tag}
                         </p>
                       </div>
