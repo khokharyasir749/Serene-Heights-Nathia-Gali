@@ -312,10 +312,10 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
         viewport={{ amount: 0.05 }}
         className="relative w-full h-[550vh] bg-[#F4F1EA] text-[#1E2621] select-none z-10"
       >
-        {/* Sticky Stage Viewport with Balanced Top Padding (pt-10 md:pt-14 px-8 md:px-14) */}
-        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between pt-10 md:pt-14 pb-4 px-8 md:px-14 bg-[#F4F1EA]">
+        {/* Sticky Stage Viewport with Balanced Top Padding */}
+        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between pt-5 md:pt-7 pb-2 bg-[#F4F1EA]">
           {/* ================= TOP BAR ================= */}
-          <div className="w-full flex justify-between items-center z-20 shrink-0 mb-3 md:mb-5">
+          <div className="w-full flex justify-between items-center z-20 shrink-0 mb-1 md:mb-2 px-6 md:px-12">
             <div className="flex items-center space-x-3">
               <span className="font-mono text-xs tracking-[0.25em] text-[#1E2621]/70 uppercase">
                 06
@@ -333,30 +333,30 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
           </div>
 
           {/* ================= HORIZONTAL SLIDER TRACK (PARALLAX LAYER 1) ================= */}
-          <div className="relative w-full flex-1 flex items-center overflow-hidden my-auto py-2">
+          <div className="relative w-full flex-1 flex items-center overflow-hidden my-auto py-1 mb-2 md:mb-3 pb-2 md:pb-3 px-6 md:px-12">
             <motion.div
               style={{ x: xHigh }}
               className="flex items-center pl-2 md:pl-4 will-change-transform"
             >
               {/* --- PANEL 0: INTRO EDITORIAL PANEL --- */}
               <div className="w-[44vw] min-w-[340px] md:w-[42vw] shrink-0 flex flex-col justify-center pr-8 lg:pr-14">
-                <div className="flex items-center space-x-2 font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-3">
+                <div className="flex items-center space-x-2 font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-2">
                   <span>06</span>
                   <span>·</span>
                   <span>THE RESIDENCES</span>
                 </div>
 
-                <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-[#1E2621] leading-[0.95] tracking-tight">
+                <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1E2621] leading-[0.95] tracking-tight">
                   From studios <br />
                   <span className="italic text-[#8C7A6B]">to penthouses.</span>
                 </h2>
 
-                <p className="font-sans font-light text-xs sm:text-sm md:text-base text-[#1E2621]/80 leading-relaxed mt-6 max-w-sm">
+                <p className="font-sans font-light text-xs sm:text-sm md:text-base text-[#1E2621]/80 leading-relaxed mt-4 sm:mt-5 max-w-sm">
                   One hundred and thirty three residences across two towers. Every unit is sold:
                   Elevate Holdings retains none for itself.
                 </p>
 
-                <div className="flex items-center space-x-2 font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[#8C7A6B] uppercase mt-8 pt-4 border-t border-[#1E2621]/15">
+                <div className="flex items-center space-x-2 font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[#8C7A6B] uppercase mt-6 pt-3.5 border-t border-[#1E2621]/15">
                   <span>STUDIO · 1 BEDROOM · 2 BEDROOM · 3 BEDROOM · PENTHOUSE</span>
                   <ArrowRight className="w-3.5 h-3.5 inline-block ml-1" />
                 </div>
@@ -374,7 +374,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                       <div className="lg:col-span-5 relative flex flex-col justify-center">
                         {/* Giant Watermark Numeral Floating in Background */}
                         <span
-                          className="absolute right-0 -top-10 md:-top-14 font-serif text-8xl sm:text-9xl md:text-[10rem] lg:text-[12rem] font-light text-transparent select-none pointer-events-none leading-none z-0"
+                          className="absolute right-0 -top-8 md:-top-12 font-serif text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light text-transparent select-none pointer-events-none leading-none z-0"
                           style={{
                             WebkitTextStroke: '1px rgba(30, 38, 33, 0.2)',
                           }}
@@ -384,27 +384,27 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
 
                         <div className="relative z-10">
                           {/* Top Category Eyebrow */}
-                          <div className="font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-1.5">
+                          <div className="font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-1">
                             {res.category}
                           </div>
 
                           {/* Main Title */}
-                          <h3 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1E2621] tracking-tight leading-[1.05] mt-1">
+                          <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1E2621] tracking-tight leading-[1.05] mt-0.5">
                             {res.title}
                           </h3>
 
                           {/* Italic Subtitle */}
-                          <p className="font-serif italic text-base sm:text-lg md:text-xl text-[#1E2621]/75 font-light mt-1 mb-5">
+                          <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#1E2621]/75 font-light mt-0.5 mb-3">
                             {res.subtitle}
                           </p>
 
                           {/* Specifications Grid */}
-                          <div className="grid grid-cols-3 gap-2 sm:gap-4 py-3.5 my-3.5 border-y border-[#1E2621]/15">
+                          <div className="grid grid-cols-3 gap-2 sm:gap-4 py-2.5 my-2.5 border-y border-[#1E2621]/15">
                             <div>
                               <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase">
                                 RESIDENCES
                               </span>
-                              <span className="font-serif text-2xl sm:text-3xl text-[#1E2621] font-light mt-1 block tabular-nums lining-nums">
+                              <span className="font-serif text-xl sm:text-2xl md:text-3xl text-[#1E2621] font-light mt-0.5 block tabular-nums lining-nums">
                                 {res.residencesCount}
                               </span>
                             </div>
@@ -413,7 +413,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                               <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase">
                                 AREA · SQ FT
                               </span>
-                              <span className="font-mono text-xs sm:text-sm text-[#1E2621] font-medium mt-1.5 block tabular-nums lining-nums">
+                              <span className="font-mono text-xs sm:text-sm text-[#1E2621] font-medium mt-1 block tabular-nums lining-nums">
                                 {res.area}
                               </span>
                             </div>
@@ -423,11 +423,11 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                                 {res.isSoldOut ? 'AVAILABILITY' : 'FROM · PKR CRORE'}
                               </span>
                               {res.isSoldOut ? (
-                                <span className="inline-block mt-1.5 font-mono text-xs text-red-700 font-semibold uppercase tracking-wider">
+                                <span className="inline-block mt-1 font-mono text-xs text-red-700 font-semibold uppercase tracking-wider">
                                   Sold out
                                 </span>
                               ) : (
-                                <span className="font-mono text-xs sm:text-sm text-[#8C7A6B] font-semibold mt-1.5 block tabular-nums lining-nums">
+                                <span className="font-mono text-xs sm:text-sm text-[#8C7A6B] font-semibold mt-1 block tabular-nums lining-nums">
                                   {res.priceOrStatus}
                                 </span>
                               )}
@@ -435,17 +435,17 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                           </div>
 
                           {/* Editorial Footnote */}
-                          <p className="font-sans font-light text-xs sm:text-sm text-[#1E2621]/80 leading-relaxed mt-3 max-w-sm">
+                          <p className="font-sans font-light text-xs sm:text-sm text-[#1E2621]/80 leading-relaxed mt-2.5 max-w-sm">
                             {res.caption}
                           </p>
 
                           {/* Action CTA Row */}
-                          <div className="flex flex-wrap items-center gap-4 mt-5">
+                          <div className="flex flex-wrap items-center gap-3 sm:gap-4 mt-3.5">
                             {!res.isSoldOut && (
                               <button
                                 onClick={() => setModalResName(res.title)}
                                 type="button"
-                                className="bg-[#1E2621] text-[#F4F1EA] px-6 py-3 rounded-full text-xs font-mono tracking-wider hover:bg-black transition-colors flex items-center space-x-2 shadow-md cursor-pointer active:scale-95"
+                                className="bg-[#1E2621] text-[#F4F1EA] px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs font-mono tracking-wider hover:bg-black transition-colors flex items-center space-x-2 shadow-md cursor-pointer active:scale-95"
                               >
                                 <span>REQUEST THE FLOOR PLATE</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
@@ -455,7 +455,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                             <button
                               onClick={onOpenExplorer}
                               type="button"
-                              className="font-mono text-xs tracking-wider text-[#1E2621] flex items-center gap-2 hover:opacity-70 transition-opacity cursor-pointer py-2 px-1"
+                              className="font-mono text-xs tracking-wider text-[#1E2621] flex items-center gap-2 hover:opacity-70 transition-opacity cursor-pointer py-1.5 px-1"
                             >
                               <Compass className="w-4 h-4 text-[#8C7A6B]" />
                               <span>EXPLORE IN 3D</span>
@@ -466,7 +466,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
 
                       {/* Right Column: Dual Architectural Image Showcase (60% / 40% Split) */}
                       <div className="lg:col-span-7 relative flex flex-col justify-center">
-                        <div className="grid grid-cols-12 gap-3 sm:gap-4 w-full h-[260px] sm:h-[320px] md:h-[380px] lg:h-[410px]">
+                        <div className="grid grid-cols-12 gap-3 sm:gap-4 w-full h-[260px] sm:h-[300px] md:h-[340px] max-h-[42vh]">
                           {/* Primary Hero Render (60% / col-span-7) */}
                           <div className="col-span-7 relative h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E3DDD2] group">
                             <img
@@ -513,7 +513,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
 
               {/* --- PANEL 6: OUTRO PANEL --- */}
               <div className="w-[34vw] min-w-[280px] shrink-0 flex flex-col justify-center items-center text-center pr-12 group">
-                <span className="font-mono text-xs tracking-[0.3em] text-[#8C7A6B] uppercase mb-4">
+                <span className="font-mono text-xs tracking-[0.3em] text-[#8C7A6B] uppercase mb-3">
                   THE MIX
                 </span>
                 <button
@@ -524,15 +524,15 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                   <span>The full mix</span>
                   <ArrowRight className="w-6 h-6 transform group-hover:translate-x-2 transition-transform" />
                 </button>
-                <p className="font-mono text-xs text-[#1E2621]/60 tracking-wider mt-4 max-w-xs">
+                <p className="font-mono text-xs text-[#1E2621]/60 tracking-wider mt-3 max-w-xs">
                   133 private residences. Studio to Penthouse.
                 </p>
               </div>
             </motion.div>
           </div>
 
-          {/* ================= BOTTOM INTERACTIVE FILMSTRIP CAROUSEL (EXACTLY 13 ARCHITECTURAL RENDERS) ================= */}
-          <div className="w-full flex items-center justify-between gap-4 z-20 shrink-0 pt-2 pb-1">
+          {/* ================= BOTTOM INTERACTIVE FILMSTRIP CAROUSEL (SLEEK & COMPACT) ================= */}
+          <div className="flex items-center justify-between w-full pt-2 pb-3 px-6 md:px-12 z-20 shrink-0 bg-transparent">
             {/* Bottom-Left: Chapter index */}
             <div className="flex items-center shrink-0">
               <span className="font-mono text-xs md:text-sm tracking-[0.25em] text-[#1E2621] uppercase font-semibold">
@@ -541,11 +541,11 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
               <span className="w-8 md:w-12 h-[1px] bg-[#1E2621]/30 ml-3 inline-block" />
             </div>
 
-            {/* Bottom-Center: 13 Architectural Renders Filmstrip Row with Smooth Scrolling Parallax */}
+            {/* Bottom-Center: Sleek Compact Filmstrip Row */}
             <div className="relative overflow-hidden py-1 max-w-full lg:max-w-[75vw] xl:max-w-[78vw]">
               <motion.div
                 style={{ x: xLow }}
-                className="flex items-center space-x-3 md:space-x-4 will-change-transform"
+                className="flex items-center space-x-2.5 sm:space-x-3 will-change-transform"
               >
                 {FILMSTRIP_ITEMS.map((item) => {
                   const isActive = activeUnitIdx === item.unitIdx;
@@ -554,7 +554,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                       key={item.id}
                       onClick={() => handleThumbnailClick(item.targetRatio)}
                       type="button"
-                      className={`group w-56 sm:w-64 md:w-72 h-30 sm:h-34 md:h-38 flex-shrink-0 relative overflow-hidden rounded-xl md:rounded-2xl border transition-all duration-300 cursor-pointer shadow-md ${
+                      className={`group w-44 sm:w-52 md:w-60 h-[90px] md:h-[105px] flex-shrink-0 relative overflow-hidden rounded-xl border transition-all duration-300 cursor-pointer shadow-md ${
                         isActive
                           ? 'ring-2 ring-[#8C7A6B] border-transparent scale-[1.02] shadow-xl'
                           : 'border-[#1E2621]/10 opacity-85 hover:opacity-100 hover:scale-[1.01]'
@@ -573,8 +573,8 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                       <div className="bg-gradient-to-t from-black/75 via-black/25 to-transparent absolute inset-0 pointer-events-none" />
 
                       {/* Bottom-Left Anchored Tracked Typography */}
-                      <div className="absolute bottom-3 left-4 md:bottom-3.5 md:left-4 z-10 pointer-events-none text-left">
-                        <p className="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#efe9df] font-medium drop-shadow-md truncate">
+                      <div className="absolute bottom-2 left-3 z-10 pointer-events-none text-left">
+                        <p className="font-mono text-[8px] sm:text-[9px] tracking-[0.18em] uppercase text-[#efe9df] font-medium drop-shadow-sm truncate">
                           {item.tag}
                         </p>
                       </div>
