@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion';
 import { Compass, ArrowRight } from 'lucide-react';
 import { FloorPlateModal } from './FloorPlateModal';
@@ -203,15 +203,41 @@ const FILMSTRIP_ITEMS = [
 
 interface ResidencesShowcaseSectionProps {
   onOpenExplorer: () => void;
+  onVisibilityChange?: (visible: boolean) => void;
 }
 
 export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps> = ({
   onOpenExplorer,
+  onVisibilityChange,
 }) => {
   const containerRef = useRef<HTMLElement>(null);
   const [modalResName, setModalResName] = useState<string | null>(null);
   const [activeUnitIdx, setActiveUnitIdx] = useState(0);
   const [isSoundOn, setIsSoundOn] = useState(false);
+
+  // Direct viewport check to guarantee header hiding on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const inView = rect.top <= 100 && rect.bottom >= 100;
+      if (inView) {
+        document.documentElement.setAttribute('data-in-residences', 'true');
+        onVisibilityChange?.(true);
+      } else {
+        if (document.documentElement.getAttribute('data-in-residences') === 'true') {
+          document.documentElement.removeAttribute('data-in-residences');
+          onVisibilityChange?.(false);
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.documentElement.removeAttribute('data-in-residences');
+    };
+  }, [onVisibilityChange]);
 
   // Track scroll position through the 550vh runway
   const { scrollYProgress } = useScroll({
@@ -271,10 +297,19 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
 
   return (
     <>
-      <section
+      <motion.section
         ref={containerRef}
         id="residences"
         data-chapter="residences"
+        onViewportEnter={() => {
+          document.documentElement.setAttribute('data-in-residences', 'true');
+          onVisibilityChange?.(true);
+        }}
+        onViewportLeave={() => {
+          document.documentElement.removeAttribute('data-in-residences');
+          onVisibilityChange?.(false);
+        }}
+        viewport={{ amount: 0.05 }}
         className="relative w-full h-[550vh] bg-[#F4F1EA] text-[#1E2621] select-none z-10"
       >
         {/* Sticky Stage Viewport with Balanced Top Padding (pt-10 md:pt-14 px-8 md:px-14) */}
@@ -564,7 +599,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Floor Plate Lead Intake Modal */}
       <FloorPlateModal

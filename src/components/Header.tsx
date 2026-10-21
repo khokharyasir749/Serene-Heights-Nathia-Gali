@@ -20,12 +20,49 @@ export const Header: React.FC<HeaderProps> = ({
   theme = 'dark',
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [inResidencesDom, setInResidencesDom] = useState(false);
   const isLight = theme === 'light';
-  const shouldShow = isVisible && !hidden;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const resEl = document.getElementById('residences');
+      if (resEl) {
+        const rect = resEl.getBoundingClientRect();
+        // Active when residences section is in view
+        const inRes = rect.top <= 100 && rect.bottom >= 100;
+        setInResidencesDom(inRes);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const shouldShow = isVisible && !hidden && !inResidencesDom;
 
   return (
     <>
+      <style>{`
+        html[data-in-residences='true'] header {
+          opacity: 0 !important;
+          transform: translateY(-100%) !important;
+          pointer-events: none !important;
+          transition: opacity 0.4s ease, transform 0.4s ease !important;
+        }
+      `}</style>
       <header
+        style={
+          !shouldShow
+            ? {
+                opacity: 0,
+                transform: 'translateY(-100%)',
+                pointerEvents: 'none',
+                transition: 'opacity 0.4s ease, transform 0.4s ease',
+              }
+            : {
+                transition: 'opacity 0.4s ease, transform 0.4s ease',
+              }
+        }
         className={`fixed top-0 left-0 right-0 z-40 w-full bg-transparent px-8 md:px-16 pt-8 pb-4 transition-all duration-500 ease-in-out ${
           shouldShow
             ? 'opacity-100 pointer-events-auto translate-y-0'

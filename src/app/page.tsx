@@ -167,7 +167,10 @@ export default function Home() {
       <OneDaySection />
 
       {/* Chapter 06: The Residences (Horizontal Pinned Scroll Showcase) */}
-      <ResidencesShowcaseSection onOpenExplorer={() => setIsExplorerOpen(true)} />
+      <ResidencesShowcaseSection
+        onOpenExplorer={() => setIsExplorerOpen(true)}
+        onVisibilityChange={setIsResidencesInView}
+      />
 
       {/* Chapter 07: The Estate (Amenities across four dedicated levels) */}
       <EstateAmenities />
