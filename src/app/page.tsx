@@ -25,13 +25,12 @@ export default function Home() {
   const [isAscentRevealed, setIsAscentRevealed] = useState(true);
   const [headerTheme, setHeaderTheme] = useState<'dark' | 'light'>('dark');
   const [isManifestoInView, setIsManifestoInView] = useState(false);
-  const [isExplorerInView, setIsExplorerInView] = useState(false);
 
   const isLightChapter =
     activeChapterId === 'manifesto' ||
     activeChapterId === 'explorer' ||
     (activeChapterId === 'ascent' && headerTheme === 'light');
-  const isHeaderVisible = !isManifestoInView && !isExplorerInView;
+  const isHeaderVisible = !isManifestoInView;
 
   // Smooth scroll to register section
   const handleRegisterClick = () => {
@@ -90,20 +89,14 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto or Explorer sections
+  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto Section
   useEffect(() => {
     const manifestoEl = document.getElementById('manifesto');
-    const explorerEl = document.getElementById('explorer');
+    if (!manifestoEl) return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.target.id === 'manifesto') {
-            setIsManifestoInView(entry.isIntersecting);
-          } else if (entry.target.id === 'explorer') {
-            setIsExplorerInView(entry.isIntersecting);
-          }
-        });
+    const manifestoObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsManifestoInView(entry.isIntersecting);
       },
       {
         rootMargin: '-40px 0px -40px 0px',
@@ -111,10 +104,8 @@ export default function Home() {
       }
     );
 
-    if (manifestoEl) observer.observe(manifestoEl);
-    if (explorerEl) observer.observe(explorerEl);
-
-    return () => observer.disconnect();
+    manifestoObserver.observe(manifestoEl);
+    return () => manifestoObserver.disconnect();
   }, []);
 
   return (

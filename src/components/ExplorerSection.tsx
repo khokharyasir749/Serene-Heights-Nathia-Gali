@@ -12,36 +12,51 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
   const containerRef = useRef<HTMLElement>(null);
   const [isMuted, setIsMuted] = useState(true);
 
-  // Track scroll position through this section
+  // Track scroll position across the pinned section
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ['start 75%', 'end end'],
+    offset: ['start start', 'end end'],
   });
 
-  // Smooth lerp for buttery 60fps animations
+  // Elastic smooth spring for jitter-free 60fps hardware accelerated interpolation
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 60,
-    damping: 25,
+    stiffness: 55,
+    damping: 24,
     restDelta: 0.001,
   });
 
-  // Top Typography reveal (early entry)
-  const headerY = useTransform(smoothProgress, [0, 0.22], [30, 0]);
-  const headerOpacity = useTransform(smoothProgress, [0, 0.18], [0, 1]);
+  // Top Typography: reveal early, hold, then smoothly fade out as card takes over the screen
+  const headerY = useTransform(smoothProgress, [0, 0.15, 0.42, 0.75], [24, 0, 0, -28]);
+  const headerOpacity = useTransform(smoothProgress, [0, 0.12, 0.42, 0.72], [0, 1, 1, 0]);
 
-  // Expanding Image Frame (Smooth Scroll Zoom)
-  // Initial State: Compact centered card frame (w-[42vw] max-w-[560px] h-[48vh] rounded-[24px])
-  // Scrolled State: Full cinematic view (w-[92vw] max-w-[1400px] h-[74vh] rounded-[16px])
-  const cardWidth = useTransform(smoothProgress, [0.18, 0.75], ['42vw', '92vw']);
-  const cardHeight = useTransform(smoothProgress, [0.18, 0.75], ['48vh', '74vh']);
-  const cardRadius = useTransform(smoothProgress, [0.18, 0.75], ['24px', '16px']);
+  // Seamless Zero-Margin Fullscreen Expansion:
+  // - Width: 42vw (compact card) -> 100vw (edge-to-edge borderless)
+  // - Height: 48vh (compact card) -> 100vh (full viewport height)
+  // - Border Radius: 24px (rounded card) -> 0px (pure fullscreen)
+  const cardWidth = useTransform(smoothProgress, [0.08, 0.82], ['42vw', '100vw']);
+  const cardHeight = useTransform(smoothProgress, [0.08, 0.82], ['48vh', '100vh']);
+  const cardRadius = useTransform(smoothProgress, [0.08, 0.82], ['24px', '0px']);
 
-  // Parallax subtle zoom on the building image inside
-  const imageScale = useTransform(smoothProgress, [0.18, 0.75], [1.12, 1.0]);
+  // Parallax subtle camera zoom on the building image inside
+  const imageScale = useTransform(smoothProgress, [0.08, 0.82], [1.12, 1.0]);
 
-  // Overlay CTA Elements reveal when card expands
-  const ctaOpacity = useTransform(smoothProgress, [0.45, 0.75], [0, 1]);
-  const ctaY = useTransform(smoothProgress, [0.45, 0.75], [24, 0]);
+  // Overlay CTA Elements reveal at peak expansion
+  const ctaOpacity = useTransform(smoothProgress, [0.38, 0.76], [0, 1]);
+  const ctaScale = useTransform(smoothProgress, [0.38, 0.76], [0.94, 1.0]);
+  const ctaY = useTransform(smoothProgress, [0.38, 0.76], [24, 0]);
+
+  // Persistent Controls adaptation: Crossfade colors as image takes over ivory background
+  const indicatorColor = useTransform(smoothProgress, [0.3, 0.7], ['#121614', '#efe9df']);
+  const indicatorLineBg = useTransform(
+    smoothProgress,
+    [0.3, 0.7],
+    ['rgba(18,22,20,0.3)', 'rgba(239,233,223,0.4)']
+  );
+  const soundColor = useTransform(
+    smoothProgress,
+    [0.3, 0.7],
+    ['rgba(18,22,20,0.75)', 'rgba(239,233,223,0.75)']
+  );
 
   const explorerUrl = siteData?.project?.explorerUrl || 'https://nathia-reserve-explorer.vercel.app';
 
@@ -50,25 +65,25 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
       ref={containerRef}
       id="explorer"
       data-chapter="explorer"
-      className="relative w-full min-h-[150vh] bg-[#F4F1EA] text-[#121614] overflow-hidden"
+      className="relative w-full h-[220vh] bg-[#F4F1EA] text-[#121614]"
     >
-      {/* Pinned Sticky Stage */}
-      <div className="sticky top-0 left-0 w-full h-screen flex flex-col items-center justify-between pt-16 md:pt-20 pb-8 px-6 md:px-12 overflow-hidden z-10">
+      {/* Sticky Fullscreen Stage: Zero padding, absolute edge-to-edge */}
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center relative">
         {/* Top Typography & Reveal Animation */}
         <motion.div
           style={{
             y: headerY,
             opacity: headerOpacity,
           }}
-          className="flex flex-col items-center text-center max-w-4xl z-20 will-change-transform shrink-0"
+          className="absolute top-16 sm:top-20 md:top-24 inset-x-0 mx-auto flex flex-col items-center text-center px-6 z-20 pointer-events-none will-change-transform max-w-4xl"
         >
           {/* Eyebrow Tag */}
-          <span className="font-mono text-xs tracking-[0.3em] text-[#121614]/60 uppercase mb-3 sm:mb-4">
+          <span className="font-mono text-xs tracking-[0.3em] text-[#121614]/60 uppercase mb-3">
             3D — 3D EXPLORER
           </span>
 
           {/* Main Editorial Headline */}
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] text-[#1A221C] tracking-tight max-w-3xl mb-3 sm:mb-4 font-normal">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] text-[#1A221C] tracking-tight max-w-3xl mb-3 font-normal">
             Tour both towers{' '}
             <span className="font-serif italic font-light">in 360°.</span>
           </h2>
@@ -79,87 +94,92 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
           </p>
         </motion.div>
 
-        {/* Center Expanding Image Frame */}
-        <div className="w-full flex items-center justify-center relative my-auto z-10">
+        {/* Expanding Image Frame: Smooth Zero-Margin Fullscreen Expansion */}
+        <motion.div
+          style={{
+            width: cardWidth,
+            height: cardHeight,
+            borderRadius: cardRadius,
+            minWidth: 'min(320px, 92vw)',
+          }}
+          className="relative flex items-center justify-center overflow-hidden z-10 will-change-[width,height,border-radius] shadow-2xl"
+        >
+          {/* High-Resolution Daytime Architectural Facade Render */}
+          <motion.div
+            style={{ scale: imageScale }}
+            className="w-full h-full relative overflow-hidden will-change-transform"
+          >
+            <img
+              src="/img/day-1300-lg.webp"
+              alt="The Nathia Reserve Dual Towers 360 Exterior View"
+              className="w-full h-full object-cover object-center pointer-events-none select-none"
+              loading="eager"
+            />
+          </motion.div>
+
+          {/* Subtle dark bottom-up shadow overlay for extreme legibility of CTAs */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+          {/* Overlay CTA Elements (Revealed at Peak Fullscreen Progress) */}
           <motion.div
             style={{
-              width: cardWidth,
-              height: cardHeight,
-              borderRadius: cardRadius,
-              minWidth: '310px',
-              maxWidth: '1400px',
+              opacity: ctaOpacity,
+              scale: ctaScale,
+              y: ctaY,
             }}
-            className="relative overflow-hidden shadow-2xl border border-[#121614]/10 bg-[#121614]/5 will-change-[width,height,border-radius]"
+            className="absolute bottom-12 md:bottom-16 inset-x-0 flex flex-col items-center justify-center z-20 px-4 will-change-transform"
           >
-            {/* High-Resolution Daytime Architectural Facade Render */}
-            <motion.div
-              style={{ scale: imageScale }}
-              className="w-full h-full relative overflow-hidden will-change-transform"
+            {/* Sand/Champagne Pill CTA Button */}
+            <button
+              onClick={onOpenExplorer}
+              type="button"
+              className="group bg-[#d5c3a5] text-[#121614] hover:bg-[#e4d5be] px-8 py-4 rounded-full font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl inline-flex items-center gap-3 active:scale-95 cursor-pointer"
             >
-              <img
-                src="/img/day-1300-lg.webp"
-                alt="The Nathia Reserve Dual Towers 360 Exterior View"
-                className="w-full h-full object-cover object-center pointer-events-none select-none"
-                loading="eager"
-              />
-            </motion.div>
+              <span>ENTER THE EXPLORER</span>
+              <span className="transition-transform duration-300 group-hover:translate-x-1 font-mono">
+                →
+              </span>
+            </button>
 
-            {/* Cinematic Bottom Vignette Scrim for CTA contrast */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/20 to-transparent pointer-events-none" />
-
-            {/* Overlay CTA Elements (Revealed on Card Expansion) */}
-            <motion.div
-              style={{
-                opacity: ctaOpacity,
-                y: ctaY,
-              }}
-              className="absolute bottom-8 md:bottom-12 inset-x-0 flex flex-col items-center justify-center z-20 px-4 will-change-transform"
+            {/* Helper Text Link */}
+            <a
+              href={explorerUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="font-mono text-[10px] tracking-[0.25em] text-[#efe9df]/85 hover:text-[#efe9df] uppercase mt-2.5 text-center drop-shadow transition-colors block"
             >
-              {/* Warm Champagne/Sand Pill Button */}
-              <button
-                onClick={onOpenExplorer}
-                type="button"
-                className="group bg-[#d5c3a5] text-[#121614] hover:bg-[#e4d5be] px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl inline-flex items-center gap-3 active:scale-95 cursor-pointer"
-              >
-                <span>ENTER THE EXPLORER</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-1 font-mono">
-                  →
-                </span>
-              </button>
-
-              {/* Helper Text Link */}
-              <a
-                href={explorerUrl}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="font-mono text-[10px] tracking-[0.25em] text-[#efe9df]/85 hover:text-[#efe9df] uppercase mt-2.5 text-center drop-shadow transition-colors block"
-              >
-                OPEN IN A NEW TAB
-              </a>
-            </motion.div>
+              OPEN IN A NEW TAB
+            </a>
           </motion.div>
-        </div>
+        </motion.div>
 
-        {/* Persistent Bottom Bar */}
-        <div className="w-full flex items-end justify-between pointer-events-none select-none z-20 pt-2 shrink-0">
+        {/* Persistent Bottom Bar Indicators (03/12 & Sound Toggle) */}
+        <div className="absolute bottom-6 md:bottom-8 left-0 w-full px-8 md:px-16 flex items-end justify-between pointer-events-none select-none z-30">
           {/* Bottom-Left: Chapter index "03 / 12" + slender line */}
           <div className="flex items-center pointer-events-auto">
-            <span className="font-mono text-xs md:text-sm tracking-[0.2em] text-[#121614] uppercase font-medium">
+            <motion.span
+              style={{ color: indicatorColor }}
+              className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase font-medium transition-colors"
+            >
               03 / 12
-            </span>
-            <span className="w-12 md:w-16 h-[1.5px] bg-[#121614]/30 ml-4 inline-block align-middle" />
+            </motion.span>
+            <motion.span
+              style={{ backgroundColor: indicatorLineBg }}
+              className="w-12 md:w-16 h-[1.5px] ml-4 inline-block align-middle transition-colors"
+            />
           </div>
 
           {/* Bottom-Right: Audio Indicator */}
           <div className="flex items-center pointer-events-auto ml-auto">
-            <button
+            <motion.button
+              style={{ color: soundColor }}
               onClick={() => setIsMuted((prev) => !prev)}
               type="button"
-              className="font-mono text-[10px] md:text-xs tracking-[0.25em] text-[#121614]/75 hover:text-[#121614] uppercase transition-colors"
+              className="font-mono text-[10px] md:text-xs tracking-[0.25em] hover:opacity-100 uppercase transition-colors"
             >
               {isMuted ? '.... SOUND OFF' : '.... SOUND ON'}
-            </button>
+            </motion.button>
           </div>
         </div>
       </div>
