@@ -12,7 +12,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
   const containerRef = useRef<HTMLElement>(null);
   const [isMuted, setIsMuted] = useState(true);
 
-  // Track scroll position across the pinned section
+  // Track scroll position across the extended 280vh runway
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
@@ -25,36 +25,35 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
     restDelta: 0.001,
   });
 
-  // Top Typography: reveal early, hold, then smoothly fade out as card takes over the screen
-  const headerY = useTransform(smoothProgress, [0, 0.15, 0.42, 0.75], [24, 0, 0, -28]);
-  const headerOpacity = useTransform(smoothProgress, [0, 0.12, 0.42, 0.72], [0, 1, 1, 0]);
+  // Top Typography: reveal early [0.0 -> 0.15], hold, then smoothly fade out [0.25 -> 0.50]
+  const headerY = useTransform(smoothProgress, [0, 0.15, 0.25, 0.50], [24, 0, 0, -30]);
+  const headerOpacity = useTransform(smoothProgress, [0, 0.12, 0.25, 0.48], [0, 1, 1, 0]);
 
   // Seamless Zero-Margin Fullscreen Expansion:
-  // - Width: 42vw (compact card) -> 100vw (edge-to-edge borderless)
-  // - Height: 48vh (compact card) -> 100vh (full viewport height)
-  // - Border Radius: 24px (rounded card) -> 0px (pure fullscreen)
-  const cardWidth = useTransform(smoothProgress, [0.08, 0.82], ['42vw', '100vw']);
-  const cardHeight = useTransform(smoothProgress, [0.08, 0.82], ['48vh', '100vh']);
-  const cardRadius = useTransform(smoothProgress, [0.08, 0.82], ['24px', '0px']);
+  // - [0.15 -> 0.65]: Smooth expansion from compact card (42vw, 48vh, 24px) to full edge-to-edge (100vw, 100vh, 0px)
+  // - [0.65 -> 0.95]: HOLD/LOCK PHASE at 100vw, 100vh, 0px border-radius
+  const cardWidth = useTransform(smoothProgress, [0.15, 0.65], ['42vw', '100vw']);
+  const cardHeight = useTransform(smoothProgress, [0.15, 0.65], ['48vh', '100vh']);
+  const cardRadius = useTransform(smoothProgress, [0.15, 0.65], ['24px', '0px']);
 
   // Parallax subtle camera zoom on the building image inside
-  const imageScale = useTransform(smoothProgress, [0.08, 0.82], [1.12, 1.0]);
+  const imageScale = useTransform(smoothProgress, [0.15, 0.65], [1.12, 1.0]);
 
-  // Overlay CTA Elements reveal at peak expansion
-  const ctaOpacity = useTransform(smoothProgress, [0.38, 0.76], [0, 1]);
-  const ctaScale = useTransform(smoothProgress, [0.38, 0.76], [0.94, 1.0]);
-  const ctaY = useTransform(smoothProgress, [0.38, 0.76], [24, 0]);
+  // Overlay CTA Elements reveal as card expands [0.35 -> 0.60], then hold firmly through [0.60 -> 1.0]
+  const ctaOpacity = useTransform(smoothProgress, [0.35, 0.60], [0, 1]);
+  const ctaScale = useTransform(smoothProgress, [0.35, 0.60], [0.94, 1.0]);
+  const ctaY = useTransform(smoothProgress, [0.35, 0.60], [24, 0]);
 
-  // Persistent Controls adaptation: Crossfade colors as image takes over ivory background
-  const indicatorColor = useTransform(smoothProgress, [0.3, 0.7], ['#121614', '#efe9df']);
+  // Persistent Controls adaptation: Crossfade colors as image takes over ivory background [0.20 -> 0.55]
+  const indicatorColor = useTransform(smoothProgress, [0.20, 0.55], ['#121614', '#efe9df']);
   const indicatorLineBg = useTransform(
     smoothProgress,
-    [0.3, 0.7],
+    [0.20, 0.55],
     ['rgba(18,22,20,0.3)', 'rgba(239,233,223,0.4)']
   );
   const soundColor = useTransform(
     smoothProgress,
-    [0.3, 0.7],
+    [0.20, 0.55],
     ['rgba(18,22,20,0.75)', 'rgba(239,233,223,0.75)']
   );
 
@@ -65,7 +64,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
       ref={containerRef}
       id="explorer"
       data-chapter="explorer"
-      className="relative w-full h-[220vh] bg-[#F4F1EA] text-[#121614]"
+      className="relative w-full h-[280vh] bg-[#F4F1EA] text-[#121614] z-20"
     >
       {/* Sticky Fullscreen Stage: Zero padding, absolute edge-to-edge */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center relative">
