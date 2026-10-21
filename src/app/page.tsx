@@ -7,9 +7,9 @@ import { ManifestoSection } from '@/components/ManifestoSection';
 import { ExplorerSection } from '@/components/ExplorerSection';
 import { ExplorerModal } from '@/components/ExplorerModal';
 import { MeasureSection } from '@/components/MeasureSection';
-import { AddressMap } from '@/components/AddressMap';
-import { DayCycle } from '@/components/DayCycle';
-import { ResidencesGrid } from '@/components/ResidencesGrid';
+import { LocationMapSection } from '@/components/LocationMapSection';
+import { OneDaySection } from '@/components/OneDaySection';
+import { ResidencesShowcaseSection } from '@/components/ResidencesShowcaseSection';
 import { EstateAmenities } from '@/components/EstateAmenities';
 import { GalleryShowcase } from '@/components/GalleryShowcase';
 import { FourSeasonsSnow } from '@/components/FourSeasonsSnow';
@@ -26,12 +26,14 @@ export default function Home() {
   const [headerTheme, setHeaderTheme] = useState<'dark' | 'light'>('dark');
   const [isManifestoInView, setIsManifestoInView] = useState(false);
   const [isMeasureInView, setIsMeasureInView] = useState(false);
+  const [isLocationInView, setIsLocationInView] = useState(false);
+  const [isDayInView, setIsDayInView] = useState(false);
 
   const isLightChapter =
     activeChapterId === 'manifesto' ||
     activeChapterId === 'explorer' ||
     (activeChapterId === 'ascent' && headerTheme === 'light');
-  const isHeaderVisible = !isManifestoInView && !isMeasureInView;
+  const isHeaderVisible = !isManifestoInView && !isMeasureInView && !isLocationInView;
 
   // Smooth scroll to register section
   const handleRegisterClick = () => {
@@ -56,6 +58,7 @@ export default function Home() {
       'manifesto',
       'explorer',
       'numbers',
+      'location-map',
       'address',
       'day',
       'residences',
@@ -90,10 +93,11 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
 
-  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto or Measure sections
+  // Dedicated observer: Strictly hide the fixed Header when inside Manifesto, Measure, or Location Map sections
   useEffect(() => {
     const manifestoEl = document.getElementById('manifesto');
     const measureEl = document.getElementById('numbers');
+    const locationEl = document.getElementById('location-map');
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -102,6 +106,8 @@ export default function Home() {
             setIsManifestoInView(entry.isIntersecting);
           } else if (entry.target.id === 'numbers') {
             setIsMeasureInView(entry.isIntersecting);
+          } else if (entry.target.id === 'location-map') {
+            setIsLocationInView(entry.isIntersecting);
           }
         });
       },
@@ -113,6 +119,7 @@ export default function Home() {
 
     if (manifestoEl) observer.observe(manifestoEl);
     if (measureEl) observer.observe(measureEl);
+    if (locationEl) observer.observe(locationEl);
 
     return () => observer.disconnect();
   }, []);
@@ -143,14 +150,14 @@ export default function Home() {
       {/* Chapter 03: The Measure (Scale, Altitude & Metrics Pinned Scrollytelling) */}
       <MeasureSection onOpenExplorer={() => setIsExplorerOpen(true)} />
 
-      {/* Chapter 04: The Only Address (Elevation profile & travel distances) */}
-      <AddressMap />
+      {/* Chapter 04: Interactive 3D Route Map & Elevation Scrollytelling */}
+      <LocationMapSection onOpenExplorer={() => setIsExplorerOpen(true)} />
 
-      {/* Chapter 05: One Day at the Reserve (Day Cycle Switcher) */}
-      <DayCycle />
+      {/* Chapter 05: One Day at the Reserve (Day-to-Night Pinned Scrollytelling) */}
+      <OneDaySection />
 
-      {/* Chapter 06: The Residences (Studios to Penthouses + Floor plate modal) */}
-      <ResidencesGrid onOpenExplorer={() => setIsExplorerOpen(true)} />
+      {/* Chapter 06: The Residences (Horizontal Pinned Scroll Showcase) */}
+      <ResidencesShowcaseSection onOpenExplorer={() => setIsExplorerOpen(true)} />
 
       {/* Chapter 07: The Estate (Amenities across four dedicated levels) */}
       <EstateAmenities />
