@@ -15,9 +15,9 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
   const [isMuted, setIsMuted] = useState(true);
   const [activeStep, setActiveStep] = useState(0);
 
-  const metrics = siteData?.numbers || [
+  const metrics = [
     {
-      value: 7900,
+      value: 7006,
       unit: 'FT',
       label: 'Above sea level',
       note: 'Roughly 2,400 metres. Above the mist line.',
@@ -42,16 +42,16 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
     },
   ];
 
-  // Track scroll position across this pinned altitude stage
+  // Track scroll position across the locked 250vh sticky track
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   });
 
-  // Buttery-smooth lerp for hardware-accelerated 60fps tracking
+  // Smooth lag-free scrubbing with stiffness: 80, damping: 25
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 55,
-    damping: 24,
+    stiffness: 80,
+    damping: 25,
     restDelta: 0.001,
   });
 
@@ -59,17 +59,24 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
   const bgScale = useTransform(smoothProgress, [0, 1], [1.08, 1.0]);
   const bgY = useTransform(smoothProgress, [0, 1], ['0%', '6%']);
 
-  // Digits counter: 4,164.0 FT -> 7,900.0 FT based on scroll progress [0.10 -> 0.85]
-  const altitudeValue = useTransform(smoothProgress, [0.1, 0.85], [4164.0, 7900.0]);
+  // Digits counter: strictly 0 -> 7006 across scroll progress [0.10 -> 0.85]
+  const altitudeValue = useTransform(smoothProgress, [0.1, 0.85], [0, 7006]);
 
-  // Update DOM span directly on motion change to prevent React re-render stutter
+  // Formatter enforcing 0,000.0 -> 7,006.0 with lining-nums and tabular numbers
+  const formatAltitude = (val: number): string => {
+    const clamped = Math.min(7006, Math.max(0, val));
+    const thousands = Math.floor(clamped / 1000);
+    const remainder = Math.floor(clamped % 1000)
+      .toString()
+      .padStart(3, '0');
+    const tenths = Math.floor((clamped * 10) % 10);
+    return `${thousands},${remainder}.${tenths}`;
+  };
+
+  // Direct DOM ref updates to eliminate React re-render stutter and lock 60FPS
   useMotionValueEvent(altitudeValue, 'change', (latest) => {
     if (activeStep === 0 && counterRef.current) {
-      const clamped = Math.min(7900, Math.max(4164, latest));
-      counterRef.current.textContent = clamped.toLocaleString('en-US', {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1,
-      });
+      counterRef.current.textContent = formatAltitude(latest);
     }
   });
 
@@ -77,11 +84,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
   useEffect(() => {
     if (counterRef.current) {
       if (activeStep === 0) {
-        const currentAlt = altitudeValue.get();
-        counterRef.current.textContent = currentAlt.toLocaleString('en-US', {
-          minimumFractionDigits: 1,
-          maximumFractionDigits: 1,
-        });
+        counterRef.current.textContent = formatAltitude(altitudeValue.get());
       } else {
         const item = metrics[activeStep];
         counterRef.current.textContent = item?.value?.toLocaleString('en-US') || '';
@@ -89,9 +92,9 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
     }
   }, [activeStep, altitudeValue, metrics]);
 
-  // Staggered reveal of text below main counter at ~60% scroll progression
-  const infoOpacity = useTransform(smoothProgress, [0.45, 0.65], [0, 1]);
-  const infoY = useTransform(smoothProgress, [0.45, 0.65], [28, 0]);
+  // Staggered reveal of text below main counter as count approaches 7,006 (0.65 -> 0.85)
+  const infoOpacity = useTransform(smoothProgress, [0.65, 0.85], [0, 1]);
+  const infoY = useTransform(smoothProgress, [0.65, 0.85], [24, 0]);
 
   const currentMetric = metrics[activeStep] || metrics[0];
 
@@ -100,11 +103,11 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
       ref={containerRef}
       id="numbers"
       data-chapter="numbers"
-      className="relative w-full h-[180vh] bg-[#121614] text-[#efe9df] overflow-hidden"
+      className="relative w-full h-[250vh] bg-[#121614] text-[#efe9df]"
     >
-      {/* Pinned Sticky Stage */}
+      {/* Pinned Sticky Stage: Locks firmly in place while traversing the 250vh scroll track */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between items-center z-10 select-none">
-        {/* Full-bleed sunset cloud-sea backdrop */}
+        {/* Full-bleed sunset cloud-sea backdrop with subtle depth scale */}
         <motion.div
           style={{
             scale: bgScale,
@@ -161,9 +164,9 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
                 color: 'transparent',
                 filter: 'drop-shadow(0 15px 35px rgba(0,0,0,0.45))',
               }}
-              className="text-[16vw] md:text-[20vw] leading-none font-serif tracking-tight font-normal text-center select-none will-change-transform inline-block"
+              className="text-[16vw] md:text-[20vw] leading-none font-serif tracking-tight font-normal text-center select-none will-change-transform inline-block tabular-nums lining-nums"
             >
-              4,164.0
+              0,000.0
             </span>
 
             {/* Pinned "FT" Unit Label */}
