@@ -123,7 +123,6 @@ export default function HeroAscent({
 
   // Phase Transitions
   const phase1Opacity = useTransform(scrollYProgress, [0, 0.45, 0.55], [1, 0.9, 0]);
-  const phase1Scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.94]);
 
   const phase2Opacity = useTransform(scrollYProgress, [0.58, 0.75, 1], [0, 1, 1]);
   const phase2Y = useTransform(scrollYProgress, [0.58, 0.75], [30, 0]);
@@ -151,14 +150,16 @@ export default function HeroAscent({
 
         {/* PHASE 1: MASSIVE CENTER ALTITUDE (MATCHES IMAGE 2) */}
         <motion.div
-          style={{ opacity: phase1Opacity, scale: phase1Scale }}
+          style={{ opacity: phase1Opacity }}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none select-none"
         >
-          <div className="relative flex items-start">
-            <div className="font-serif text-[7.5rem] sm:text-[12rem] md:text-[15rem] lg:text-[18rem] text-[#EDE8DF] font-light tracking-tight leading-none tabular-nums drop-shadow-2xl">
-              <span ref={counterRef}>0,000</span>
+          <div className="relative flex items-start select-none">
+            <div className="text-[13rem] sm:text-[16rem] md:text-[20rem] lg:text-[22rem] font-serif font-light leading-none tracking-tight tabular-nums select-none text-[#EDE8DF] drop-shadow-2xl">
+              <span ref={counterRef} className="inline-block tabular-nums [font-variant-numeric:tabular-nums]">
+                0,000
+              </span>
             </div>
-            <span className="font-mono text-sm sm:text-xl text-[#C9BEAE] tracking-widest ml-2 mt-4 sm:mt-8">
+            <span className="font-mono text-base sm:text-xl text-[#C9BEAE] tracking-widest ml-3 mt-8 sm:mt-12 select-none">
               FT
             </span>
           </div>
