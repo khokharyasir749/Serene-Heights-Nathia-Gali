@@ -13,8 +13,9 @@ import { ResidencesShowcaseSection } from '@/components/ResidencesShowcaseSectio
 import { EstateAmenities } from '@/components/EstateAmenities';
 import { FirstLookGallery } from '@/components/FirstLookGallery';
 import { FourSeasonsWinter } from '@/components/FourSeasonsWinter';
-import { CommercialOwnership } from '@/components/CommercialOwnership';
-import { ReturnsCalculator } from '@/components/ReturnsCalculator';
+import { CommercialAssetSection } from '@/components/CommercialAssetSection';
+import { CommercialStructurePricing } from '@/components/CommercialStructurePricing';
+import { InvestmentCalculator } from '@/components/InvestmentCalculator';
 import { ElevateDeveloper } from '@/components/ElevateDeveloper';
 import { RegisterFounders } from '@/components/RegisterFounders';
 import { Footer } from '@/components/Footer';
@@ -37,6 +38,7 @@ export default function Home() {
     activeChapterId === 'explorer' ||
     activeChapterId === 'residences' ||
     activeChapterId === 'gallery' ||
+    activeChapterId === 'ownership' ||
     (activeChapterId === 'ascent' && headerTheme === 'light');
   const isHeaderVisible =
     !isManifestoInView && !isMeasureInView && !isLocationInView && !isResidencesActive;
@@ -182,11 +184,12 @@ export default function Home() {
       {/* Chapter 09: Four Seasons High (Winter operation & snow hold) */}
       <FourSeasonsWinter />
 
-      {/* Chapter 10: A Commercial Asset (Ownership structure & approvals) */}
-      <CommercialOwnership />
+      {/* Chapter 10: A Commercial Asset (Ownership structure, pricing & approvals) */}
+      <CommercialAssetSection />
+      <CommercialStructurePricing />
 
       {/* Chapter 11: What It Earns (Real-Time Financial & Yield Calculator) */}
-      <ReturnsCalculator onRegisterClick={handleRegisterClick} />
+      <InvestmentCalculator onRegisterClick={handleRegisterClick} />
 
       {/* Chapter 12: Elevate Holdings (Founder Ahmed Khilji & Partners) */}
       <ElevateDeveloper />

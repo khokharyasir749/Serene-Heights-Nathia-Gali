@@ -68,14 +68,6 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      <style>{`
-        html[data-in-residences='true'] header {
-          opacity: 0 !important;
-          transform: translateY(-100%) !important;
-          pointer-events: none !important;
-          transition: opacity 0.35s ease, transform 0.35s ease !important;
-        }
-      `}</style>
       <header
         style={{
           transform: shouldShow ? 'translateY(0)' : 'translateY(-100%)',
