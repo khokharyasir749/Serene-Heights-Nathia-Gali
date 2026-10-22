@@ -77,7 +77,7 @@ export default function Hero() {
           muted
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          src="/Video/Nathia%20gali%20project.mp4"
+          src="/Video/serene-ascent-scrub.mp4"
         />
 
         {/* Contrast Overlays */}
