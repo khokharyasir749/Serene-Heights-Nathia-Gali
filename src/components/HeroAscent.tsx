@@ -17,8 +17,6 @@ export default function HeroAscent({
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const counterRef = useRef<HTMLSpanElement>(null);
-  const targetTimeRef = useRef(0);
-  const rafIdRef = useRef<number | null>(null);
   const [isMuted, setIsMuted] = useState(true);
 
   const { scrollYProgress } = useScroll({
@@ -26,11 +24,12 @@ export default function HeroAscent({
     offset: ["start start", "end end"],
   });
 
-  // Soft spring to absorb rapid wheel jerks
+  // Soft spring to smoothly interpolate scroll
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 55,
-    damping: 25,
-    restDelta: 0.0001,
+    stiffness: 75,
+    damping: 28,
+    mass: 0.5,
+    restDelta: 0.0005,
   });
 
   useEffect(() => {
@@ -40,29 +39,53 @@ export default function HeroAscent({
     video.pause();
     video.currentTime = 0;
 
-    // High-performance continuous interpolation loop: zero decoder freezing
-    const renderLoop = () => {
-      if (video && video.duration && !isNaN(video.duration)) {
-        const delta = targetTimeRef.current - video.currentTime;
-        if (Math.abs(delta) > 0.002) {
-          video.currentTime += delta * 0.18;
-        }
+    let isSeeking = false;
+    let queuedTime: number | null = null;
+
+    const requestSeek = (targetTime: number) => {
+      if (!video || isNaN(video.duration) || video.duration === 0) return;
+
+      const clamped = Math.min(
+        Math.max(targetTime, 0.01),
+        video.duration - 0.05
+      );
+
+      if (isSeeking || video.seeking) {
+        queuedTime = clamped;
+        return;
       }
-      rafIdRef.current = requestAnimationFrame(renderLoop);
+
+      isSeeking = true;
+      video.currentTime = clamped;
     };
 
-    rafIdRef.current = requestAnimationFrame(renderLoop);
+    const onSeeked = () => {
+      isSeeking = false;
+      if (queuedTime !== null) {
+        const nextTime = queuedTime;
+        queuedTime = null;
+        requestSeek(nextTime);
+      }
+    };
+
+    const onLoaded = () => {
+      if (video && video.duration && !isNaN(video.duration)) {
+        requestSeek(smoothProgress.get() * video.duration);
+      }
+    };
+
+    video.addEventListener("seeked", onSeeked);
+    video.addEventListener("loadedmetadata", onLoaded);
+    video.addEventListener("canplay", onLoaded);
 
     const unsubscribe = smoothProgress.on("change", (latest) => {
-      // 1. Calculate target video time
-      if (video && video.duration) {
-        targetTimeRef.current = Math.min(
-          Math.max(latest * video.duration, 0),
-          video.duration - 0.05
-        );
+      // 1. Scrub video timeline cleanly
+      if (video && video.duration && !isNaN(video.duration)) {
+        const target = latest * video.duration;
+        requestSeek(target);
       }
 
-      // 2. Direct DOM update for formatted counter (e.g. 0,000 -> 7,900)
+      // 2. Direct DOM update for formatted counter (0,000 to 7,900)
       const altitude = Math.round(latest * 7900);
       if (counterRef.current) {
         const formatted =
@@ -81,7 +104,9 @@ export default function HeroAscent({
     });
 
     return () => {
-      if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
+      video.removeEventListener("seeked", onSeeked);
+      video.removeEventListener("loadedmetadata", onLoaded);
+      video.removeEventListener("canplay", onLoaded);
       unsubscribe();
     };
   }, [smoothProgress, onThemeChange, onAscentRevealChange]);
@@ -96,12 +121,12 @@ export default function HeroAscent({
     });
   };
 
-  // Phase Transitions (Image 2 -> Image 1)
-  const phase1Opacity = useTransform(scrollYProgress, [0, 0.44, 0.54], [1, 0.9, 0]);
+  // Phase Transitions
+  const phase1Opacity = useTransform(scrollYProgress, [0, 0.45, 0.55], [1, 0.9, 0]);
   const phase1Scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.94]);
 
-  const phase2Opacity = useTransform(scrollYProgress, [0.55, 0.72, 1], [0, 1, 1]);
-  const phase2Y = useTransform(scrollYProgress, [0.55, 0.72], [32, 0]);
+  const phase2Opacity = useTransform(scrollYProgress, [0.58, 0.75, 1], [0, 1, 1]);
+  const phase2Y = useTransform(scrollYProgress, [0.58, 0.75], [30, 0]);
 
   return (
     <section
@@ -124,12 +149,39 @@ export default function HeroAscent({
         {/* Cinematic Vignette */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#161B18]/90 via-black/20 to-[#161B18]/70 pointer-events-none" />
 
-        {/* Top Header Placeholder Spacer (Global Header floats above this) */}
-        <div className="relative z-10 w-full h-24 pointer-events-none" />
+        {/* Global Floating Header */}
+        <div className="relative z-20 flex items-center justify-between px-8 sm:px-14 pt-8 pointer-events-auto">
+          <div className="flex flex-col">
+            <span className="font-serif text-xl sm:text-2xl text-[#C9BEAE] tracking-widest font-normal uppercase">
+              The Serene Heights
+            </span>
+            <span className="text-[9px] tracking-[0.35em] uppercase text-[#A8A195] -mt-1">
+              Nathia Gali
+            </span>
+          </div>
 
-        {/* =========================================================================
-            PHASE 1: MASSIVE CENTER ALTITUDE (MATCHES IMAGE 2: 0,000 FT)
-        ========================================================================== */}
+          <div className="flex items-center gap-6">
+            <button
+              onClick={onRegisterClick}
+              type="button"
+              className="hidden sm:inline-flex border border-white/25 rounded-full px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase text-[#EDE8DF] hover:bg-white/10 transition-all cursor-pointer"
+            >
+              Register Interest
+            </button>
+            <button
+              type="button"
+              className="flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#EDE8DF] cursor-pointer"
+            >
+              <span>Menu</span>
+              <span className="flex flex-col gap-1 w-6">
+                <span className="h-[1.5px] w-full bg-[#EDE8DF]"></span>
+                <span className="h-[1.5px] w-full bg-[#EDE8DF]"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* PHASE 1: MASSIVE CENTER ALTITUDE (MATCHES IMAGE 2) */}
         <motion.div
           style={{ opacity: phase1Opacity, scale: phase1Scale }}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none select-none"
@@ -144,26 +196,24 @@ export default function HeroAscent({
           </div>
 
           <div className="absolute bottom-16 flex flex-col items-center gap-2">
-            <span className="font-mono text-[10px] sm:text-xs text-[#EDE8DF]/75 tracking-[0.3em] uppercase">
+            <span className="font-mono text-[10px] sm:text-xs text-[#EDE8DF]/70 tracking-[0.3em] uppercase">
               SCROLL TO CLIMB
             </span>
             <div className="w-[1px] h-6 bg-gradient-to-b from-[#C9BEAE] to-transparent animate-pulse" />
           </div>
         </motion.div>
 
-        {/* =========================================================================
-            PHASE 2: EDITORIAL TITLE & CTA (MATCHES IMAGE 1: THE EXCEPTIONAL...)
-        ========================================================================== */}
+        {/* PHASE 2: EDITORIAL TITLE & CTA (MATCHES IMAGE 1) */}
         <motion.div
           style={{ opacity: phase2Opacity, y: phase2Y }}
-          className="absolute inset-0 z-10 flex flex-col justify-end px-8 sm:px-14 pb-20 pointer-events-none select-none"
+          className="absolute inset-0 z-10 flex flex-col justify-end px-8 sm:px-14 pb-16 pointer-events-none select-none"
         >
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-4">
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-6">
             <div className="max-w-3xl">
               <span className="font-mono text-xs sm:text-sm tracking-[0.3em] uppercase text-[#C9BEAE] mb-4 block">
                 NATHIA GALI · THE GALIYAT · 7,900 FT
               </span>
-              <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#EDE8DF] font-light leading-[0.93] tracking-tight">
+              <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#EDE8DF] font-light leading-[0.94] tracking-tight">
                 The Exceptional,<br />
                 <span className="italic font-normal">Reserved For You.</span>
               </h1>
@@ -179,7 +229,7 @@ export default function HeroAscent({
               <button
                 onClick={onRegisterClick}
                 type="button"
-                className="bg-[#C9BEAE] hover:bg-[#d8cfc2] text-[#161B18] font-medium text-xs sm:text-sm tracking-widest uppercase px-8 sm:px-10 py-4 sm:py-5 rounded-full flex items-center gap-4 transition-all shadow-2xl group active:scale-95 cursor-pointer"
+                className="bg-[#C9BEAE] hover:bg-[#d8cfc2] text-[#161B18] font-medium text-xs sm:text-sm tracking-widest uppercase px-8 sm:px-10 py-4 sm:py-5 rounded-full flex items-center gap-4 transition-all shadow-xl group active:scale-95 cursor-pointer"
               >
                 <span>Register Priority Interest</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -188,9 +238,7 @@ export default function HeroAscent({
           </div>
         </motion.div>
 
-        {/* =========================================================================
-            BOTTOM PERSISTENT CONTROLS (01 / 12 ———— & SOUND TOGGLE)
-        ========================================================================== */}
+        {/* Bottom Persistent Indicators */}
         <div className="relative z-20 w-full px-8 sm:px-14 pb-8 flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.25em] text-[#A8A195] uppercase select-none pointer-events-auto">
           <div className="flex items-center gap-4 pointer-events-none">
             <span>01 / 12</span>
