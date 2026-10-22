@@ -17,7 +17,7 @@ import { CommercialAssetSection } from '@/components/CommercialAssetSection';
 import { CommercialStructurePricing } from '@/components/CommercialStructurePricing';
 import { InvestmentCalculator } from '@/components/InvestmentCalculator';
 import { FounderStandardsSection } from '@/components/FounderStandardsSection';
-import { RegisterFounders } from '@/components/RegisterFounders';
+import { PublicReleaseRegistration } from '@/components/PublicReleaseRegistration';
 import { Footer } from '@/components/Footer';
 
 export default function Home() {
@@ -195,7 +195,7 @@ export default function Home() {
       <FounderStandardsSection />
 
       {/* Chapter 14: Public Release (Multi-Step Founders' List Intake) */}
-      <RegisterFounders />
+      <PublicReleaseRegistration />
 
       {/* Footer */}
       <Footer />
