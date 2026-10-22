@@ -307,7 +307,7 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
         >
           <video
             ref={videoRef}
-            src="/Video/serene-ascent-scrub.mp4"
+            src="/Video/serene-heights-nathia-gali.mp4"
             muted={isMuted}
             playsInline
             preload="auto"
