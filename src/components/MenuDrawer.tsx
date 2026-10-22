@@ -71,6 +71,25 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Lock body scroll and listen for Escape key when menu is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isOpen, onClose]);
+
   const handleItemClick = (targetId: string) => {
     onClose();
     setTimeout(() => {
@@ -79,7 +98,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 150);
+    }, 450);
   };
 
   const handleRegister = () => {
@@ -91,7 +110,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
         const el = document.getElementById('register');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
       }
-    }, 150);
+    }, 450);
   };
 
   const handleExplorer = () => {
@@ -99,18 +118,18 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
     setTimeout(() => {
       const el = document.getElementById('explorer');
       if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }, 150);
+    }, 450);
   };
 
   return (
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[100] bg-[#161B18] text-[#EAE6DE] flex overflow-hidden select-none"
+          initial={{ y: '-100%' }}
+          animate={{ y: '0%' }}
+          exit={{ y: '-100%' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="fixed inset-0 z-[100] bg-[#161B18] text-[#EAE6DE] flex overflow-hidden select-none shadow-[0_25px_60px_rgba(0,0,0,0.85)]"
         >
           {/* ================= LEFT HALF: DYNAMIC IMAGE PREVIEW (Desktop) ================= */}
           <div className="hidden lg:block lg:w-[45%] xl:w-[48%] h-full relative overflow-hidden bg-[#0c0f0d]">

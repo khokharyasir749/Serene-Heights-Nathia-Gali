@@ -129,10 +129,10 @@ export const Header: React.FC<HeaderProps> = ({
 
             {/* "MENU" Trigger: Clean uppercase text "MENU" paired with minimal two-line hamburger */}
             <button
-              onClick={() => setIsMenuOpen(true)}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
               type="button"
               className="group flex items-center space-x-3 transition-colors focus:outline-none py-1"
-              aria-label="Open navigation menu"
+              aria-label="Toggle navigation menu"
             >
               <span
                 className={`font-mono text-xs tracking-[0.2em] uppercase transition-colors duration-500 ${
