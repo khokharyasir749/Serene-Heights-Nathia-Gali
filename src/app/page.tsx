@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { HeroAscent } from '@/components/HeroAscent';
-import TheReserveChapter from '@/components/TheReserveChapter';
 import { ManifestoSection } from '@/components/ManifestoSection';
 import { ExplorerSection } from '@/components/ExplorerSection';
 import { ExplorerModal } from '@/components/ExplorerModal';
@@ -151,15 +150,12 @@ export default function Home() {
         theme={isLightChapter ? 'light' : 'dark'}
       />
 
-      {/* Chapter 01: The Ascent & Scroll-Scrubbed Cinematic Experience */}
+      {/* Chapter 01 & Chapter 02: Unified Ascent, Peak Reveal & The Reserve Seamless Crop */}
       <HeroAscent
         onRegisterClick={handleRegisterClick}
         onAscentRevealChange={setIsAscentRevealed}
         onThemeChange={setHeaderTheme}
       />
-
-      {/* Chapter 02: The Reserve Editorial Showcase */}
-      <TheReserveChapter />
 
       {/* Manifesto Statement: Scroll-driven expanding image & staggered typography reveal */}
       <ManifestoSection />

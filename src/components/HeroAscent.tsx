@@ -19,6 +19,21 @@ export default function HeroAscent({
   const counterRef = useRef<HTMLSpanElement>(null);
   const [isMuted, setIsMuted] = useState(true);
 
+  // Responsive window dimensions for smooth pixel-perfect crop animation
+  const [windowSize, setWindowSize] = useState({ width: 1920, height: 1080 });
+
+  useEffect(() => {
+    const updateSize = () => {
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  const targetWidth = Math.min(380, windowSize.width * 0.85);
+  const targetHeight = targetWidth * (4 / 3);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -79,15 +94,15 @@ export default function HeroAscent({
     video.addEventListener("canplay", onLoaded);
 
     const unsubscribe = smoothProgress.on("change", (latest) => {
-      // 1. Scrub video timeline cleanly
+      // 1. Scrub video timeline cleanly up to peak (~58% of scroll)
       if (video && video.duration && !isNaN(video.duration)) {
-        const target = latest * video.duration;
+        const videoProgress = Math.min(1, latest / 0.58);
+        const target = videoProgress * video.duration;
         requestSeek(target);
       }
 
-      // 2. Direct DOM update for formatted counter (0,000 to 7,900)
-      // Smoothly climbs to peak 7,900 FT as scroll progresses towards the summit (~85% scroll)
-      const progressToPeak = Math.min(1, Math.max(0, latest / 0.85));
+      // 2. Direct DOM update for formatted counter (0,000 to 7,900 FT) during Phase 1
+      const progressToPeak = Math.min(1, Math.max(0, latest / 0.45));
       const altitude = Math.round(progressToPeak * 7900);
       if (counterRef.current) {
         const formatted =
@@ -97,8 +112,9 @@ export default function HeroAscent({
         counterRef.current.innerText = formatted;
       }
 
+      // Dynamic header theme switch when transitioning into cream parchment Chapter 02
       if (onThemeChange) {
-        onThemeChange(latest >= 0.88 ? "light" : "dark");
+        onThemeChange(latest >= 0.74 ? "light" : "dark");
       }
       if (onAscentRevealChange) {
         onAscentRevealChange(latest >= 0.1);
@@ -123,43 +139,122 @@ export default function HeroAscent({
     });
   };
 
-  // Phase Transitions
-  // Counter stays fully visible from 0 to 78% scroll, then fades out as it reaches 7,900 FT
-  const phase1Opacity = useTransform(scrollYProgress, [0, 0.78, 0.88], [1, 1, 0]);
+  // =========================================================================
+  // SCROLL-LINKED TRANSFORMATION TIMELINE (0.00 -> 1.00 across 800vh)
+  // =========================================================================
 
-  // Headline only reveals at the very end (86% to 94% scroll)
-  const phase2Opacity = useTransform(scrollYProgress, [0.86, 0.94, 1], [0, 1, 1]);
-  const phase2Y = useTransform(scrollYProgress, [0.86, 0.94], [30, 0]);
+  // 1. Phase 1: Massive 0,000 FT Counter (visible 0 -> 0.44, fades out to 0.50)
+  const phase1Opacity = useTransform(scrollYProgress, [0, 0.44, 0.50], [1, 1, 0]);
+
+  // 2. High-res 4K dusk render crossfade over video at peak (0.46 -> 0.54)
+  const highResImageOpacity = useTransform(scrollYProgress, [0.46, 0.54], [0, 1]);
+
+  // 3. Phase 2: Editorial Headline & CTA ("The Exceptional, Reserved For You")
+  const phase2Opacity = useTransform(scrollYProgress, [0.50, 0.57, 0.65, 0.71], [0, 1, 1, 0]);
+  const phase2Y = useTransform(scrollYProgress, [0.50, 0.57, 0.65, 0.71], [30, 0, 0, -30]);
+
+  // 4. Phase 3: Seamless Background Morph (#161B18 -> #F5F2EB parchment)
+  const bgColor = useTransform(scrollYProgress, [0.68, 0.78], ["#161B18", "#F5F2EB"]);
+  const vignetteOpacity = useTransform(scrollYProgress, [0.68, 0.76], [1, 0]);
+
+  // 5. Phase 3: Contracting Center Media Frame (100vw/100vh -> 380px/506px 3:4 box)
+  const frameWidth = useTransform(scrollYProgress, [0.68, 0.80], [windowSize.width, targetWidth]);
+  const frameHeight = useTransform(scrollYProgress, [0.68, 0.80], [windowSize.height, targetHeight]);
+  const frameBorderRadius = useTransform(scrollYProgress, [0.68, 0.80], [0, 4]);
+  const frameShadow = useTransform(
+    scrollYProgress,
+    [0.68, 0.80],
+    ["0px 0px 0px rgba(0,0,0,0)", "0px 25px 60px -15px rgba(28,25,23,0.3)"]
+  );
+
+  // 6. Chapter 02: 3-Column Editorial Content Reveals
+  const ch2LeftOpacity = useTransform(scrollYProgress, [0.76, 0.83], [0, 1]);
+  const ch2LeftY = useTransform(scrollYProgress, [0.76, 0.83], [25, 0]);
+
+  const ch2CaptionOpacity = useTransform(scrollYProgress, [0.78, 0.84], [0, 1]);
+  const ch2CaptionY = useTransform(scrollYProgress, [0.78, 0.84], [15, 0]);
+
+  const ch2RightOpacity = useTransform(scrollYProgress, [0.78, 0.85], [0, 1]);
+  const ch2RightY = useTransform(scrollYProgress, [0.78, 0.85], [25, 0]);
+
+  // 7. Bottom Bar Crossfade (01 / 12 -> 02 / 12 and dark to parchment text)
+  const ch1IndicatorOpacity = useTransform(scrollYProgress, [0.70, 0.76], [1, 0]);
+  const ch2IndicatorOpacity = useTransform(scrollYProgress, [0.74, 0.80], [0, 1]);
+  const bottomTextColor = useTransform(scrollYProgress, [0.70, 0.78], ["#A8A195", "#78716C"]);
+  const bottomLineColor = useTransform(
+    scrollYProgress,
+    [0.70, 0.78],
+    ["rgba(168,161,149,0.4)", "rgba(120,113,108,0.4)"]
+  );
 
   return (
     <section
       ref={containerRef}
       id="ascent"
       data-chapter="ascent"
-      className="relative h-[600vh] bg-[#161B18]"
+      className="relative h-[800vh]"
     >
-      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
-        {/* Background Scrubbed Video */}
-        <video
-          ref={videoRef}
-          playsInline
-          muted={isMuted}
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          src="/Video/serene-heights-scrub-fast.mp4"
+      {/* Anchor point for Chapter 02 The Reserve navigation */}
+      <div id="reserve" className="absolute top-[68%] w-full h-1 pointer-events-none" />
+
+      {/* Pinned Sticky Viewport with Dynamic Morphing Background */}
+      <motion.div
+        style={{ backgroundColor: bgColor }}
+        className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between"
+      >
+        {/* =========================================================================
+            CENTER CONTRACTING MEDIA FRAME (FULL-BLEED -> 3:4 CENTER PORTRAIT)
+        ========================================================================== */}
+        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none">
+          <motion.div
+            style={{
+              width: frameWidth,
+              height: frameHeight,
+              borderRadius: frameBorderRadius,
+              boxShadow: frameShadow,
+            }}
+            className="relative overflow-hidden shrink-0 bg-[#161B18]"
+          >
+            {/* Background Scrubbed Video */}
+            <video
+              ref={videoRef}
+              playsInline
+              muted={isMuted}
+              preload="auto"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
+              src="/Video/serene-heights-scrub-fast.mp4"
+            />
+
+            {/* High-Res 4K Dusk Architectural Facade (Crossfades in at summit) */}
+            <motion.img
+              style={{ opacity: highResImageOpacity }}
+              src="/img/facade-hero-sunset-lg.webp"
+              alt="The Serene Heights - Golden Hour at 7,900 FT"
+              className="absolute inset-0 w-full h-full object-cover object-[65%_35%] pointer-events-none select-none"
+              loading="eager"
+            />
+          </motion.div>
+        </div>
+
+        {/* Cinematic Vignette (Fades to 0 during parchment transition) */}
+        <motion.div
+          style={{ opacity: vignetteOpacity }}
+          className="absolute inset-0 bg-gradient-to-t from-[#161B18]/90 via-black/20 to-[#161B18]/70 pointer-events-none"
         />
 
-        {/* Cinematic Vignette */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#161B18]/90 via-black/20 to-[#161B18]/70 pointer-events-none" />
-
-        {/* PHASE 1: MASSIVE CENTER ALTITUDE (MATCHES IMAGE 2) */}
+        {/* =========================================================================
+            PHASE 1: MASSIVE CENTER ALTITUDE (0,000 -> 7,900 FT)
+        ========================================================================== */}
         <motion.div
           style={{ opacity: phase1Opacity }}
-          className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none select-none"
+          className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none"
         >
           <div className="relative flex items-start select-none">
             <div className="text-[13rem] sm:text-[16rem] md:text-[20rem] lg:text-[22rem] font-serif font-light leading-none tracking-tight tabular-nums select-none text-[#EDE8DF] drop-shadow-2xl">
-              <span ref={counterRef} className="inline-block tabular-nums [font-variant-numeric:tabular-nums]">
+              <span
+                ref={counterRef}
+                className="inline-block tabular-nums [font-variant-numeric:tabular-nums]"
+              >
                 0,000
               </span>
             </div>
@@ -176,10 +271,12 @@ export default function HeroAscent({
           </div>
         </motion.div>
 
-        {/* PHASE 2: EDITORIAL TITLE & CTA (MATCHES IMAGE 1) */}
+        {/* =========================================================================
+            PHASE 2: EDITORIAL TITLE & CTA ("The Exceptional, Reserved For You")
+        ========================================================================== */}
         <motion.div
           style={{ opacity: phase2Opacity, y: phase2Y }}
-          className="absolute inset-0 z-10 flex flex-col justify-end px-8 sm:px-14 pb-16 pointer-events-none select-none"
+          className="absolute inset-0 z-20 flex flex-col justify-end px-8 sm:px-14 pb-16 pointer-events-none select-none"
         >
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-6">
             <div className="max-w-3xl">
@@ -211,22 +308,110 @@ export default function HeroAscent({
           </div>
         </motion.div>
 
-        {/* Bottom Persistent Indicators */}
-        <div className="relative z-20 mt-auto w-full px-8 sm:px-14 pb-8 flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.25em] text-[#A8A195] uppercase select-none pointer-events-auto">
-          <div className="flex items-center gap-4 pointer-events-none">
-            <span>01 / 12</span>
-            <span className="h-[1px] w-8 sm:w-12 bg-[#A8A195]/40" />
+        {/* =========================================================================
+            PHASE 3 / CHAPTER 02: 3-COLUMN EDITORIAL SHOWCASE (THE RESERVE)
+        ========================================================================== */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center px-8 sm:px-14 lg:px-16 pointer-events-none select-none">
+          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+            
+            {/* Column 1: Left Eyebrow & Staggered Serif Headline */}
+            <motion.div
+              style={{ opacity: ch2LeftOpacity, y: ch2LeftY }}
+              className="lg:col-span-4 flex flex-col justify-center"
+            >
+              {/* Eyebrow */}
+              <div className="flex items-center gap-3 mb-6 sm:mb-8">
+                <span className="font-mono text-xs tracking-[0.3em] uppercase text-[#78716C]">
+                  02
+                </span>
+                <span className="w-8 h-[1px] bg-[#78716C]/40" />
+                <span className="font-mono text-xs tracking-[0.3em] uppercase text-[#78716C]">
+                  THE RESERVE
+                </span>
+              </div>
+
+              {/* Headline */}
+              <h2 className="font-serif text-5xl sm:text-6xl lg:text-7xl xl:text-[5.25rem] text-[#1C1917] font-light leading-[1.08] tracking-tight">
+                Slower days.<br />
+                Deeper breaths.<br />
+                <span className="italic font-normal font-serif text-[#8C7E6A]">
+                  True rest.
+                </span>
+              </h2>
+            </motion.div>
+
+            {/* Column 2: Center Spacer (matches frame dimensions) + Caption below */}
+            <div className="lg:col-span-4 flex flex-col items-center justify-center">
+              {/* Phantom spacer that guarantees grid column alignment */}
+              <div
+                style={{ width: targetWidth, height: targetHeight }}
+                className="shrink-0 pointer-events-none"
+              />
+
+              {/* Caption right below the frame */}
+              <motion.p
+                style={{ opacity: ch2CaptionOpacity, y: ch2CaptionY }}
+                className="font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#78716C] mt-4 text-center select-none"
+              >
+                GOLDEN HOUR · 7,900 FT
+              </motion.p>
+            </div>
+
+            {/* Column 3: Right Editorial Prose with delicate leading */}
+            <motion.div
+              style={{ opacity: ch2RightOpacity, y: ch2RightY }}
+              className="lg:col-span-4 flex flex-col justify-end lg:pt-36 lg:pl-6"
+            >
+              <p className="font-serif text-lg sm:text-xl lg:text-2xl text-[#292524] font-light leading-relaxed max-w-sm">
+                High on the main road of Nathia Gali, composed in stone, timber and glass above an unbroken sweep of protected pine forest.
+              </p>
+            </motion.div>
+
+          </div>
+        </div>
+
+        {/* =========================================================================
+            BOTTOM PERSISTENT CONTROLS (01 / 12 -> 02 / 12 & SOUND TOGGLE)
+        ========================================================================== */}
+        <motion.div
+          style={{ color: bottomTextColor }}
+          className="relative z-30 mt-auto w-full max-w-7xl mx-auto px-8 sm:px-14 lg:px-16 pb-8 flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.25em] uppercase select-none pointer-events-auto"
+        >
+          <div className="flex items-center gap-4 pointer-events-none relative h-4">
+            {/* 01 / 12 Chapter 01 indicator */}
+            <motion.div
+              style={{ opacity: ch1IndicatorOpacity }}
+              className="flex items-center gap-4 absolute left-0 top-0 whitespace-nowrap"
+            >
+              <span>01 / 12</span>
+              <motion.span
+                style={{ backgroundColor: bottomLineColor }}
+                className="h-[1px] w-8 sm:w-12"
+              />
+            </motion.div>
+
+            {/* 02 / 12 Chapter 02 indicator */}
+            <motion.div
+              style={{ opacity: ch2IndicatorOpacity }}
+              className="flex items-center gap-4 absolute left-0 top-0 whitespace-nowrap"
+            >
+              <span>02 / 12</span>
+              <motion.span
+                style={{ backgroundColor: bottomLineColor }}
+                className="h-[1px] w-8 sm:w-12"
+              />
+            </motion.div>
           </div>
 
           <button
             onClick={toggleSound}
             type="button"
-            className="hover:text-[#EDE8DF] transition-colors cursor-pointer"
+            className="hover:opacity-80 transition-opacity cursor-pointer"
           >
             {isMuted ? ".... SOUND OFF" : ".... SOUND ON"}
           </button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
