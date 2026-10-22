@@ -149,38 +149,6 @@ export default function HeroAscent({
         {/* Cinematic Vignette */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#161B18]/90 via-black/20 to-[#161B18]/70 pointer-events-none" />
 
-        {/* Global Floating Header */}
-        <div className="relative z-20 flex items-center justify-between px-8 sm:px-14 pt-8 pointer-events-auto">
-          <div className="flex flex-col">
-            <span className="font-serif text-xl sm:text-2xl text-[#C9BEAE] tracking-widest font-normal uppercase">
-              The Serene Heights
-            </span>
-            <span className="text-[9px] tracking-[0.35em] uppercase text-[#A8A195] -mt-1">
-              Nathia Gali
-            </span>
-          </div>
-
-          <div className="flex items-center gap-6">
-            <button
-              onClick={onRegisterClick}
-              type="button"
-              className="hidden sm:inline-flex border border-white/25 rounded-full px-6 py-2.5 text-[11px] tracking-[0.2em] uppercase text-[#EDE8DF] hover:bg-white/10 transition-all cursor-pointer"
-            >
-              Register Interest
-            </button>
-            <button
-              type="button"
-              className="flex items-center gap-3 text-xs tracking-[0.2em] uppercase text-[#EDE8DF] cursor-pointer"
-            >
-              <span>Menu</span>
-              <span className="flex flex-col gap-1 w-6">
-                <span className="h-[1.5px] w-full bg-[#EDE8DF]"></span>
-                <span className="h-[1.5px] w-full bg-[#EDE8DF]"></span>
-              </span>
-            </button>
-          </div>
-        </div>
-
         {/* PHASE 1: MASSIVE CENTER ALTITUDE (MATCHES IMAGE 2) */}
         <motion.div
           style={{ opacity: phase1Opacity, scale: phase1Scale }}
@@ -239,7 +207,7 @@ export default function HeroAscent({
         </motion.div>
 
         {/* Bottom Persistent Indicators */}
-        <div className="relative z-20 w-full px-8 sm:px-14 pb-8 flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.25em] text-[#A8A195] uppercase select-none pointer-events-auto">
+        <div className="relative z-20 mt-auto w-full px-8 sm:px-14 pb-8 flex items-center justify-between font-mono text-[10px] sm:text-xs tracking-[0.25em] text-[#A8A195] uppercase select-none pointer-events-auto">
           <div className="flex items-center gap-4 pointer-events-none">
             <span>01 / 12</span>
             <span className="h-[1px] w-8 sm:w-12 bg-[#A8A195]/40" />

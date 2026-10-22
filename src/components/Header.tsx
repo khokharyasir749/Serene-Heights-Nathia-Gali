@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({
           <a
             href="#ascent"
             className="group flex flex-col items-start text-left focus:outline-none select-none transition-opacity hover:opacity-90"
-            aria-label="The Nathia Reserve"
+            aria-label="The Serene Heights"
           >
             <span
               className={`font-serif italic text-xs md:text-sm leading-none pl-0.5 mb-1 font-normal transition-colors duration-500 ${
@@ -101,14 +101,14 @@ export const Header: React.FC<HeaderProps> = ({
                 isLight ? 'text-[#121614]' : 'text-[#efe9df] group-hover:text-[#c3a78e]'
               }`}
             >
-              Nathia
+              Serene
             </span>
             <span
               className={`font-serif text-[11px] sm:text-xs md:text-sm tracking-[0.38em] uppercase font-light leading-tight mt-0.5 pl-0.5 transition-colors duration-500 ${
                 isLight ? 'text-[#121614]/85' : 'text-[#efe9df]/90 group-hover:text-[#c3a78e]'
               }`}
             >
-              Reserve
+              Heights
             </span>
           </a>
 
