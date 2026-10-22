@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { HeroAscent } from '@/components/HeroAscent';
+import TheReserveChapter from '@/components/TheReserveChapter';
 import { ManifestoSection } from '@/components/ManifestoSection';
 import { ExplorerSection } from '@/components/ExplorerSection';
 import { ExplorerModal } from '@/components/ExplorerModal';
@@ -34,6 +35,7 @@ export default function Home() {
   const isResidencesActive = activeChapterId === 'residences' || isResidencesInView;
 
   const isLightChapter =
+    activeChapterId === 'reserve' ||
     activeChapterId === 'manifesto' ||
     activeChapterId === 'explorer' ||
     activeChapterId === 'residences' ||
@@ -64,6 +66,7 @@ export default function Home() {
     const chapterIds = [
       'hero',
       'ascent',
+      'reserve',
       'manifesto',
       'explorer',
       'numbers',
@@ -154,6 +157,9 @@ export default function Home() {
         onAscentRevealChange={setIsAscentRevealed}
         onThemeChange={setHeaderTheme}
       />
+
+      {/* Chapter 02: The Reserve Editorial Showcase */}
+      <TheReserveChapter />
 
       {/* Manifesto Statement: Scroll-driven expanding image & staggered typography reveal */}
       <ManifestoSection />

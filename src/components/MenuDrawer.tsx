@@ -23,8 +23,8 @@ const MENU_ITEMS: MenuItem[] = [
     num: '01',
     title: 'The Reserve',
     subtitle: 'ABOVE THE MIST LINE',
-    targetId: 'manifesto',
-    image: '/img/cloudsea-lg.webp',
+    targetId: 'reserve',
+    image: '/img/facade-hero-sunset-lg.webp',
   },
   {
     num: '02',
