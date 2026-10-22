@@ -160,11 +160,12 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </header>
 
-      {/* Slide-over Menu Drawer */}
+      {/* Full-Screen Split Menu Drawer */}
       <MenuDrawer
         isOpen={isMenuOpen}
         onClose={() => setIsMenuOpen(false)}
         onSelectChapter={onSelectChapter}
+        onRegisterClick={onRegisterClick}
       />
     </>
   );

@@ -1,147 +1,246 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ArrowUpRight, Compass, PhoneCall } from 'lucide-react';
-import siteData from '@/data/siteData';
 
 interface MenuDrawerProps {
   isOpen: boolean;
   onClose: () => void;
   onSelectChapter: (id: string) => void;
+  onRegisterClick?: () => void;
 }
 
-export const MenuDrawer: React.FC<MenuDrawerProps> = ({ isOpen, onClose, onSelectChapter }) => {
-  const { menuLinks, chapters, project } = siteData;
+interface MenuItem {
+  num: string;
+  title: string;
+  subtitle: string;
+  targetId: string;
+  image: string;
+}
+
+const MENU_ITEMS: MenuItem[] = [
+  {
+    num: '01',
+    title: 'The Reserve',
+    subtitle: 'ABOVE THE MIST LINE',
+    targetId: 'manifesto',
+    image: '/img/cloudsea-lg.webp',
+  },
+  {
+    num: '02',
+    title: 'Residences',
+    subtitle: '133 · STUDIO TO PENTHOUSE',
+    targetId: 'residences',
+    image: '/img/facade-snow-night-lg.webp',
+  },
+  {
+    num: '03',
+    title: 'The Estate',
+    subtitle: '25,000+ SQ FT · FOUR LEVELS',
+    targetId: 'estate',
+    image: '/img/amenity-lobby-lg.webp',
+  },
+  {
+    num: '04',
+    title: 'Location',
+    subtitle: 'THE MAIN NATHIA GALI ROAD',
+    targetId: 'location-map',
+    image: '/img/aerial-ridge-lg.webp',
+  },
+  {
+    num: '05',
+    title: 'Elevate',
+    subtitle: 'OPERATOR BEFORE DEVELOPER',
+    targetId: 'elevate',
+    image: '/img/founder-lg.webp',
+  },
+  {
+    num: '06',
+    title: 'Questions',
+    subtitle: 'DIRECT ANSWERS',
+    targetId: 'register',
+    image: '/img/int-living-day-lg.webp',
+  },
+];
+
+export const MenuDrawer: React.FC<MenuDrawerProps> = ({
+  isOpen,
+  onClose,
+  onSelectChapter,
+  onRegisterClick,
+}) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleItemClick = (targetId: string) => {
+    onClose();
+    setTimeout(() => {
+      onSelectChapter(targetId);
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 150);
+  };
+
+  const handleRegister = () => {
+    onClose();
+    setTimeout(() => {
+      if (onRegisterClick) {
+        onRegisterClick();
+      } else {
+        const el = document.getElementById('register');
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 150);
+  };
+
+  const handleExplorer = () => {
+    onClose();
+    setTimeout(() => {
+      const el = document.getElementById('explorer');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 150);
+  };
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 z-[80] bg-black/75 backdrop-blur-md"
-          />
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="fixed inset-0 z-[100] bg-[#161B18] text-[#EAE6DE] flex overflow-hidden select-none"
+        >
+          {/* ================= LEFT HALF: DYNAMIC IMAGE PREVIEW (Desktop) ================= */}
+          <div className="hidden lg:block lg:w-[45%] xl:w-[48%] h-full relative overflow-hidden bg-[#0c0f0d]">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={MENU_ITEMS[activeIndex].image}
+                src={MENU_ITEMS[activeIndex].image}
+                alt={MENU_ITEMS[activeIndex].title}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                className="w-full h-full object-cover object-center"
+              />
+            </AnimatePresence>
 
-          {/* Drawer Panel */}
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-            className="fixed top-0 right-0 bottom-0 z-[90] w-full max-w-xl bg-[#0c0f0d] border-l border-[#253129] flex flex-col justify-between overflow-y-auto"
-          >
-            {/* Header inside drawer */}
-            <div className="flex items-center justify-between p-6 md:p-8 border-b border-[#253129]/60">
-              <div className="flex items-center space-x-3">
-                <span className="w-2 h-2 rounded-full bg-[#c3a78e] animate-ping" />
-                <span className="font-mono text-xs uppercase tracking-luxury text-[#c3a78e]">
-                  7,900 FT · Nathia Gali
-                </span>
+            {/* Vignette gradients */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
+            <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#161B18] to-transparent pointer-events-none" />
+
+            {/* Brand Logo Watermark (Top Left) */}
+            <div className="absolute top-10 left-10 z-10 select-none pointer-events-none opacity-80">
+              <div className="font-serif text-xl tracking-[0.15em] text-[#EAE6DE] font-light leading-none">
+                The
               </div>
-              <button
-                onClick={onClose}
-                className="group flex items-center space-x-2 text-xs font-mono uppercase tracking-luxury text-[#efe9df]/70 hover:text-[#efe9df] transition-colors p-2"
-                aria-label="Close menu"
-              >
-                <span>Close</span>
-                <span className="p-1 rounded-full border border-[#253129] group-hover:border-[#c3a78e] transition-colors">
-                  <X className="w-4 h-4" />
-                </span>
-              </button>
+              <div className="font-serif text-3xl tracking-[0.2em] text-[#C9BEAE] font-normal leading-tight uppercase -mt-0.5">
+                Nathia
+              </div>
+              <div className="font-mono text-[9px] tracking-[0.35em] text-[#EAE6DE]/70 uppercase">
+                Reserve
+              </div>
+            </div>
+          </div>
+
+          {/* ================= RIGHT HALF: NAVIGATION & ACTIONS ================= */}
+          <div className="flex-1 h-full px-8 sm:px-14 md:px-16 lg:px-20 py-10 md:py-12 flex flex-col justify-between overflow-y-auto bg-[#161B18]">
+            {/* Top Bar inside Menu Drawer */}
+            <div className="flex items-center justify-between w-full">
+              {/* Centered Decorative Tan Dot */}
+              <div className="w-1.5 h-1.5 rounded-full bg-[#C9BEAE]" />
+
+              {/* Right Action Controls */}
+              <div className="flex items-center space-x-6 sm:space-x-8">
+                <button
+                  type="button"
+                  onClick={handleRegister}
+                  className="px-6 py-2 rounded-full border border-[#7A7468]/50 text-[#EAE6DE] hover:border-[#C9BEAE] hover:text-[#C9BEAE] transition-all font-mono text-[10px] sm:text-[11px] tracking-[0.2em] uppercase cursor-pointer"
+                >
+                  REGISTER INTEREST
+                </button>
+
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="flex items-center gap-2.5 font-mono text-[11px] tracking-[0.2em] uppercase text-[#EAE6DE] hover:text-[#C9BEAE] transition-colors cursor-pointer group"
+                >
+                  <span>CLOSE</span>
+                  <span className="text-base font-light transition-transform group-hover:rotate-90 duration-300">
+                    ✕
+                  </span>
+                </button>
+              </div>
             </div>
 
-            {/* Menu Sections */}
-            <div className="p-6 md:p-8 flex-1">
-              <p className="font-mono text-[11px] uppercase tracking-luxury text-[#c3a78e] mb-6">
-                Editorial Chapters
-              </p>
-
-              <div className="space-y-4">
-                {chapters?.map((ch: any) => (
-                  <button
-                    key={ch.id}
-                    onClick={() => {
-                      onSelectChapter(ch.id);
-                      onClose();
-                    }}
-                    className="w-full text-left group flex items-baseline justify-between py-2 border-b border-[#253129]/40 hover:border-[#c3a78e]/60 transition-all"
+            {/* Main Menu List (The 6 Luxury Chapter Items) */}
+            <div className="my-auto w-full py-6">
+              {MENU_ITEMS.map((item, index) => {
+                const isHovered = activeIndex === index;
+                return (
+                  <div
+                    key={item.num}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onClick={() => handleItemClick(item.targetId)}
+                    className="w-full border-b border-[#7A7468]/20 py-4 sm:py-5 lg:py-6 flex items-baseline justify-between group cursor-pointer transition-colors"
                   >
-                    <div className="flex items-baseline space-x-4">
-                      <span className="font-mono text-xs text-[#c3a78e]/60 group-hover:text-[#c3a78e] transition-colors">
-                        {ch.no}
+                    {/* Left: Number and Title */}
+                    <div className="flex items-baseline gap-6 sm:gap-10">
+                      <span className="font-mono text-xs sm:text-sm tracking-wider text-[#A8A195]/60 group-hover:text-[#C9BEAE] transition-colors w-6 sm:w-8 shrink-0">
+                        {item.num}
                       </span>
-                      <span className="font-serif text-2xl md:text-3xl text-[#efe9df] group-hover:text-[#c3a78e] transition-colors tracking-wide">
-                        {ch.name}
+                      <span
+                        className={`font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.8rem] xl:text-[4.2rem] font-light tracking-tight leading-none transition-colors ${
+                          isHovered
+                            ? 'text-[#C9BEAE]'
+                            : 'text-[#EAE6DE] group-hover:text-[#C9BEAE]'
+                        }`}
+                      >
+                        {item.title}
                       </span>
                     </div>
-                    <ArrowUpRight className="w-4 h-4 text-[#253129] group-hover:text-[#c3a78e] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
-                  </button>
-                ))}
-              </div>
 
-              {/* Fast links */}
-              <div className="mt-10 pt-6 border-t border-[#253129]">
-                <p className="font-mono text-[11px] uppercase tracking-luxury text-[#c3a78e] mb-4">
-                  Quick Access
-                </p>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    onClick={() => {
-                      onSelectChapter('returns');
-                      onClose();
-                    }}
-                    className="p-3 text-left rounded bg-[#141c17] border border-[#253129] hover:border-[#c3a78e] transition-colors"
-                  >
-                    <span className="block font-mono text-[10px] text-[#c3a78e] uppercase tracking-wider">
-                      Financial
+                    {/* Right: Subtitle */}
+                    <span className="font-mono text-[9px] sm:text-[10px] md:text-xs tracking-[0.25em] text-[#A8A195] uppercase font-light ml-4 text-right group-hover:text-[#EAE6DE] transition-colors shrink-0">
+                      {item.subtitle}
                     </span>
-                    <span className="font-serif text-base text-[#efe9df]">ROI Calculator</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      onSelectChapter('residences');
-                      onClose();
-                    }}
-                    className="p-3 text-left rounded bg-[#141c17] border border-[#253129] hover:border-[#c3a78e] transition-colors"
-                  >
-                    <span className="block font-mono text-[10px] text-[#c3a78e] uppercase tracking-wider">
-                      Availability
-                    </span>
-                    <span className="font-serif text-base text-[#efe9df]">133 Residences</span>
-                  </button>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Bottom Controls & Metadata Footer */}
+            <div className="w-full pt-4">
+              {/* 3D Explorer Button */}
+              <button
+                type="button"
+                onClick={handleExplorer}
+                className="px-6 py-2.5 rounded-full border border-[#7A7468]/50 text-[#EAE6DE] hover:border-[#C9BEAE] hover:text-[#C9BEAE] font-mono text-[10px] sm:text-[11px] tracking-[0.2em] uppercase transition-all flex items-center gap-2.5 cursor-pointer mb-6"
+              >
+                <span>3D EXPLORER</span>
+                <span className="text-sm">→</span>
+              </button>
+
+              {/* Three Editorial Footer Columns */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-[#7A7468]/15 font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-light">
+                <div>
+                  <span className="text-[#7A7468] block mb-1">ADDRESS</span>
+                  <span className="text-[#EAE6DE]">Nathia Gali Road, 7,900 FT</span>
+                </div>
+                <div>
+                  <span className="text-[#7A7468] block mb-1">ENQUIRIES</span>
+                  <span className="text-[#EAE6DE]">concierge@thenathiareserve.com</span>
+                </div>
+                <div>
+                  <span className="text-[#7A7468] block mb-1">YOU ARE HERE</span>
+                  <span className="text-[#C9BEAE]">The Nathia Reserve</span>
                 </div>
               </div>
             </div>
-
-            {/* Footer inside drawer */}
-            <div className="p-6 md:p-8 bg-[#090d0a] border-t border-[#253129]/60">
-              <div className="text-xs text-[#efe9df]/60 space-y-2">
-                <p className="font-mono text-[10px] uppercase tracking-luxury text-[#c3a78e]">
-                  Elevate Holdings
-                </p>
-                <p className="font-serif text-base text-[#efe9df] italic">
-                  &ldquo;We are building the addresses Pakistan deserves.&rdquo;
-                </p>
-                <div className="flex items-center justify-between pt-2">
-                  <span className="font-mono text-[11px] text-[#efe9df]/50">{project?.email}</span>
-                  <a
-                    href="https://instagram.com/thenathiareserve"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-mono text-[11px] text-[#c3a78e] hover:underline"
-                  >
-                    @thenathiareserve
-                  </a>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </>
+          </div>
+        </motion.div>
       )}
     </AnimatePresence>
   );
