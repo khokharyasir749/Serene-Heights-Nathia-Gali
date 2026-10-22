@@ -16,7 +16,7 @@ import { FourSeasonsWinter } from '@/components/FourSeasonsWinter';
 import { CommercialAssetSection } from '@/components/CommercialAssetSection';
 import { CommercialStructurePricing } from '@/components/CommercialStructurePricing';
 import { InvestmentCalculator } from '@/components/InvestmentCalculator';
-import { ElevateDeveloper } from '@/components/ElevateDeveloper';
+import { FounderStandardsSection } from '@/components/FounderStandardsSection';
 import { RegisterFounders } from '@/components/RegisterFounders';
 import { Footer } from '@/components/Footer';
 
@@ -192,7 +192,7 @@ export default function Home() {
       <InvestmentCalculator onRegisterClick={handleRegisterClick} />
 
       {/* Chapter 12: Elevate Holdings (Founder Ahmed Khilji & Partners) */}
-      <ElevateDeveloper />
+      <FounderStandardsSection />
 
       {/* Chapter 14: Public Release (Multi-Step Founders' List Intake) */}
       <RegisterFounders />
