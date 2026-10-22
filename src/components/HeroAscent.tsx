@@ -143,7 +143,7 @@ export default function HeroAscent({
           muted={isMuted}
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          src="/Video/serene-heights-nathia-gali.mp4"
+          src="/Video/serene-heights-scrub-fast.mp4"
         />
 
         {/* Cinematic Vignette */}
