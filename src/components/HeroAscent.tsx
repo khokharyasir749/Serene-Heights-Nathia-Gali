@@ -86,7 +86,9 @@ export default function HeroAscent({
       }
 
       // 2. Direct DOM update for formatted counter (0,000 to 7,900)
-      const altitude = Math.round(latest * 7900);
+      // Smoothly climbs to peak 7,900 FT as scroll progresses towards the summit (~85% scroll)
+      const progressToPeak = Math.min(1, Math.max(0, latest / 0.85));
+      const altitude = Math.round(progressToPeak * 7900);
       if (counterRef.current) {
         const formatted =
           altitude >= 1000
@@ -122,17 +124,19 @@ export default function HeroAscent({
   };
 
   // Phase Transitions
-  const phase1Opacity = useTransform(scrollYProgress, [0, 0.45, 0.55], [1, 0.9, 0]);
+  // Counter stays fully visible from 0 to 78% scroll, then fades out as it reaches 7,900 FT
+  const phase1Opacity = useTransform(scrollYProgress, [0, 0.78, 0.88], [1, 1, 0]);
 
-  const phase2Opacity = useTransform(scrollYProgress, [0.58, 0.75, 1], [0, 1, 1]);
-  const phase2Y = useTransform(scrollYProgress, [0.58, 0.75], [30, 0]);
+  // Headline only reveals at the very end (86% to 94% scroll)
+  const phase2Opacity = useTransform(scrollYProgress, [0.86, 0.94, 1], [0, 1, 1]);
+  const phase2Y = useTransform(scrollYProgress, [0.86, 0.94], [30, 0]);
 
   return (
     <section
       ref={containerRef}
       id="ascent"
       data-chapter="ascent"
-      className="relative h-[450vh] bg-[#161B18]"
+      className="relative h-[600vh] bg-[#161B18]"
     >
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
         {/* Background Scrubbed Video */}
