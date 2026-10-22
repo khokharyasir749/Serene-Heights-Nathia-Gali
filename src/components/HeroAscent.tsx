@@ -1,7 +1,12 @@
-'use client';
-
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionTemplate } from 'framer-motion';
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  useMotionValue,
+  useMotionTemplate,
+} from 'framer-motion';
 
 interface HeroAscentProps {
   onRegisterClick: () => void;
@@ -17,6 +22,22 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  // Mouse Parallax Physics
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const smoothX = useSpring(mouseX, { stiffness: 45, damping: 20 });
+  const smoothY = useSpring(mouseY, { stiffness: 45, damping: 20 });
+
+  const xTransform = useTransform(smoothX, [-1, 1], [-18, 18]);
+  const yTransform = useTransform(smoothY, [-1, 1], [-12, 12]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { innerWidth, innerHeight } = window;
+    mouseX.set((e.clientX / innerWidth) * 2 - 1);
+    mouseY.set((e.clientY / innerHeight) * 2 - 1);
+  };
+
   // Direct DOM refs for fixed-width digit slots (eliminates React state thrashing & 60fps stutter)
   const d1Ref = useRef<HTMLSpanElement>(null);
   const commaRef = useRef<HTMLSpanElement>(null);
@@ -27,10 +48,6 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
   const displayedAltRef = useRef<number>(0);
   const targetAltRef = useRef<number>(0);
 
-  const currentVideoTimeRef = useRef<number>(0);
-  const targetVideoTimeRef = useRef<number>(0);
-
-  const [isMetadataLoaded, setIsMetadataLoaded] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const rafIdRef = useRef<number | null>(null);
 
@@ -44,6 +61,18 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
+  }, []);
+
+  // Ensure video auto-plays immediately upon mount
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        if (videoRef.current) {
+          videoRef.current.muted = true;
+          videoRef.current.play().catch(() => {});
+        }
+      });
+    }
   }, []);
 
   // Direct DOM update: zero re-render, zero layout recalculation
@@ -128,52 +157,25 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
     restDelta: 0.0001,
   });
 
-  // Listen to video metadata
-  const handleLoadedMetadata = () => {
-    setIsMetadataLoaded(true);
-    const v = videoRef.current as (HTMLVideoElement & { fastSeek?: (time: number) => void }) | null;
-    if (v && v.duration) {
-      const initialRatio = Math.min(1, Math.max(0, smoothProgress.get() / 0.75));
-      const initialTime = initialRatio * v.duration;
-      targetVideoTimeRef.current = initialTime;
-      currentVideoTimeRef.current = initialTime;
-      if (typeof v.fastSeek === 'function') {
-        v.fastSeek(initialTime);
-      } else {
-        v.currentTime = initialTime;
-      }
-    }
-  };
 
-  // High-performance 60FPS unified loop: Video Scrubbing + Counter Lerp
+  // High-performance 60FPS unified loop: Counter Lerp & Altitude Tracker
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
     let lastTheme: 'dark' | 'light' = smoothProgress.get() >= 0.87 ? 'light' : 'dark';
     onAscentRevealChange?.(true);
     onThemeChange?.(lastTheme);
 
-    // Initial counter & video positions at mount
+    // Initial counter position at mount
     const initialAltRatio = Math.min(1, Math.max(0, smoothProgress.get() / 0.70));
     targetAltRef.current = initialAltRatio * 7906;
     displayedAltRef.current = targetAltRef.current;
     updateCounterDOM(displayedAltRef.current);
 
-    if (video.duration && !isNaN(video.duration)) {
-      const initialScrub = Math.min(1, Math.max(0, smoothProgress.get() / 0.75));
-      targetVideoTimeRef.current = initialScrub * video.duration;
-      currentVideoTimeRef.current = targetVideoTimeRef.current;
-      video.currentTime = targetVideoTimeRef.current;
-    }
-
     let isRunning = true;
 
-    // Single unified 60FPS RAF Loop
+    // Fluid Lerp 60FPS RAF Loop
     const loop = () => {
       if (!isRunning) return;
 
-      // 1. Fluid Lerp Counter update (interpolates gently between frames)
       const diff = targetAltRef.current - displayedAltRef.current;
       if (Math.abs(diff) > 0.08) {
         displayedAltRef.current += diff * 0.22;
@@ -181,26 +183,6 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
       } else if (displayedAltRef.current !== targetAltRef.current) {
         displayedAltRef.current = targetAltRef.current;
         updateCounterDOM(displayedAltRef.current);
-      }
-
-      // 2. Video Scrubbing synchronization (smooth 0.15 lerp + zero seek-latency)
-      if (video.duration && !isNaN(video.duration)) {
-        const timeDiff = targetVideoTimeRef.current - currentVideoTimeRef.current;
-        if (Math.abs(timeDiff) > 0.001) {
-          currentVideoTimeRef.current += timeDiff * 0.15;
-        } else {
-          currentVideoTimeRef.current = targetVideoTimeRef.current;
-        }
-
-        // Prevent decoder choking & threshold check (> 0.03s)
-        const v = video as HTMLVideoElement & { fastSeek?: (time: number) => void };
-        if (!v.seeking && Math.abs(v.currentTime - currentVideoTimeRef.current) > 0.03) {
-          if (typeof v.fastSeek === 'function') {
-            v.fastSeek(currentVideoTimeRef.current);
-          } else {
-            v.currentTime = currentVideoTimeRef.current;
-          }
-        }
       }
 
       rafIdRef.current = requestAnimationFrame(loop);
@@ -212,12 +194,6 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
       // Phase 1: Altitude climbs 0 -> 7906 across 0.0 -> 0.70
       const altRatio = Math.min(1, Math.max(0, progress / 0.70));
       targetAltRef.current = altRatio * 7906;
-
-      // Video scrubs 0.0 -> 0.75 across video.duration
-      if (video.duration && !isNaN(video.duration)) {
-        const scrubRatio = Math.min(1, Math.max(0, progress / 0.75));
-        targetVideoTimeRef.current = scrubRatio * video.duration;
-      }
 
       // Header Theme switch: dark on video, light on ivory Chapter 02
       const newTheme: 'dark' | 'light' = progress >= 0.87 ? 'light' : 'dark';
@@ -278,6 +254,7 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
       ref={containerRef}
       id="ascent"
       data-chapter="ascent"
+      onMouseMove={handleMouseMove}
       className="relative w-full h-[900vh] bg-[#0A110D] text-[#efe9df]"
     >
       {/* Chapter 02 Scroll Anchor for menu navigation */}
@@ -300,16 +277,28 @@ export const HeroAscent: React.FC<HeroAscentProps> = ({
           style={{ clipPath }}
           className="absolute inset-0 z-0 overflow-hidden will-change-[clip-path]"
         >
-          <video
-            ref={videoRef}
-            src="/Video/serene-ascent-scrub.mp4"
-            muted={isMuted}
-            playsInline
-            preload="auto"
-            onLoadedMetadata={handleLoadedMetadata}
-            className="w-full h-full object-cover object-center pointer-events-none will-change-transform"
-            style={{ willChange: 'transform' }}
-          />
+          {/* Parallax Motion Wrapper */}
+          <motion.div
+            style={{
+              x: xTransform,
+              y: yTransform,
+            }}
+            className="w-full h-full will-change-transform scale-110"
+          >
+            <video
+              ref={videoRef}
+              autoPlay
+              loop
+              muted={isMuted}
+              playsInline
+              preload="auto"
+              className="w-full h-full object-cover object-center pointer-events-none scale-105"
+              src="/Video/Nathia%20gali%20project.mp4"
+            />
+          </motion.div>
+
+          {/* Luxury Aesthetic Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#161B18] via-transparent to-[#161B18]/40 pointer-events-none" />
         </motion.div>
 
         {/* Centered Portrait Card Frame, Shadow & Luxury Border (Chapter 02) */}
