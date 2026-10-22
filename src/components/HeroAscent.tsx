@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 interface HeroAscentProps {
   onRegisterClick?: () => void;
@@ -16,88 +16,119 @@ export default function HeroAscent({
 }: HeroAscentProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const targetTimeRef = useRef(0);
-  const animationFrameRef = useRef<number | null>(null);
+  const isSeekingRef = useRef<boolean>(false);
+  const nextTargetTimeRef = useRef<number | null>(null);
 
+  // 1. Tall runway so user has sufficient scroll distance
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // Track altitude synchronously with scroll (0 -> 7,800 FT)
+  // 2. Smooth spring to prevent abrupt delta spikes
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 90,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   const [altitude, setAltitude] = useState(0);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
+    // Enforce paused state and initial load
     video.pause();
     video.currentTime = 0;
 
     const handleLoaded = () => {
       video.pause();
-      video.currentTime = 0;
+      if (video.duration && !isNaN(video.duration)) {
+        const currentProgress = smoothProgress.get();
+        if (currentProgress > 0) {
+          applyTargetTime(currentProgress * video.duration);
+        }
+      }
     };
 
     video.addEventListener("loadedmetadata", handleLoaded);
     video.addEventListener("canplay", handleLoaded);
 
-    // Smooth lerp loop running on RAF for silky 60fps scrubbing
-    const updateVideoFrame = () => {
-      if (video && !isNaN(video.duration) && video.duration > 0) {
-        // Linear interpolation towards target time
-        const diff = targetTimeRef.current - video.currentTime;
-        if (Math.abs(diff) > 0.005) {
-          video.currentTime += diff * 0.12; // 0.12 provides smooth dampening
-        }
+    // Direct seeking lock mechanism to guarantee frame render without decoder freeze
+    const applyTargetTime = (targetTime: number) => {
+      if (!video || isNaN(video.duration) || video.duration === 0) return;
+
+      const clampedTime = Math.min(
+        Math.max(targetTime, 0.01),
+        video.duration - 0.05
+      );
+
+      if (video.seeking || isSeekingRef.current) {
+        nextTargetTimeRef.current = clampedTime;
+        return;
       }
-      animationFrameRef.current = requestAnimationFrame(updateVideoFrame);
+
+      isSeekingRef.current = true;
+      video.currentTime = clampedTime;
     };
 
-    animationFrameRef.current = requestAnimationFrame(updateVideoFrame);
-
-    const unsubscribe = scrollYProgress.on("change", (progress) => {
-      // 1. Update target video time clamped safely
-      if (video && video.duration) {
-        targetTimeRef.current = Math.min(
-          Math.max(progress * video.duration, 0),
-          video.duration - 0.05
-        );
+    const handleSeeked = () => {
+      isSeekingRef.current = false;
+      if (nextTargetTimeRef.current !== null) {
+        const next = nextTargetTimeRef.current;
+        nextTargetTimeRef.current = null;
+        applyTargetTime(next);
       }
-      // 2. Synchronously lock altitude counter to the exact same scroll percentage
-      const currentAltitude = Math.round(progress * 7800);
+    };
+
+    video.addEventListener("seeked", handleSeeked);
+
+    const unsubscribe = smoothProgress.on("change", (latest) => {
+      // Synchronize Altitude Counter
+      const currentAltitude = Math.round(latest * 7800);
       setAltitude(currentAltitude);
 
-      // Notify parent theme and reveal states if provided
+      // Advance video frames smoothly via seeking queue
+      if (video && video.duration && !isNaN(video.duration)) {
+        applyTargetTime(latest * video.duration);
+      }
+
       if (onThemeChange) {
-        onThemeChange(progress >= 0.88 ? "light" : "dark");
+        onThemeChange(latest >= 0.88 ? "light" : "dark");
       }
       if (onAscentRevealChange) {
-        onAscentRevealChange(progress >= 0.1);
+        onAscentRevealChange(latest >= 0.1);
       }
     });
 
     return () => {
       video.removeEventListener("loadedmetadata", handleLoaded);
       video.removeEventListener("canplay", handleLoaded);
-      if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      video.removeEventListener("seeked", handleSeeked);
       unsubscribe();
     };
-  }, [scrollYProgress, onThemeChange, onAscentRevealChange]);
+  }, [smoothProgress, onThemeChange, onAscentRevealChange]);
 
-  // Editorial overlays linked to the synchronized scroll timeline
-  const introOpacity = useTransform(scrollYProgress, [0, 0.18], [1, 0]);
-  const buildingLabelOpacity = useTransform(scrollYProgress, [0.45, 0.7, 0.9], [0, 1, 0]);
+  // Editorial Overlays: Ensure proper timing so text doesn't overlap
+  const introOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+  const buildingLabelOpacity = useTransform(
+    scrollYProgress,
+    [0.6, 0.75, 0.95],
+    [0, 1, 0]
+  );
+  const bottomBarOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0.4]);
 
   return (
     <section
       ref={containerRef}
       id="ascent"
       data-chapter="ascent"
-      className="relative h-[350vh] bg-[#161B18]"
+      className="relative h-[400vh] bg-[#161B18]"
     >
+      {/* Pinned Viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
-        {/* Strictly Scroll-Scrubbed Video Asset */}
+        {/* Scroll-Scrubbed Video Element */}
         <video
           ref={videoRef}
           playsInline
@@ -111,7 +142,7 @@ export default function HeroAscent({
         <div className="absolute inset-0 bg-gradient-to-t from-[#161B18] via-transparent to-[#161B18]/50 pointer-events-none" />
         <div className="absolute inset-0 bg-black/20 pointer-events-none" />
 
-        {/* Top Centered Elevation Counter (In Perfect Sync with Video) */}
+        {/* Top Centered Elevation Counter */}
         <div className="relative z-10 pt-28 text-center pointer-events-none select-none">
           <span className="font-mono text-[11px] sm:text-xs tracking-[0.3em] uppercase text-[#C9BEAE]">
             ELEVATION ASCENT
@@ -122,7 +153,7 @@ export default function HeroAscent({
           </div>
         </div>
 
-        {/* Initial Eyebrow & Prompt */}
+        {/* Initial Eyebrow */}
         <motion.div
           style={{ opacity: introOpacity }}
           className="relative z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
@@ -135,7 +166,7 @@ export default function HeroAscent({
           </p>
         </motion.div>
 
-        {/* Reveal Phase as Video Reaches the Architectural Peak */}
+        {/* Reveal Phase (Appears only around 60-95% scroll when building is visible) */}
         <motion.div
           style={{ opacity: buildingLabelOpacity }}
           className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center px-6 pointer-events-none"
@@ -149,11 +180,14 @@ export default function HeroAscent({
         </motion.div>
 
         {/* Bottom Status Bar */}
-        <div className="relative z-10 w-full px-8 pb-8 flex items-center justify-between font-mono text-[10px] tracking-[0.25em] text-[#A8A195] uppercase select-none">
+        <motion.div
+          style={{ opacity: bottomBarOpacity }}
+          className="relative z-10 w-full px-8 pb-8 flex items-center justify-between font-mono text-[10px] tracking-[0.25em] text-[#A8A195] uppercase select-none"
+        >
           <span>01 / 12 ————</span>
           <span className="animate-pulse">↓ SCROLL TO EXPLORE</span>
           <span>NATHIA GALI, PAKISTAN</span>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
