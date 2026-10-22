@@ -32,24 +32,24 @@ const PHASES: TimePhase[] = [
     id: '1300',
     time: '13:00',
     label: 'MIDDAY',
-    headline: 'Laps in the open mountain air.',
-    img: '/img/day-1300-lg.webp',
+    headline: 'Laps in the heated infinity pool.',
+    img: '/pictures/home/image3.png',
     targetRatio: 0.38,
   },
   {
     id: '1830',
     time: '18:30',
     label: 'GOLDEN HOUR',
-    headline: 'The water curtain catches the last sun.',
-    img: '/img/day-1830-lg.webp',
+    headline: 'Sunset over the pine valley from 7,906 FT.',
+    img: '/pictures/home/largestResort.png',
     targetRatio: 0.68,
   },
   {
     id: '2200',
     time: '22:00',
     label: 'NIGHTFALL',
-    headline: 'Stars over the ridge. Silence below.',
-    img: '/img/day-2200-lg.webp',
+    headline: 'Stars over the snow ridge. Silence below.',
+    img: '/pictures/home/frames/frame4.png',
     targetRatio: 0.92,
   },
 ];
@@ -192,7 +192,7 @@ export const OneDaySection: React.FC = () => {
         >
           <img
             src="/img/day-0700-lg.webp"
-            alt="The Nathia Reserve at 07:00 First Light"
+            alt="Serene Heights at 07:00 First Light"
             className="w-full h-full object-cover object-center pointer-events-none select-none"
             loading="eager"
           />
@@ -204,8 +204,8 @@ export const OneDaySection: React.FC = () => {
           className="absolute inset-0 w-full h-full pointer-events-none will-change-[opacity] z-0 origin-center"
         >
           <img
-            src="/img/day-1300-lg.webp"
-            alt="The Nathia Reserve at 13:00 Midday"
+            src="/pictures/home/image3.png"
+            alt="Serene Heights at 13:00 Midday Heated Pool"
             className="w-full h-full object-cover object-center pointer-events-none select-none"
             loading="eager"
           />
@@ -217,8 +217,8 @@ export const OneDaySection: React.FC = () => {
           className="absolute inset-0 w-full h-full pointer-events-none will-change-[opacity] z-0 origin-center"
         >
           <img
-            src="/img/day-1830-lg.webp"
-            alt="The Nathia Reserve at 18:30 Golden Hour"
+            src="/pictures/home/largestResort.png"
+            alt="Serene Heights at 18:30 Golden Hour"
             className="w-full h-full object-cover object-center pointer-events-none select-none"
             loading="eager"
           />
@@ -230,8 +230,8 @@ export const OneDaySection: React.FC = () => {
           className="absolute inset-0 w-full h-full pointer-events-none will-change-[opacity] z-0 origin-center"
         >
           <img
-            src="/img/day-2200-lg.webp"
-            alt="The Nathia Reserve at 22:00 Nightfall"
+            src="/pictures/home/frames/frame4.png"
+            alt="Serene Heights at 22:00 Nightfall"
             className="w-full h-full object-cover object-center pointer-events-none select-none"
             loading="eager"
           />
@@ -241,7 +241,6 @@ export const OneDaySection: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0c0f0d]/65 via-transparent to-[#0c0f0d]/85 pointer-events-none z-10" />
 
         {/* ================= TOP PINNED AREA: Positioned cleanly beneath fixed Brand Header ================= */}
-        {/* pt-28 md:pt-32 provides ample breathing room below "The Nathia Reserve" logo and "REGISTER INTEREST" / "MENU" */}
         <div className="w-full px-8 md:px-16 pt-28 md:pt-32 flex justify-between items-start z-20 shrink-0">
           {/* Top-Left: Chapter Tag */}
           <div className="flex items-center space-x-3 mt-1">
@@ -250,7 +249,7 @@ export const OneDaySection: React.FC = () => {
             </span>
             <span className="w-8 h-[1px] bg-[#efe9df]/40 inline-block" />
             <span className="font-mono text-xs tracking-[0.3em] text-[#efe9df]/85 uppercase font-medium">
-              ONE DAY AT THE RESERVE
+              ONE DAY AT SERENE HEIGHTS
             </span>
           </div>
 

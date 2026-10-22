@@ -17,13 +17,20 @@ export const FounderStandardsSection: React.FC = () => {
           {/* ================= LEFT COLUMN (Sticky Founder Portrait) ================= */}
           <div className="lg:col-span-5 relative lg:sticky lg:top-28 w-full flex flex-col justify-between">
             {/* Portrait Framing */}
-            <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#202722] shadow-2xl border border-[#7A7468]/20">
+            <div className="relative w-full aspect-[4/5] rounded-2xl overflow-hidden bg-[#202722] shadow-2xl border border-[#7A7468]/20 group">
               <img
                 src="/img/founder-lg.webp"
-                alt="Ahmed Khilji, Founder of Elevate Holdings"
+                alt="Fahad Masud Lone, Founder of DM Consortium"
                 className="w-full h-full object-cover object-center"
                 loading="lazy"
               />
+              <div className="absolute top-4 right-4 bg-[#161B18]/90 backdrop-blur-md p-2 rounded-xl border border-[#7A7468]/30">
+                <img
+                  src="/pictures/carousel/dm.png"
+                  alt="DM Consortium Logo"
+                  className="h-8 w-auto object-contain"
+                />
+              </div>
             </div>
 
             {/* Bottom Chapter Tag (Desktop) */}
@@ -39,21 +46,21 @@ export const FounderStandardsSection: React.FC = () => {
           <div className="lg:col-span-7 flex flex-col space-y-12 sm:space-y-16 lg:pl-6">
             {/* Header Block with Eyebrow and Headline */}
             <div>
-              {/* Eyebrow (matching Screenshot 12 —— ELEVATE HOLDINGS) */}
+              {/* Eyebrow */}
               <div className="flex items-center space-x-3 mb-6 sm:mb-8">
                 <span className="font-mono text-[10px] sm:text-xs tracking-[0.28em] text-[#A8A195] uppercase font-light">
                   12
                 </span>
                 <span className="w-8 sm:w-10 h-[1px] bg-[#A8A195]/50 inline-block" />
                 <span className="font-mono text-[10px] sm:text-xs tracking-[0.28em] text-[#A8A195] uppercase font-light">
-                  ELEVATE HOLDINGS
+                  DM CONSORTIUM
                 </span>
               </div>
 
               {/* Three-Line Two-Tone Headline */}
               <h2 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] xl:text-[6.2rem] text-[#EAE6DE] leading-[0.95] tracking-tight">
-                <span className="block font-normal">Three reserves.</span>
-                <span className="block font-normal">Five years.</span>
+                <span className="block font-normal">Fifteen landmarks.</span>
+                <span className="block font-normal">Proven delivery.</span>
                 <span className="block italic font-light text-[#C9BEAE] mt-1 sm:mt-2">
                   One standard.
                 </span>
@@ -63,14 +70,14 @@ export const FounderStandardsSection: React.FC = () => {
             {/* Editorial Paragraphs */}
             <div className="space-y-6">
               <p className="font-sans font-light text-sm sm:text-base md:text-lg leading-relaxed text-[#C4BCB0] max-w-2xl">
-                Six million people visit the Galyat every year, and find almost nothing built to
-                receive them. Elevate Holdings builds only in Northern Pakistan: mountain reserves
-                designed, built and then operated by the same company. The Nathia Reserve is the
-                first of three.
+                Founded in 2018 by Fahad Masud Lone, DM Consortium stands as one of Pakistan&apos;s
+                premier development groups, having successfully delivered over 15 landmark residential
+                and commercial projects with uncompromised engineering integrity.
               </p>
               <p className="font-sans font-light text-sm sm:text-base md:text-lg leading-relaxed text-[#C4BCB0] max-w-2xl">
-                Founded by Ahmed Khilji, an operator before a developer, whose team has run 24/7
-                guest operations for 4,000+ properties worldwide.
+                Serene Heights Nathia Gali is the consortium’s crown jewel: spanning 30+ Kanals with
+                150+ luxury hotel suites, Italian central heating, heated infinity pool, and 24/7
+                five-star hospitality operations.
               </p>
             </div>
 
@@ -80,10 +87,10 @@ export const FounderStandardsSection: React.FC = () => {
                 “
               </span>
               <p className="font-serif italic font-light text-2xl sm:text-3xl md:text-4xl text-[#C9BEAE] leading-snug tracking-normal">
-                We are building the addresses Pakistan deserves. It begins on the Nathia road.
+                We are building the addresses Pakistan deserves. It begins at 7,906 feet in Nathia Gali.
               </p>
               <span className="font-mono text-[10px] sm:text-xs tracking-[0.25em] text-[#A8A195] uppercase font-light mt-6 block">
-                AHMED KHILJI · FOUNDER — ELEVATE HOLDINGS
+                FAHAD MASUD LONE · FOUNDER — DM CONSORTIUM
               </span>
             </div>
 
@@ -91,10 +98,10 @@ export const FounderStandardsSection: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 pt-8 border-t border-[#7A7468]/20">
               <div>
                 <span className="font-mono text-[10px] tracking-[0.25em] text-[#A8A195] uppercase font-light mb-2 block">
-                  ARCHITECTURE
+                  ARCHITECTURE & MASTERPLAN
                 </span>
                 <span className="font-serif text-xl sm:text-2xl text-[#EAE6DE] font-normal block">
-                  Noor Khan Design Studio
+                  DM Consortium Design Wing
                 </span>
               </div>
 
@@ -103,7 +110,7 @@ export const FounderStandardsSection: React.FC = () => {
                   PRINCIPAL CONTRACTOR
                 </span>
                 <span className="font-serif text-xl sm:text-2xl text-[#EAE6DE] font-normal tracking-wide block">
-                  ZKB
+                  DM Consortium Infrastructure
                 </span>
               </div>
             </div>

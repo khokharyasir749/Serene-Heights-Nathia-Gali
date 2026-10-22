@@ -91,8 +91,8 @@ export default function TheReserveChapter({
                   className="w-full h-[110%] -mt-[5%] relative"
                 >
                   <img
-                    src="/img/facade-hero-sunset-lg.webp"
-                    alt="The Serene Heights - Golden Hour at 7,900 FT"
+                    src="/pictures/home/largestResort.png"
+                    alt="Serene Heights Nathia Gali - Golden Hour at 7,906 FT"
                     className="w-full h-full object-cover object-[65%_35%] select-none pointer-events-none transition-transform duration-700 hover:scale-105"
                     loading="eager"
                   />
@@ -101,7 +101,7 @@ export default function TheReserveChapter({
 
               {/* Caption */}
               <p className="font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#78716C] mt-4 text-center">
-                GOLDEN HOUR · 7,900 FT
+                GOLDEN HOUR · 7,906 FT
               </p>
             </div>
           </motion.div>

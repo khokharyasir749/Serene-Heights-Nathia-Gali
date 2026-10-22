@@ -50,8 +50,8 @@ export const ManifestoSection: React.FC = () => {
             className="w-full h-full relative overflow-hidden will-change-transform"
           >
             <img
-              src="/img/cafe-day-lg.webp"
-              alt="The Nathia Reserve Stone Terrace Dining"
+              src="/pictures/home/nathiagaliResort/nathiagaliResort.png"
+              alt="Serene Heights Nathia Gali Grand Resort Entrance"
               className="w-full h-full object-cover object-center pointer-events-none select-none"
               loading="eager"
             />
@@ -68,7 +68,7 @@ export const ManifestoSection: React.FC = () => {
             }}
             className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-[3.25rem] leading-[1.12] tracking-tight text-[#1A221C] font-normal mb-8 will-change-transform"
           >
-            The Nathia Reserve is built to the highest standard of luxury Pakistan has ever seen: the most premium apartment hotel in the country.
+            Serene Heights Nathia Gali is built to the highest standard of luxury Pakistan has ever seen: the premier 5-star mountain resort in the country.
           </motion.h2>
 
           {/* Sub-statement Paragraph */}
@@ -79,7 +79,7 @@ export const ManifestoSection: React.FC = () => {
             }}
             className="font-sans text-base md:text-lg text-[#2A302B]/80 font-light leading-relaxed max-w-xl will-change-transform"
           >
-            Both a private residence and a fully managed retreat: staffed, serviced and alive through all four seasons.
+            Both a private residence and a fully managed retreat: staffed, serviced and alive through all four seasons across 30+ Kanals.
           </motion.p>
         </div>
       </div>

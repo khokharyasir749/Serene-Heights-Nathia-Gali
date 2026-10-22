@@ -83,33 +83,33 @@ export const Header: React.FC<HeaderProps> = ({
         }`}
       >
         <div className="w-full flex justify-between items-center">
-          {/* Left: Elegant Luxury Stacked Serif Brand Logo */}
+          {/* Left: Official Logo Crest & Elegant Luxury Typography */}
           <a
             href="#ascent"
-            className="group flex flex-col items-start text-left focus:outline-none select-none transition-opacity hover:opacity-90"
-            aria-label="The Serene Heights"
+            className="group flex items-center gap-3 sm:gap-4 text-left focus:outline-none select-none transition-opacity hover:opacity-95"
+            aria-label="Serene Heights Nathia Gali"
           >
-            <span
-              className={`font-serif italic text-xs md:text-sm leading-none pl-0.5 mb-1 font-normal transition-colors duration-500 ${
-                isLight ? 'text-[#121614]/70' : 'text-[#efe9df]/75 group-hover:text-[#c3a78e]'
-              }`}
-            >
-              The
-            </span>
-            <span
-              className={`font-serif text-2xl sm:text-3xl md:text-4xl tracking-[0.2em] uppercase font-light leading-none transition-colors duration-500 ${
-                isLight ? 'text-[#121614]' : 'text-[#efe9df] group-hover:text-[#c3a78e]'
-              }`}
-            >
-              Serene
-            </span>
-            <span
-              className={`font-serif text-[11px] sm:text-xs md:text-sm tracking-[0.38em] uppercase font-light leading-tight mt-0.5 pl-0.5 transition-colors duration-500 ${
-                isLight ? 'text-[#121614]/85' : 'text-[#efe9df]/90 group-hover:text-[#c3a78e]'
-              }`}
-            >
-              Heights
-            </span>
+            <img
+              src={isLight ? '/assets/logo/logoGreen.png' : '/assets/logo/logo.png'}
+              alt="Serene Heights Crest"
+              className="h-10 sm:h-12 w-auto object-contain transition-all duration-500 shrink-0 drop-shadow"
+            />
+            <div className="flex flex-col items-start">
+              <span
+                className={`font-serif text-xl sm:text-2xl md:text-3xl tracking-[0.16em] uppercase font-light leading-none transition-colors duration-500 ${
+                  isLight ? 'text-[#121614]' : 'text-[#efe9df] group-hover:text-[#c3a78e]'
+                }`}
+              >
+                Serene Heights
+              </span>
+              <span
+                className={`font-mono text-[8px] sm:text-[9.5px] tracking-[0.32em] uppercase font-light leading-tight mt-1 transition-colors duration-500 ${
+                  isLight ? 'text-[#121614]/75' : 'text-[#efe9df]/70 group-hover:text-[#c3a78e]'
+                }`}
+              >
+                Nathia Gali · 7,906 FT
+              </span>
+            </div>
           </a>
 
           {/* Right Action Controls: Transparent Pill CTA & Two-Line Menu Trigger */}

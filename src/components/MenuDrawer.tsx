@@ -24,33 +24,33 @@ const MENU_ITEMS: MenuItem[] = [
     title: 'The Reserve',
     subtitle: 'ABOVE THE MIST LINE',
     targetId: 'reserve',
-    image: '/img/facade-hero-sunset-lg.webp',
+    image: '/pictures/home/largestResort.png',
   },
   {
     num: '02',
     title: 'Residences',
-    subtitle: '133 · STUDIO TO PENTHOUSE',
+    subtitle: '150+ · STUDIO TO PENTHOUSE',
     targetId: 'residences',
-    image: '/img/facade-snow-night-lg.webp',
+    image: '/pictures/home/frames/frame4.png',
   },
   {
     num: '03',
     title: 'The Estate',
-    subtitle: '25,000+ SQ FT · FOUR LEVELS',
+    subtitle: '30+ KANALS · THREE TOWERS',
     targetId: 'estate',
-    image: '/img/amenity-lobby-lg.webp',
+    image: '/pictures/home/nathiagaliResort/nathiagaliResort.png',
   },
   {
     num: '04',
     title: 'Location',
-    subtitle: 'THE MAIN NATHIA GALI ROAD',
+    subtitle: 'KALA BAGH AIR BASE ROAD',
     targetId: 'location-map',
-    image: '/img/aerial-ridge-lg.webp',
+    image: '/pictures/home/image2.png',
   },
   {
     num: '05',
-    title: 'Elevate',
-    subtitle: 'OPERATOR BEFORE DEVELOPER',
+    title: 'DM Consortium',
+    subtitle: 'DEVELOPER & OPERATOR',
     targetId: 'elevate',
     image: '/img/founder-lg.webp',
   },
@@ -59,7 +59,7 @@ const MENU_ITEMS: MenuItem[] = [
     title: 'Questions',
     subtitle: 'DIRECT ANSWERS',
     targetId: 'register',
-    image: '/img/int-living-day-lg.webp',
+    image: '/pictures/about/obj/objImg1.png',
   },
 ];
 
@@ -151,15 +151,19 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
             <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#161B18] to-transparent pointer-events-none" />
 
             {/* Brand Logo Watermark (Top Left) */}
-            <div className="absolute top-10 left-10 z-10 select-none pointer-events-none opacity-80">
-              <div className="font-serif text-xl tracking-[0.15em] text-[#EAE6DE] font-light leading-none">
-                The
-              </div>
-              <div className="font-serif text-3xl tracking-[0.2em] text-[#C9BEAE] font-normal leading-tight uppercase -mt-0.5">
-                Nathia
-              </div>
-              <div className="font-mono text-[9px] tracking-[0.35em] text-[#EAE6DE]/70 uppercase">
-                Reserve
+            <div className="absolute top-10 left-10 z-10 select-none pointer-events-none opacity-90 flex items-center gap-3">
+              <img
+                src="/assets/logo/logo.png"
+                alt="Serene Heights Nathia Gali Logo"
+                className="h-12 w-auto object-contain"
+              />
+              <div className="flex flex-col">
+                <span className="font-serif text-xl tracking-[0.16em] text-[#EAE6DE] font-light leading-none uppercase">
+                  Serene Heights
+                </span>
+                <span className="font-mono text-[8px] tracking-[0.3em] text-[#C9BEAE] uppercase mt-1">
+                  Nathia Gali · 7,906 FT
+                </span>
               </div>
             </div>
           </div>
@@ -246,15 +250,15 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 pt-6 border-t border-[#7A7468]/15 font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase font-light">
                 <div>
                   <span className="text-[#7A7468] block mb-1">ADDRESS</span>
-                  <span className="text-[#EAE6DE]">Nathia Gali Road, 7,900 FT</span>
+                  <span className="text-[#EAE6DE]">Kala Bagh Air Base Road, 7,906 FT</span>
                 </div>
                 <div>
                   <span className="text-[#7A7468] block mb-1">ENQUIRIES</span>
-                  <span className="text-[#EAE6DE]">concierge@thenathiareserve.com</span>
+                  <span className="text-[#EAE6DE]">info@sereneheightsnathiagali.com</span>
                 </div>
                 <div>
                   <span className="text-[#7A7468] block mb-1">YOU ARE HERE</span>
-                  <span className="text-[#C9BEAE]">The Nathia Reserve</span>
+                  <span className="text-[#C9BEAE]">Serene Heights Nathia Gali</span>
                 </div>
               </div>
             </div>

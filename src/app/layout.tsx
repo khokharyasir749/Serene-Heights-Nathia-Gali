@@ -25,29 +25,30 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Nathia Reserve | Luxury Apartments in Nathia Gali · By Elevate Holdings",
+  title: "Serene Heights Nathia Gali | 5-Star Hotel Suites & Luxury Residences · By DM Consortium",
   description:
-    "A hotel-operated rental investment in Nathia Gali, by Elevate Holdings. 133 residences at 7,900 ft on the main Nathia Gali road, all managed inside one full-service hotel, open all four seasons.",
+    "Pakistan's premier 5-star mountain resort & luxury hotel apartments at 7,906 ft in Nathia Gali, by DM Consortium. 150+ suites across 30+ Kanals on Kala Bagh Air Base Road, offering 36-month flexible payment plans and high rental yield.",
   keywords: [
-    "The Nathia Reserve",
-    "Nathia Gali",
+    "Serene Heights Nathia Gali",
+    "Serene Heights",
+    "Nathia Gali Hotel Apartments",
+    "DM Consortium",
+    "Fahad Masud Lone",
+    "Kala Bagh Air Base Road",
     "Luxury Apartments Nathia Gali",
-    "Elevate Holdings",
-    "Ayubia National Park",
-    "Hotel Apartments Pakistan",
     "Real Estate Investment Pakistan",
   ],
   openGraph: {
-    title: "The Nathia Reserve | Luxury Residences at 7,900 ft",
-    description: "The Exceptional, Reserved For You. Pakistan's most premium apartment hotel.",
-    url: "https://thenathiareserve.com",
-    siteName: "The Nathia Reserve",
+    title: "Serene Heights Nathia Gali | 5-Star Resort Residences at 7,906 FT",
+    description: "The Exceptional, Reserved For You. Pakistan's largest 5-star mountain resort by DM Consortium.",
+    url: "https://www.sereneheightsnathiagali.com/nathiagali",
+    siteName: "Serene Heights Nathia Gali",
     images: [
       {
-        url: "/img/day-1830-lg.webp",
+        url: "/pictures/home/largestResort.png",
         width: 1200,
         height: 630,
-        alt: "The Nathia Reserve Sunset View",
+        alt: "Serene Heights Nathia Gali Resort Render",
       },
     ],
     locale: "en_US",

@@ -194,7 +194,7 @@ export default function Home() {
       {/* Chapter 11: What It Earns (Real-Time Financial & Yield Calculator) */}
       <InvestmentCalculator onRegisterClick={handleRegisterClick} />
 
-      {/* Chapter 12: Elevate Holdings (Founder Ahmed Khilji & Partners) */}
+      {/* Chapter 12: DM Consortium (Founder Fahad Masud Lone) */}
       <FounderStandardsSection />
 
       {/* Chapter 14: Public Release (Multi-Step Founders' List Intake) */}

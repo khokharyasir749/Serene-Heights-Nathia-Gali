@@ -25,8 +25,8 @@ export const FourSeasonsSnow: React.FC = () => {
             className="lg:col-span-6 relative rounded-3xl overflow-hidden border border-[#253129] shadow-2xl group"
           >
             <img
-              src="/img/facade-snow-night-lg.webp"
-              alt="Snowfall at The Nathia Reserve at night"
+              src="/pictures/home/frames/frame4.png"
+              alt="Snowfall at Serene Heights Nathia Gali at night"
               className="w-full h-[400px] sm:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
@@ -34,7 +34,7 @@ export const FourSeasonsSnow: React.FC = () => {
 
             <div className="absolute top-6 left-6 inline-flex items-center space-x-2 text-xs font-mono text-[#c3a78e] bg-[#0c0f0d]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#253129]">
               <Snowflake className="w-3.5 h-3.5 text-cyan-200 animate-spin-slow" />
-              <span>Winter Operation · 7,900 FT</span>
+              <span>Winter Operation · 7,906 FT</span>
             </div>
 
             <div className="absolute bottom-6 left-6 right-6 p-4 rounded-xl bg-[#0c0f0d]/80 backdrop-blur-md border border-[#253129]">
@@ -57,7 +57,7 @@ export const FourSeasonsSnow: React.FC = () => {
 
             <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#efe9df] leading-[1.1] font-normal">
               Snow falls.{' '}
-              <span className="font-serif italic text-[#c3a78e]">The Reserve stays warm.</span>
+              <span className="font-serif italic text-[#c3a78e]">Serene Heights stays warm.</span>
             </h2>
 
             <p className="font-sans text-base sm:text-lg text-[#efe9df]/80 font-light leading-relaxed">

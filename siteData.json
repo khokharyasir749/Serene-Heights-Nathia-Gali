@@ -2,11 +2,11 @@
   "address": {
     "label": "The Only Address",
     "head": [
-      "The only address",
-      "on the main",
-      "Nathia road."
+      "The premier address",
+      "on the Kala Bagh",
+      "Air Base road."
     ],
-    "body": "The only private residence estate on the main Nathia Gali road, alone on the ridge line and bordered by the protected forests of Ayubia National Park. The outlook is protected by law, not by a neighbour’s goodwill.",
+    "body": "The largest luxury private residence resort estate on Kala Bagh Air Base Road, Nathia Gali, spanning 30+ Kanals bordered by the protected pine forests of Ayubia National Park.",
     "headB": [
       "There will never",
       "be another."
@@ -29,14 +29,14 @@
       }
     ],
     "mistLine": "The mist line",
-    "eyebrow": "Nathia Gali · The Galiyat · 7,900 ft",
+    "eyebrow": "Nathia Gali · The Galiyat · 7,906 ft",
     "title": [
       "The Exceptional,",
       "Reserved For You."
     ],
     "sub": [
-      "Pakistan’s most premium apartment hotel",
-      "By Elevate Holdings"
+      "Pakistan’s premier 5-star mountain resort",
+      "By DM Consortium"
     ],
     "cta": "Register priority interest",
     "cue": "Scroll to climb"
@@ -95,7 +95,7 @@
     {
       "id": "elevate",
       "no": "11",
-      "name": "Elevate Holdings"
+      "name": "DM Consortium"
     },
     {
       "id": "register",
@@ -104,7 +104,7 @@
     }
   ],
   "day": {
-    "label": "One day at the Reserve",
+    "label": "One day at Serene Heights",
     "moments": [
       {
         "time": "07:00",
@@ -117,51 +117,51 @@
         "time": "13:00",
         "minutes": 780,
         "label": "Midday",
-        "line": "Laps in the open mountain air.",
+        "line": "Laps in the heated infinity pool.",
         "img": "day-1300"
       },
       {
         "time": "18:30",
         "minutes": 1110,
         "label": "Golden hour",
-        "line": "The water curtain catches the last sun.",
+        "line": "Sunset over the pine valley from 7,906 FT.",
         "img": "day-1830"
       },
       {
         "time": "22:00",
         "minutes": 1320,
         "label": "Nightfall",
-        "line": "Stars over the ridge. Silence below.",
+        "line": "Stars over the snow ridge. Silence below.",
         "img": "day-2200"
       }
     ]
   },
   "elevate": {
-    "label": "Elevate Holdings",
+    "label": "DM Consortium",
     "head": [
-      "Three reserves.",
-      "Five years."
+      "Pakistan's Premier",
+      "Mountain Resort."
     ],
     "headEm": "One standard.",
     "body": [
-      "Six million people visit the Galyat every year, and find almost nothing built to receive them. Elevate Holdings builds only in Northern Pakistan: mountain reserves designed, built and then operated by the same company. The Nathia Reserve is the first of three.",
-      "Founded by Ahmed Khilji, an operator before a developer, whose team has run 24/7 guest operations for 4,000+ properties worldwide."
+      "Founded by Fahad Masud Lone in 2018, DM Consortium has delivered over 15 landmark residential and commercial projects across Pakistan with unyielding commitment to architectural excellence.",
+      "Serene Heights Nathia Gali is the consortium’s flagship luxury mountain resort—spanning 30+ Kanals with 150+ bespoke residences, heated infinity pool, rooftop dining at 7,906 ft, Italian central heating, and 24/7 five-star hospitality."
     ],
     "quote": [
       "We are building the addresses",
       "Pakistan deserves. It begins",
-      "on the Nathia road."
+      "at 7,906 feet in Nathia Gali."
     ],
-    "cite": "Ahmed Khilji",
-    "citeRole": "Founder · Elevate Holdings",
+    "cite": "Fahad Masud Lone",
+    "citeRole": "Founder · DM Consortium",
     "credits": [
       {
-        "k": "Architecture",
-        "v": "Noor Khan Design Studio"
+        "k": "Architecture & Masterplan",
+        "v": "DM Consortium Design Wing"
       },
       {
         "k": "Principal contractor",
-        "v": "ZKB"
+        "v": "DM Consortium Infrastructure"
       }
     ],
     "more": "The full story"
@@ -170,15 +170,16 @@
     "label": "The Estate",
     "head": [
       "Everything you need",
-      "at 7,900 feet."
+      "at 7,906 feet."
     ],
     "headEm": "Nothing you don’t.",
-    "body": "More than 25,000 sq ft given over to amenities across four dedicated levels: staffed and open through all four seasons, including the snow months.",
+    "body": "More than 30+ Kanals given over to amenities across three dedicated towers: staffed and open through all four seasons, including the snow months.",
     "towers": [
-      "Tower A",
-      "Tower B"
+      "Tower 1",
+      "Tower 2",
+      "Tower 3"
     ],
-    "towersLink": "Glass skywalk",
+    "towersLink": "Panoramic skywalk",
     "chapters": [
       {
         "no": "I",
@@ -293,16 +294,16 @@
       }
     ],
     "towerB": [
-      "Across the skywalk,",
-      "Tower B."
+      "Across the promenade,",
+      "The Towers."
     ],
-    "towerBBody": "The second tower holds everything that makes owning here easy: owners’ concierge and housekeeping, covered arrival and valet parking, a rooftop event terrace at 7,900 ft, and a full rental management desk.",
+    "towerBBody": "The resort towers hold everything that makes owning here easy: owners’ concierge and housekeeping, covered arrival and valet parking, a rooftop restaurant at 7,906 ft, heated infinity pool, Italian central heating, and a full rental management desk.",
     "more": "Every amenity, listed"
   },
   "explorer": {
     "label": "3D Explorer",
     "head": [
-      "Tour both towers",
+      "Tour all three towers",
       "in 360°."
     ],
     "body": "Browse studios, apartments and penthouses, and view floor plans in interactive 3D.",
@@ -310,10 +311,10 @@
     "newTab": "Open in a new tab"
   },
   "footer": {
-    "line": "7,900 ft. One address.",
+    "line": "7,906 ft. One address.",
     "lineEm": "The next chapter begins here.",
-    "disclaimer": "Every residence at The Nathia Reserve is operated within the Reserve's managed hotel programme: the building runs as a single hotel and residences are not let or operated outside it. The programme's terms, and any owner returns, are defined solely in the signed buyer documentation, which prevails over all marketing material. Rental income depends on occupancy, achieved room rates, operating costs and market conditions, all of which vary, and no return is guaranteed or represented in marketing. Any contractual minimum, where offered, applies only from Year 2 of hotel operations. Registration of interest does not constitute an offer for sale, a reservation or a contract. Figures, specifications, dates and releases may change without notice.",
-    "copyright": "© MMXXVI Elevate Holdings. All rights reserved. The Nathia Reserve is a development by Elevate Holdings.",
+    "disclaimer": "Every residence at Serene Heights Nathia Gali is operated within the resort's managed 5-star hotel programme: the building runs as a single hotel and residences are not let or operated outside it. The programme's terms, and any owner returns, are defined solely in the signed buyer documentation, which prevails over all marketing material. Rental income depends on occupancy, achieved room rates, operating costs and market conditions, all of which vary, and no return is guaranteed or represented in marketing. Registration of interest does not constitute an offer for sale, a reservation or a contract. Figures, specifications, dates and releases may change without notice.",
+    "copyright": "© MMXXVI DM Consortium. All rights reserved. Serene Heights Nathia Gali is a development by DM Consortium.",
     "explore": [
       {
         "label": "The Residences",
@@ -350,13 +351,13 @@
     ],
     "map": {
       "label": "Find us on Google Maps",
-      "href": "https://www.google.com/maps/place/The+Nathia+Reserve/@34.0725156,73.3815342,17z/data=!4m6!3m5!1s0x38de2b002e43469d:0xc97b7b8f6e1bb2d8!8m2!3d34.0725156!4d73.3815342"
+      "href": "https://maps.google.com/?q=Serene+Heights+Nathia+Gali"
     }
   },
   "gallery": {
     "label": "First Look",
-    "head": "Inside the",
-    "headEm": "Reserve.",
+    "head": "Inside",
+    "headEm": "Serene Heights.",
     "hint": "Drag",
     "items": [
       {
@@ -372,7 +373,7 @@
       {
         "img": "facade-snow-night",
         "caption": "First snow",
-        "alt": "The Reserve in snowfall at night"
+        "alt": "The resort in snowfall at night"
       },
       {
         "img": "hydro-night",
@@ -397,7 +398,7 @@
       {
         "img": "aerial-curve",
         "caption": "The ridge",
-        "alt": "Aerial view of the Reserve on the ridge"
+        "alt": "Aerial view of Serene Heights on the ridge"
       },
       {
         "img": "int-1bed-kitchen",
@@ -429,14 +430,14 @@
       "True rest."
     ],
     "lede": [
-      "High on the main road of Nathia Gali,",
+      "High on the Kala Bagh Air Base road,",
       "composed in stone, timber and glass",
       "above an unbroken sweep",
       "of protected pine forest."
     ],
     "body": [
-      "The Nathia Reserve is built to the highest standard of luxury Pakistan has ever seen: the most premium apartment hotel in the country.",
-      "Both a private residence and a fully managed retreat: staffed, serviced and alive through all four seasons."
+      "Serene Heights Nathia Gali is built to the highest standard of luxury Pakistan has ever seen: the most premium 5-star mountain resort in the country.",
+      "Both a private residence and a fully managed retreat: staffed, serviced and alive through all four seasons across 30+ Kanals."
     ]
   },
   "menuLinks": [
@@ -450,28 +451,28 @@
     {
       "no": "02",
       "title": "Residences",
-      "sub": "133 · Studio to Penthouse",
+      "sub": "150+ · Studio to Penthouse",
       "href": "/residences",
       "img": "int-suite-living"
     },
     {
       "no": "03",
       "title": "The Estate",
-      "sub": "25,000+ sq ft · four levels",
+      "sub": "30+ Kanals · 3 Towers",
       "href": "/amenities",
       "img": "pool-sunset"
     },
     {
       "no": "04",
       "title": "Location",
-      "sub": "The main Nathia Gali road",
+      "sub": "Kala Bagh Air Base Road",
       "href": "/location",
       "img": "aerial-curve"
     },
     {
       "no": "05",
-      "title": "Elevate",
-      "sub": "Operator before developer",
+      "title": "DM Consortium",
+      "sub": "Developer & Operator",
       "href": "/developer",
       "img": "founder"
     },
@@ -490,31 +491,31 @@
   },
   "numbers": [
     {
-      "value": 7900,
+      "value": 7906,
       "unit": "FT",
       "label": "Above sea level",
-      "note": "Roughly 2,400 metres. Above the mist line.",
+      "note": "Roughly 2,410 metres. Above the mist line.",
       "img": "cloudsea"
     },
     {
-      "value": 133,
-      "unit": "",
+      "value": 150,
+      "unit": "+",
       "label": "Private residences",
-      "note": "Two towers, joined by a glass skywalk.",
+      "note": "Three towers across a 30+ Kanal resort campus.",
       "img": "day-1830"
     },
     {
       "value": 365,
       "unit": "",
-      "label": "Days a year · hotel operated",
+      "label": "Days a year · 5-Star Resort operated",
       "note": "Staffed and serviced through all four seasons.",
       "img": "day-1300"
     },
     {
-      "value": 1,
-      "unit": "",
-      "label": "Development on the main road",
-      "note": "The only private residence estate on the main Nathia Gali road.",
+      "value": 30,
+      "unit": "+",
+      "label": "Kanals master resort campus",
+      "note": "The largest luxury hospitality estate in Nathia Gali.",
       "img": "aerial-curve",
       "focus": [
         0.84,
@@ -527,11 +528,11 @@
     "label": "A commercial asset",
     "head": "Own it. Earn from it.",
     "headEm": "Never worry about it.",
-    "lede": "This is an income asset, not a second home. After handover the Reserve operates as a single full service apartment hotel, open all four seasons and staffed all year, and every one of the 133 residences is run inside that operation by the Reserve’s own team. You hold the title and use your residence when you wish; the rest of the year it works.",
+    "lede": "This is an income asset, not a second home. After handover Serene Heights operates as a single full service 5-star mountain resort, open all four seasons and staffed all year, and every one of the 150+ residences is run inside that operation by Serene Heights' own team. You hold the title and enjoy 28 free nights annual stay; the rest of the year it generates monthly rental returns of PKR 80,000 to 120,000.",
     "list": [
-      "Every residence is managed within the Reserve’s hotel operation",
+      "Every residence is managed within Serene Heights hotel operation",
       "Bookings, housekeeping and maintenance: all handled",
-      "One operator, one standard, year round: no caretaker, no chowkidar",
+      "One operator, one standard, year round: 5-star hospitality management",
       "Overseas buyers welcome: routes set out in the buyer pack"
     ],
     "structureTitle": "The structure",
@@ -549,12 +550,12 @@
         "label": "On possession"
       },
       {
-        "value": "2030",
-        "label": "Handover"
+        "value": "36 Mo.",
+        "label": "Installment Plan"
       }
     ],
     "pricesTitle": "The prices",
-    "pricing": "Starting prices. The full payment schedule is released privately to the founders’ list ahead of public launch. Any price quoted on a third party website is not issued by Elevate Holdings.",
+    "pricing": "Starting prices. The full payment schedule is released privately to the founders’ list ahead of public launch. Any price quoted on a third party website is not issued by DM Consortium.",
     "approvalsTitle": "Approvals held",
     "approvals": [
       "Galiyat Development Authority (GDA) approval",
@@ -602,23 +603,22 @@
     }
   ],
   "project": {
-    "name": "The Nathia Reserve",
-    "developer": "Elevate Holdings",
-    "founder": "Ahmed Khilji",
-    "locationLine": "Nathia Gali · The Galiyat · 7,900 ft",
-    "road": "The main Nathia Gali road",
-    "address": "Nathia Gali · Khyber Pakhtunkhwa · Pakistan",
-    "elevationFt": 7900,
-    "email": "elevateholdings11@gmail.com",
+    "name": "Serene Heights Nathia Gali",
+    "developer": "DM Consortium",
+    "founder": "Fahad Masud Lone",
+    "locationLine": "Kala Bagh Air Base Road · Nathia Gali · 7,906 ft",
+    "road": "1.5 KM, Kala Bagh Air Base Road",
+    "address": "Kala Bagh Air Base Road, Nathia Gali, Khyber Pakhtunkhwa, Pakistan",
+    "elevationFt": 7906,
+    "email": "info@sereneheightsnathiagali.com",
     "instagram": [
-      "@thenathiareserve",
-      "@khilji.11",
-      "@ahmed.khiljii"
+      "@sereneheightsnathiagali",
+      "@dmconsortium"
     ],
-    "design": "Noor Khan Design Studio",
-    "contractor": "ZKB",
-    "handover": "2030",
-    "explorerUrl": "https://nathia-reserve-explorer.vercel.app"
+    "design": "DM Consortium Design Wing",
+    "contractor": "DM Consortium Infrastructure",
+    "handover": "2028",
+    "explorerUrl": "https://www.sereneheightsnathiagali.com/nathiagali"
   },
   "register": {
     "label": "Public release",
@@ -634,7 +634,7 @@
       {
         "no": "II.",
         "title": "Founders’ pricing.",
-        "text": "The most favourable terms the Reserve will ever offer."
+        "text": "The most favourable terms Serene Heights will ever offer."
       },
       {
         "no": "III.",
@@ -739,19 +739,19 @@
       "nameCity": "Your name and city, please.",
       "whatsapp": "A WhatsApp number we can reach you on.",
       "email": "A valid email address.",
-      "network": "We could not send that just now. Please try again, or write to us at elevateholdings11@gmail.com."
+      "network": "We could not send that just now. Please try again, or write to us at info@sereneheightsnathiagali.com."
     },
     "continue": "Continue",
     "back": "Back",
     "submit": "Register interest",
-    "small": "It takes twenty seconds. Your progress saves as you go. Your details remain private to The Nathia Reserve and Elevate Holdings, and are used only to contact you about this project.",
+    "small": "It takes twenty seconds. Your progress saves as you go. Your details remain private to Serene Heights Nathia Gali and DM Consortium, and are used only to contact you about this project.",
     "done": {
       "label": "Received",
       "title": "You’re on the founders’ list",
       "body": "Our team will reach you personally on WhatsApp. Plans and founders’ pricing are released to the priority list first.",
       "whatsappCta": "Message us on WhatsApp now",
       "whatsappNote": "Faster than waiting for us to call.",
-      "whatsappPrefill": "Hello — I have just registered on thenathiareserve.com and would like the details."
+      "whatsappPrefill": "Hello — I have just registered on sereneheightsnathiagali.com and would like the details."
     }
   },
   "rentalBasis": {
@@ -820,7 +820,7 @@
       "units": 12,
       "area": "390 to 416",
       "line": "Intimate studios opening straight into the pine canopy.",
-      "note": "A single, efficient mountain room: the entry into the Reserve.",
+      "note": "A single, efficient mountain room: the entry into Serene Heights.",
       "hero": "res-studio",
       "plate": "int-suite-living",
       "heroAlt": "Studio bedroom opening to a valley view",
@@ -835,7 +835,7 @@
       "collection": "Pinewood Suites",
       "units": 74,
       "area": "607 to 1,170",
-      "line": "Framed valley views: the heart of the Reserve.",
+      "line": "Framed valley views: the heart of Serene Heights.",
       "note": "The core of the building, and the most flexible to let.",
       "hero": "int-1bed-living",
       "plate": "int-1bed-fireplace",
@@ -867,7 +867,7 @@
       "collection": "Summit Residences",
       "units": 12,
       "area": "1,856 to 2,189",
-      "line": "The widest valley frontage in the Reserve.",
+      "line": "The widest valley frontage in Serene Heights.",
       "note": "The deepest plates in the building.",
       "hero": "res-3bed",
       "plate": "int-3bed",
@@ -900,7 +900,7 @@
       "From studios",
       "to penthouses."
     ],
-    "body": "One hundred and thirty three residences across two towers. Every unit is sold: Elevate Holdings retains none for itself.",
+    "body": "One hundred and fifty luxury residences across three towers. Developed with unyielding quality by DM Consortium.",
     "cta": "Request the floor plate",
     "more": "The full mix"
   },
@@ -910,14 +910,14 @@
       "It is not a second home."
     ],
     "headEm": "It is a business.",
-    "lede": "Every residence is run inside the Reserve’s own hotel operation, so it works all year rather than sitting shut for eleven months. The two numbers below are the ones that decide the answer: what a night sells for, and how full the building is. Both start where we expect to run them. Move either and watch the figure change.",
+    "lede": "Every residence is run inside Serene Heights' own 5-star resort operation, so it works all year rather than sitting shut for eleven months. The two numbers below are the ones that decide the answer: what a night sells for, and how full the building is. Both start where we expect to run them. Move either and watch the figure change.",
     "calcTitle": "Your residence, as an asset",
     "fields": {
       "unit": "Residence",
       "rate": "Nightly rate",
       "occupancy": "Occupancy across the year"
     },
-    "rateNote": "Starts at the Reserve’s own planned nightly rate for this residence type.",
+    "rateNote": "Starts at Serene Heights' own planned nightly rate for this residence type.",
     "occNote": "Starts at our planning figure of 60% of the year let.",
     "rows": {
       "nights": "Nights let a year",
@@ -932,22 +932,22 @@
     "crossoverTail": "what its own monthly instalment costs.",
     "assumptionsTitle": "The assumptions, stated",
     "assumptions": [
-      "Nightly rates start at the Reserve’s own planned operating card — PKR 70,000 for a one bedroom, PKR 160,000 for a two bedroom and PKR 250,000 for a three bedroom — and you can move them.",
-      "Occupancy is the share of the year let, starting at our planning figure of 60%. The Reserve is staffed and open through all four seasons, including the snow season, when most of Nathia Gali closes.",
+      "Nightly rates start at Serene Heights' own planned operating card — PKR 70,000 for a one bedroom, PKR 160,000 for a two bedroom and PKR 250,000 for a three bedroom — and you can move them.",
+      "Occupancy is the share of the year let, starting at our planning figure of 60%. Serene Heights is staffed and open through all four seasons, including the winter snow season, when most of Nathia Gali closes.",
       "Hotel management is 30% of gross room income, all in, and it is deducted in front of you in the table above. There is no separate owner service charge on top.",
       "The purchase figure used is the published starting price for that residence type. A specific residence is priced individually, and those figures go to the founders’ list."
     ],
-    "caveat": "Illustration only. These figures are produced from the inputs you set and are not a forecast, a projection, or any guarantee, offer or representation of return by The Nathia Reserve or Elevate Holdings. No rental return is promised. Actual income depends on occupancy, achieved room rates, operating costs and market conditions, all of which vary and may differ materially from the figures shown. The terms of the hotel programme, and any owner returns, are defined solely in the signed buyer documentation, which prevails over all marketing material.",
+    "caveat": "Illustration only. These figures are produced from the inputs you set and are not a forecast, a projection, or any guarantee, offer or representation of return by Serene Heights Nathia Gali or DM Consortium. No rental return is promised. Actual income depends on occupancy, achieved room rates, operating costs and market conditions, all of which vary and may differ materially from the figures shown. The terms of the hotel programme, and any owner returns, are defined solely in the signed buyer documentation, which prevails over all marketing material.",
     "cta": "Get the figures for a specific residence"
   },
   "snow": {
     "label": "Four seasons high",
     "head": [
       "Snow falls.",
-      "The Reserve"
+      "Serene Heights"
     ],
     "headEm": "stays warm.",
-    "body": "Heated interiors, covered arrival and a staffed estate through the winter: while the hill stations close, the Reserve is at its most beautiful. The heated outdoor pool stays open in the snow.",
+    "body": "Heated interiors, Italian central heating, covered arrival and a staffed estate through the winter: while the hill stations close, Serene Heights is at its most beautiful. The heated outdoor infinity pool stays open in the snow.",
     "kicker": "Post handover",
     "count": 365,
     "countLabel": "Days a year · fully managed"

@@ -25,7 +25,7 @@ export const Manifesto: React.FC = () => {
           >
             <div className="inline-flex items-center space-x-2 font-mono text-xs uppercase tracking-luxury text-[#c3a78e]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#c3a78e]" />
-              <span>02 · The Reserve</span>
+              <span>02 · Serene Heights</span>
             </div>
 
             <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#efe9df] leading-[1.15] font-normal">
@@ -34,14 +34,14 @@ export const Manifesto: React.FC = () => {
             </h2>
 
             <p className="font-sans text-base sm:text-lg md:text-xl text-[#efe9df]/85 font-light leading-relaxed border-l-2 border-[#c3a78e]/50 pl-6 my-6">
-              The Nathia Reserve is built to the highest standard of luxury Pakistan has ever seen:
+              Serene Heights Nathia Gali is built to the highest standard of luxury Pakistan has ever seen:
               both a private residence and a fully managed retreat: staffed, serviced and alive
               through all four seasons.
             </p>
 
             <div className="grid grid-cols-2 gap-6 pt-4 font-mono text-xs">
               <div className="p-4 rounded border border-[#253129] bg-[#141c17]/50">
-                <span className="block text-[#c3a78e] text-lg font-serif">133</span>
+                <span className="block text-[#c3a78e] text-lg font-serif">150+</span>
                 <span className="text-[#efe9df]/60 uppercase tracking-wider text-[11px]">
                   Private Suites
                 </span>
@@ -65,8 +65,8 @@ export const Manifesto: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden border border-[#253129] shadow-2xl group">
               <img
-                src="/img/cafe-day-lg.webp"
-                alt="Morning at The Nathia Reserve stone café terrace"
+                src="/pictures/home/nathiagaliResort/nathiagaliResort.png"
+                alt="Morning at Serene Heights stone café terrace"
                 className="w-full h-[420px] md:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
@@ -76,7 +76,7 @@ export const Manifesto: React.FC = () => {
                   The Stone Terrace Café
                 </span>
                 <p className="font-serif text-sm text-[#efe9df]/90 italic">
-                  &ldquo;A terrace above the clouds, morning coffee at 7,900 ft.&rdquo;
+                  &ldquo;A terrace above the clouds, morning coffee at 7,906 ft.&rdquo;
                 </p>
               </div>
             </div>

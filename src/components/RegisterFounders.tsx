@@ -299,7 +299,7 @@ export const RegisterFounders: React.FC = () => {
 
                     <div className="flex items-center space-x-2 text-[11px] text-[#efe9df]/60 font-sans pt-1">
                       <Shield className="w-3.5 h-3.5 text-[#c3a78e] shrink-0" />
-                      <span>Your details remain strictly confidential to Elevate Holdings.</span>
+                      <span>Your details remain strictly confidential to DM Consortium.</span>
                     </div>
                   </motion.div>
                 )}

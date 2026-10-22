@@ -157,9 +157,9 @@ export const CommercialStructurePricing: React.FC = () => {
 
           {/* Disclaimer Paragraph */}
           <p className="font-sans font-light text-xs sm:text-sm text-[#7A7468] max-w-2xl mt-8 mb-10 leading-relaxed">
-            Starting prices. The full payment schedule is released privately to the founders’ list
-            ahead of public launch. Any price quoted on a third party website is not issued by
-            Elevate Holdings.
+            Starting prices. The full payment schedule is released privately to registered buyers
+            ahead of phase completion. Any price quoted on an unauthorized third party website is
+            not issued by DM Consortium.
           </p>
 
           {/* Decorative Centered Tan Accent Dot */}

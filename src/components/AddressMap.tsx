@@ -49,7 +49,7 @@ export const AddressMap: React.FC = () => {
                 <span>Coordinates</span>
               </div>
               <div className="font-serif text-4xl text-[#efe9df] mb-1">
-                7,900 <span className="text-base font-mono text-[#c3a78e]">FT</span>
+                7,906 <span className="text-base font-mono text-[#c3a78e]">FT</span>
               </div>
               <p className="font-mono text-xs text-[#efe9df]/60">
                 34.0722° N, 73.3842° E · Highest ridge point
@@ -59,13 +59,13 @@ export const AddressMap: React.FC = () => {
             <div className="my-8 py-6 border-y border-[#253129]/60">
               <div className="flex justify-between text-[11px] font-mono text-[#efe9df]/60 mb-2">
                 <span>Islamabad (1,750 FT)</span>
-                <span>The Reserve (7,900 FT)</span>
+                <span>Serene Heights (7,906 FT)</span>
               </div>
               <div className="relative h-2 rounded-full bg-[#253129] overflow-hidden">
                 <div className="absolute left-0 top-0 bottom-0 w-full bg-gradient-to-r from-[#253129] via-[#c3a78e]/60 to-[#c3a78e]" />
               </div>
               <div className="text-right text-[10px] font-mono text-[#c3a78e] mt-1.5">
-                ▲ +6,150 FT Net Elevation Gain
+                ▲ +6,156 FT Net Elevation Gain
               </div>
             </div>
 

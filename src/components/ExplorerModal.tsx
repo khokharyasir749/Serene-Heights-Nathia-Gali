@@ -34,10 +34,10 @@ export const ExplorerModal: React.FC<ExplorerModalProps> = ({ isOpen, onClose })
               <div className="flex items-center space-x-3">
                 <span className="w-2 h-2 rounded-full bg-[#c3a78e] animate-pulse" />
                 <span className="font-serif text-lg text-[#efe9df]">
-                  The Nathia Reserve · 360° Interactive Explorer
+                  Serene Heights Nathia Gali · 360° Interactive Explorer
                 </span>
                 <span className="hidden sm:inline-block font-mono text-[10px] text-[#c3a78e] border border-[#253129] px-2 py-0.5 rounded uppercase">
-                  Tower A & Tower B
+                  3 Towers · 150+ Suites
                 </span>
               </div>
 
@@ -67,7 +67,7 @@ export const ExplorerModal: React.FC<ExplorerModalProps> = ({ isOpen, onClose })
             <div className="relative flex-1 bg-black w-full h-full overflow-hidden">
               <iframe
                 src={explorerUrl}
-                title="The Nathia Reserve 3D Explorer"
+                title="Serene Heights Nathia Gali 3D Explorer"
                 className="w-full h-full border-0"
                 allow="accelerometer; gyroscope; magnetometer; fullscreen"
                 loading="lazy"

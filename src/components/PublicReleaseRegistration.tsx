@@ -86,9 +86,9 @@ export const PublicReleaseRegistration: React.FC = () => {
 
   const handleWhatsAppDirect = () => {
     const text = encodeURIComponent(
-      `Hello, I would like priority founder's allocation details for The Nathia Reserve. (Selected: ${selectedInterest}, Timeframe: ${selectedTiming})`
+      `Hello, I would like priority founder's allocation details for Serene Heights Nathia Gali. (Selected: ${selectedInterest}, Timeframe: ${selectedTiming})`
     );
-    window.open(`https://wa.me/923000000000?text=${text}`, '_blank');
+    window.open(`https://wa.me/923008497999?text=${text}`, '_blank');
   };
 
   return (
@@ -156,7 +156,7 @@ export const PublicReleaseRegistration: React.FC = () => {
                     <strong className="text-[#EAE6DE] font-medium font-sans">
                       Founders’ pricing.
                     </strong>{' '}
-                    The most favourable terms the Reserve will ever offer.
+                    The most favourable terms Serene Heights will ever offer.
                   </div>
                 </div>
 
@@ -310,7 +310,7 @@ export const PublicReleaseRegistration: React.FC = () => {
                     {/* Privacy Disclaimer */}
                     <p className="font-sans font-light text-[11px] sm:text-xs text-[#7A7468] leading-relaxed mt-10">
                       It takes twenty seconds. Your progress saves as you go. Your details remain
-                      private to The Nathia Reserve and Elevate Holdings, and are used only to
+                      private to Serene Heights Nathia Gali and DM Consortium, and are used only to
                       contact you about this project.
                     </p>
                   </motion.div>
@@ -456,7 +456,7 @@ export const PublicReleaseRegistration: React.FC = () => {
                         You’re on the founders’ list.
                       </h3>
                       <p className="font-sans text-sm text-[#C4BCB0] font-light max-w-md mx-auto leading-relaxed">
-                        A member of the Elevate private client team will release the full particulars,
+                        A member of the DM Consortium private client team will release the full particulars,
                         floor plans, and starting allocations directly to your contact details.
                       </p>
                     </div>

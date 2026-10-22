@@ -130,7 +130,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ onRe
 
           {/* Editorial Paragraph */}
           <p className="font-sans font-light text-xs sm:text-sm md:text-base leading-relaxed text-[#C4BCB0] max-w-xl mt-10">
-            Every residence is run inside the Reserve’s own hotel operation, so it works all year
+            Every residence is run inside Serene Heights&apos; own hotel operations, so it works all year
             rather than sitting shut for eleven months. The two numbers below are the ones that decide
             the answer: what a night sells for, and how full the building is. Both start where we
             expect to run them. Move either and watch the figure change.
@@ -218,7 +218,7 @@ export const InvestmentCalculator: React.FC<InvestmentCalculatorProps> = ({ onRe
                 className="calc-range-slider"
               />
               <p className="font-sans font-light text-xs text-[#7A7468] mt-3 leading-relaxed">
-                Starts at the Reserve’s own planned nightly rate for this residence type. Planned: PKR {selectedUnit.defaultRate.toLocaleString()}.
+                Starts at Serene Heights&apos; planned nightly rate for this residence type. Planned: PKR {selectedUnit.defaultRate.toLocaleString()}.
               </p>
             </div>
 

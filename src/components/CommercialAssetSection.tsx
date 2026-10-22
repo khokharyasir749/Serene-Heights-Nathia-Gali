@@ -16,10 +16,10 @@ export const CommercialAssetSection: React.FC = () => {
   const scale = useTransform(scrollYProgress, [0.1, 0.7], [1.0, 1.15]);
 
   const bulletPoints = [
-    'Every residence is managed within the Reserve’s hotel operation',
+    'Every residence is managed within Serene Heights hotel operations',
     'Bookings, housekeeping and maintenance: all handled',
-    'One operator, one standard, year round: no caretaker, no chowkidar',
-    'Overseas buyers welcome: routes set out in the buyer pack',
+    'One operator, one 5-star standard, year round: no caretaker, no chowkidar',
+    'Overseas buyers welcome: 28 days annual stay & monthly rental returns',
   ];
 
   return (
@@ -62,11 +62,11 @@ export const CommercialAssetSection: React.FC = () => {
         <div className="lg:col-span-6 flex flex-col justify-start">
           {/* Lead Editorial Paragraph */}
           <p className="font-serif text-xl sm:text-2xl md:text-[1.75rem] text-[#1E2621] font-light leading-[1.35] tracking-tight mb-10">
-            This is an income asset, not a second home. After handover the Reserve operates as a
-            single full service apartment hotel, open all four seasons and staffed all year, and
-            every one of the 133 residences is run inside that operation by the Reserve’s own
-            team. You hold the title and use your residence when you wish; the rest of the year it
-            works.
+            This is an income asset, not just a second home. After handover Serene Heights operates
+            as a premier full-service 5-star mountain resort, open all four seasons and staffed
+            year-round. Every one of the 150+ suites across 3 towers is managed inside that operation
+            by Serene Heights&apos; dedicated hospitality team. You hold deed ownership with 28 days
+            free annual stay; the rest of the year it generates monthly rental returns.
           </p>
 
           {/* Feature Bullet List with Hairline Dividers */}
@@ -92,17 +92,11 @@ export const CommercialAssetSection: React.FC = () => {
           <div className="relative w-full aspect-[4/5] sm:aspect-[4/4.8] lg:aspect-[4/4.6] rounded-2xl overflow-hidden bg-[#EAE6DE] shadow-2xl">
             {/* Smooth Zoom Image clipped neatly inside the rounded container */}
             <motion.img
-              src="/img/amenity-lobby-lg.webp"
-              alt="Grand Lobby & Reception at The Nathia Reserve"
+              src="/pictures/home/nathiagaliResort/nathiagaliResort.png"
+              alt="Grand Resort Architecture at Serene Heights Nathia Gali"
               style={{ scale }}
               className="w-full h-full object-cover will-change-transform origin-center"
               loading="lazy"
-              onError={(e) => {
-                const target = e.currentTarget;
-                if (!target.src.includes('reception-lg.webp')) {
-                  target.src = '/img/reception-lg.webp';
-                }
-              }}
             />
             {/* Subtle natural ambient gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />

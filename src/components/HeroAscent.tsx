@@ -101,9 +101,9 @@ export default function HeroAscent({
         requestSeek(target);
       }
 
-      // 2. Direct DOM update for formatted counter (0,000 to 7,900 FT) during Phase 1
+      // 2. Direct DOM update for formatted counter (0,000 to 7,906 FT) during Phase 1
       const progressToPeak = Math.min(1, Math.max(0, latest / 0.45));
-      const altitude = Math.round(progressToPeak * 7900);
+      const altitude = Math.round(progressToPeak * 7906);
       if (counterRef.current) {
         const formatted =
           altitude >= 1000
@@ -228,8 +228,8 @@ export default function HeroAscent({
             {/* High-Res 4K Dusk Architectural Facade (Crossfades in at summit) */}
             <motion.img
               style={{ opacity: highResImageOpacity }}
-              src="/img/facade-hero-sunset-lg.webp"
-              alt="The Serene Heights - Golden Hour at 7,900 FT"
+              src="/pictures/home/largestResort.png"
+              alt="Serene Heights Nathia Gali - Golden Hour at 7,906 FT"
               className="absolute inset-0 w-full h-full object-cover object-[65%_35%] pointer-events-none select-none"
               loading="eager"
             />
@@ -243,7 +243,7 @@ export default function HeroAscent({
         />
 
         {/* =========================================================================
-            PHASE 1: MASSIVE CENTER ALTITUDE (0,000 -> 7,900 FT)
+            PHASE 1: MASSIVE CENTER ALTITUDE (0,000 -> 7,906 FT)
         ========================================================================== */}
         <motion.div
           style={{ opacity: phase1Opacity }}
@@ -281,16 +281,16 @@ export default function HeroAscent({
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-6">
             <div className="max-w-3xl">
               <span className="font-mono text-xs sm:text-sm tracking-[0.3em] uppercase text-[#C9BEAE] mb-4 block">
-                NATHIA GALI · THE GALIYAT · 7,900 FT
+                NATHIA GALI · THE GALIYAT · 7,906 FT
               </span>
               <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#EDE8DF] font-light leading-[0.94] tracking-tight">
                 The Exceptional,<br />
                 <span className="italic font-normal">Reserved For You.</span>
               </h1>
               <p className="font-sans text-sm sm:text-base text-[#efe9df]/85 tracking-wide mt-6 leading-relaxed">
-                Pakistan’s most premium apartment hotel<br />
+                Pakistan’s premier 5-star mountain resort<br />
                 <span className="text-[#C9BEAE] text-xs sm:text-sm font-light">
-                  By Elevate Holdings
+                  By DM Consortium
                 </span>
               </p>
             </div>
@@ -353,7 +353,7 @@ export default function HeroAscent({
                 style={{ opacity: ch2CaptionOpacity, y: ch2CaptionY }}
                 className="font-mono text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#78716C] mt-4 text-center select-none"
               >
-                GOLDEN HOUR · 7,900 FT
+                GOLDEN HOUR · 7,906 FT
               </motion.p>
             </div>
 

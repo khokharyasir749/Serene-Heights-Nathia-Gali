@@ -51,14 +51,14 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
   );
   const slide4BgOpacity = useTransform(smoothProgress, [0.76, 0.81], [0, 1]);
 
-  // ================= PHASE 1 (01 / 04 - Above Sea Level): 0,000 -> 7,900 FT =================
-  const altitudeValue = useTransform(smoothProgress, [0.02, 0.16], [0, 7900]);
+  // ================= PHASE 1 (01 / 04 - Above Sea Level): 0,000 -> 7,906 FT =================
+  const altitudeValue = useTransform(smoothProgress, [0.02, 0.16], [0, 7906]);
   const slide1InfoOpacity = useTransform(smoothProgress, [0.1, 0.16], [0, 1]);
   const slide1InfoY = useTransform(smoothProgress, [0.1, 0.16], [24, 0]);
   const slide1Opacity = useTransform(smoothProgress, [0.22, 0.27], [1, 0]);
   const slide1Y = useTransform(smoothProgress, [0.22, 0.27], [0, -28]);
 
-  // ================= PHASE 2 (02 / 04 - Private Residences): 0 -> 133 =================
+  // ================= PHASE 2 (02 / 04 - Private Residences): 0 -> 150 =================
   const slide2Opacity = useTransform(
     smoothProgress,
     [0.25, 0.3, 0.49, 0.54],
@@ -69,7 +69,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
     [0.25, 0.3, 0.49, 0.54],
     [28, 0, 0, -28]
   );
-  const residencesValue = useTransform(smoothProgress, [0.3, 0.44], [0, 133]);
+  const residencesValue = useTransform(smoothProgress, [0.3, 0.44], [0, 150]);
   const slide2InfoOpacity = useTransform(smoothProgress, [0.38, 0.44], [0, 1]);
   const slide2InfoY = useTransform(smoothProgress, [0.38, 0.44], [20, 0]);
 
@@ -95,9 +95,9 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
   const slide4InfoOpacity = useTransform(smoothProgress, [0.84, 0.9], [0, 1]);
   const slide4InfoY = useTransform(smoothProgress, [0.84, 0.9], [20, 0]);
 
-  // Pure integer formatting: "0,000" -> "7,900" with zero decimals
+  // Pure integer formatting: "0,000" -> "7,906" with zero decimals
   const formatAltitude = (val: number): string => {
-    const clamped = Math.min(7900, Math.max(0, Math.floor(val)));
+    const clamped = Math.min(7906, Math.max(0, Math.floor(val)));
     const thousands = Math.floor(clamped / 1000);
     const remainder = (clamped % 1000).toString().padStart(3, '0');
     return `${thousands},${remainder}`;
@@ -112,8 +112,8 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
 
   useMotionValueEvent(residencesValue, 'change', (latest) => {
     if (residencesRef.current) {
-      const count = Math.min(133, Math.max(0, Math.round(latest)));
-      residencesRef.current.textContent = count.toString();
+      const count = Math.min(150, Math.max(0, Math.round(latest)));
+      residencesRef.current.textContent = `${count}+`;
     }
   });
 
@@ -170,10 +170,10 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
       altitudeRef.current.textContent = formatAltitude(altitudeValue.get());
     }
     if (residencesRef.current) {
-      residencesRef.current.textContent = Math.min(
-        133,
+      residencesRef.current.textContent = `${Math.min(
+        150,
         Math.max(0, Math.round(residencesValue.get()))
-      ).toString();
+      )}+`;
     }
     if (daysRef.current) {
       daysRef.current.textContent = Math.min(
@@ -195,7 +195,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
     >
       {/* Pinned Sticky Stage: Locks firmly in place flush at top-0 */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between items-center z-10 select-none">
-        {/* ================= BACKGROUND 1: Sunset Cloud-Sea (Slide 01) ================= */}
+        {/* ================= BACKGROUND 1: Sunset Master Campus (Slide 01) ================= */}
         <motion.div
           style={{
             scale: bgScale1,
@@ -204,8 +204,8 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           className="absolute -top-[6%] -bottom-[6%] -left-[6%] -right-[6%] w-[112%] h-[112%] pointer-events-none will-change-transform z-0 origin-center overflow-hidden"
         >
           <img
-            src="/img/the%20nathi.png"
-            alt="The Nathia Reserve Sunset Cloud Sea"
+            src="/pictures/home/largestResort.png"
+            alt="Serene Heights Nathia Gali Master Campus at 7,906 FT"
             className="w-full h-full object-cover object-center pointer-events-none select-none scale-105"
             style={{
               filter: 'blur(6px) brightness(0.42) contrast(1.02)',
@@ -215,7 +215,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           <div className="absolute inset-0 bg-gradient-to-b from-[#0c0f0d]/50 via-transparent to-[#0c0f0d]/80 pointer-events-none" />
         </motion.div>
 
-        {/* ================= BACKGROUND 2: Evening Facade Render (Slide 02) ================= */}
+        {/* ================= BACKGROUND 2: Evening Snow Facade Render (Slide 02) ================= */}
         <motion.div
           style={{
             scale: bgScale2,
@@ -224,8 +224,8 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           className="absolute -top-[6%] -bottom-[6%] -left-[6%] -right-[6%] w-[112%] h-[112%] pointer-events-none will-change-transform z-0 origin-center overflow-hidden"
         >
           <img
-            src="/img/day-2200-lg.webp"
-            alt="The Nathia Reserve Night Architectural Facade"
+            src="/pictures/home/frames/frame4.png"
+            alt="Serene Heights Nathia Gali Snow Facade"
             className="w-full h-full object-cover object-center pointer-events-none select-none scale-105"
             style={{
               filter: 'blur(6px) brightness(0.38) contrast(1.05)',
@@ -235,7 +235,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           <div className="absolute inset-0 bg-gradient-to-b from-[#0c0f0d]/50 via-transparent to-[#0c0f0d]/80 pointer-events-none" />
         </motion.div>
 
-        {/* ================= BACKGROUND 3: Daytime Architectural Facade (Slide 03) ================= */}
+        {/* ================= BACKGROUND 3: Heated Pool & Valley View (Slide 03) ================= */}
         <motion.div
           style={{
             scale: bgScale3,
@@ -244,8 +244,8 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           className="absolute -top-[6%] -bottom-[6%] -left-[6%] -right-[6%] w-[112%] h-[112%] pointer-events-none will-change-transform z-0 origin-center overflow-hidden"
         >
           <img
-            src="/img/day-1300-lg.webp"
-            alt="The Nathia Reserve Daytime Architectural Facade"
+            src="/pictures/home/image3.png"
+            alt="Serene Heights Nathia Gali Heated Pool"
             className="w-full h-full object-cover object-center pointer-events-none select-none scale-105"
             style={{
               filter: 'blur(6px) brightness(0.38) contrast(1.05)',
@@ -255,7 +255,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           <div className="absolute inset-0 bg-gradient-to-b from-[#0c0f0d]/50 via-transparent to-[#0c0f0d]/80 pointer-events-none" />
         </motion.div>
 
-        {/* ================= BACKGROUND 4: Aerial View Curved Estate (Slide 04) ================= */}
+        {/* ================= BACKGROUND 4: Grand Resort Lobby Arrival (Slide 04) ================= */}
         <motion.div
           style={{
             scale: bgScale4,
@@ -264,8 +264,8 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           className="absolute -top-[6%] -bottom-[6%] -left-[6%] -right-[6%] w-[112%] h-[112%] pointer-events-none will-change-transform z-0 origin-center overflow-hidden"
         >
           <img
-            src="/img/aerial-curve-lg.webp"
-            alt="The Nathia Reserve Aerial Curve Estate"
+            src="/pictures/home/nathiagaliResort/nathiagaliResort.png"
+            alt="Serene Heights Nathia Gali Grand Resort"
             className="w-full h-full object-cover object-center pointer-events-none select-none scale-105"
             style={{
               filter: 'blur(6px) brightness(0.38) contrast(1.05)',
@@ -301,7 +301,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
           </span>
         </button>
 
-        {/* ================= SLIDE 01: 7,900 FT (Above Sea Level) ================= */}
+        {/* ================= SLIDE 01: 7,906 FT (Above Sea Level) ================= */}
         <motion.div
           style={{
             opacity: slide1Opacity,
@@ -318,7 +318,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
                 fontVariantNumeric: 'lining-nums tabular-nums',
                 fontFeatureSettings: '"lnum" 1, "tnum" 1',
                 backgroundImage:
-                  'url(/img/the%20nathi.png), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
+                  'url(/pictures/home/largestResort.png), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center 45%',
                 WebkitBackgroundClip: 'text',
@@ -357,7 +357,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
 
             {/* Subtext */}
             <p className="font-serif text-xl sm:text-2xl md:text-3xl text-center text-[#efe9df] font-light mt-3 tracking-wide drop-shadow-md">
-              Roughly 2,400 metres. Above the mist line.
+              Roughly 2,410 metres. Above the mist line.
             </p>
           </motion.div>
         </motion.div>
@@ -379,7 +379,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
                 fontVariantNumeric: 'lining-nums tabular-nums',
                 fontFeatureSettings: '"lnum" 1, "tnum" 1',
                 backgroundImage:
-                  'url(/img/day-2200-lg.webp), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
+                  'url(/pictures/home/frames/frame4.png), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center 38%',
                 WebkitBackgroundClip: 'text',
@@ -413,9 +413,9 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
               PRIVATE RESIDENCES
             </h3>
 
-            {/* Subtext: Two towers, joined by a glass skywalk. */}
+            {/* Subtext: Three towers across 30+ Kanals */}
             <p className="font-serif text-xl sm:text-2xl md:text-3xl text-center text-[#efe9df] font-light mt-3 tracking-wide drop-shadow-md">
-              Two towers, joined by a glass skywalk.
+              Three towers across 30+ Kanals, joined by scenic mountain trails.
             </p>
           </motion.div>
         </motion.div>
@@ -437,7 +437,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
                 fontVariantNumeric: 'lining-nums tabular-nums',
                 fontFeatureSettings: '"lnum" 1, "tnum" 1',
                 backgroundImage:
-                  'url(/img/day-1300-lg.webp), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
+                  'url(/pictures/home/image3.png), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center 38%',
                 WebkitBackgroundClip: 'text',
@@ -495,7 +495,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
                 fontVariantNumeric: 'lining-nums tabular-nums',
                 fontFeatureSettings: '"lnum" 1, "tnum" 1',
                 backgroundImage:
-                  'url(/img/aerial-curve-lg.webp), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
+                  'url(/pictures/home/nathiagaliResort/nathiagaliResort.png), linear-gradient(180deg, #FFFFFF 0%, #F5E8D3 55%, #C2AC8F 100%)',
                 backgroundSize: 'cover',
                 backgroundPosition: 'center 40%',
                 WebkitBackgroundClip: 'text',
@@ -531,7 +531,7 @@ export const MeasureSection: React.FC<MeasureSectionProps> = ({ onOpenExplorer }
 
             {/* Editorial Headline */}
             <p className="font-serif text-xl sm:text-2xl md:text-3xl text-center text-[#efe9df] font-light mt-3 tracking-wide drop-shadow-md max-w-2xl">
-              The only private residence estate on the main Nathia Gali road.
+              The premier 30+ Kanal luxury resort on Kala Bagh Air Base Road.
             </p>
           </motion.div>
         </motion.div>

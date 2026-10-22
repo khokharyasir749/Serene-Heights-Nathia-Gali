@@ -83,7 +83,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
 
           {/* Main Editorial Headline */}
           <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] text-[#1A221C] tracking-tight max-w-3xl mb-3 font-normal">
-            Tour both towers{' '}
+            Tour all three towers{' '}
             <span className="font-serif italic font-light">in 360°.</span>
           </h2>
 
@@ -109,8 +109,8 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
             className="w-full h-full relative overflow-hidden will-change-transform"
           >
             <img
-              src="/img/day-1300-lg.webp"
-              alt="The Nathia Reserve Dual Towers 360 Exterior View"
+              src="/pictures/home/largestResort.png"
+              alt="Serene Heights Nathia Gali 3D Architectural View"
               className="w-full h-full object-cover object-center pointer-events-none select-none"
               loading="eager"
             />

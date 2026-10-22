@@ -41,7 +41,7 @@ const ROOMS_STRIPS: RoomStrip[] = [
     img: '/img/reception-lg.webp',
     fallback: '/img/int-lobby.webp',
     alt: 'Double-height stone foyer with crystal chandelier and reception desk',
-    desc: 'A soaring double-height stone foyer welcoming owners and guests into the Reserve, centered by handcrafted brass screens and crystalline chandeliers.',
+    desc: 'A soaring double-height stone foyer welcoming owners and guests into Serene Heights, centered by handcrafted brass screens and crystalline chandeliers.',
   },
   {
     id: 'cigar',
@@ -68,7 +68,7 @@ const ROOMS_STRIPS: RoomStrip[] = [
     img: '/img/boardroom-lg.webp',
     fallback: '/img/amenity-boardroom.webp',
     alt: 'Long conference executive oak table with illuminated glass pendant sculpture',
-    desc: 'High-speed fiber connectivity, acoustic isolation, and confidential meeting facilities suspended above the clouds at 7,900 feet.',
+    desc: 'High-speed fiber connectivity, acoustic isolation, and confidential meeting facilities suspended above the clouds at 7,906 feet.',
   },
 ];
 
@@ -113,7 +113,7 @@ export const EstateAmenities: React.FC = () => {
           {/* Massive Display Serif Headline: Two-Tone Bone Ivory + Warm Sand Bronze */}
           <h1 className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[7.2rem] xl:text-[8rem] leading-[0.92] tracking-tight">
             <span className="block text-[#EAE6DE]">Everything you need</span>
-            <span className="block text-[#EAE6DE] mt-1 sm:mt-2">at 7,900 feet.</span>
+            <span className="block text-[#EAE6DE] mt-1 sm:mt-2">at 7,906 feet.</span>
             <span className="block font-serif italic font-light text-[#C9BEAE] mt-1 sm:mt-2">
               Nothing you don’t.
             </span>
@@ -374,7 +374,7 @@ export const EstateAmenities: React.FC = () => {
           {/* Left Editorial Body Copy */}
           <p className="font-serif text-lg sm:text-2xl md:text-[1.65rem] text-[#C4BCB0] font-light leading-relaxed max-w-2xl">
             The second tower holds everything that makes owning here easy: owners’ concierge and
-            housekeeping, covered arrival and valet parking, a rooftop event terrace at 7,900 ft,
+            housekeeping, covered arrival and valet parking, a rooftop event terrace at 7,906 ft,
             and a full rental management desk.
           </p>
 
@@ -464,7 +464,7 @@ export const EstateAmenities: React.FC = () => {
 
                 <div className="pt-8 border-t border-[#7A7468]/15 mt-8 flex items-center justify-between">
                   <span className="font-mono text-xs text-[#7A7468] tracking-wider uppercase">
-                    THE RESERVE ESTATE
+                    SERENE HEIGHTS ESTATE
                   </span>
                   <button
                     onClick={() => setSelectedModalRoom(null)}

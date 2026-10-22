@@ -38,7 +38,7 @@ export const GalleryShowcase: React.FC = () => {
                 <span>08 · First Look</span>
               </div>
               <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#efe9df] leading-tight font-normal">
-                Inside the <span className="font-serif italic text-[#c3a78e]">Reserve.</span>
+                Inside <span className="font-serif italic text-[#c3a78e]">Serene Heights.</span>
               </h2>
             </div>
             <div className="flex items-center space-x-3 text-xs font-mono text-[#efe9df]/50 uppercase tracking-luxury">

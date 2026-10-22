@@ -204,8 +204,8 @@ export const FourSeasonsWinter: React.FC = () => {
     >
       {/* ================= BACKGROUND IMAGE ================= */}
       <img
-        src="/img/facade-snow-night-lg.webp"
-        alt="The Nathia Reserve in Winter Snow"
+        src="/pictures/home/frames/frame4.png"
+        alt="Serene Heights Nathia Gali in Winter Snow"
         className="absolute inset-0 w-full h-full object-cover object-center z-0 scale-[1.02]"
         loading="lazy"
       />
@@ -239,7 +239,7 @@ export const FourSeasonsWinter: React.FC = () => {
             Snow falls.
           </span>
           <span className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl text-[#EAE6DE] leading-[0.92] tracking-tight block mt-1 sm:mt-2">
-            The Reserve
+            Serene Heights
           </span>
           <span className="font-serif italic font-light text-6xl sm:text-7xl md:text-8xl text-[#C9BEAE] leading-[0.95] tracking-normal block mt-1 sm:mt-2">
             stays warm.
@@ -248,9 +248,9 @@ export const FourSeasonsWinter: React.FC = () => {
 
         {/* Editorial Body Paragraph */}
         <p className="font-sans font-light text-xs sm:text-sm md:text-base leading-relaxed text-[#C4BCB0] max-w-lg mt-8 sm:mt-10 drop-shadow-sm">
-          Heated interiors, covered arrival and a staffed estate through the winter: while the
-          hill stations close, the Reserve is at its most beautiful. The heated outdoor pool stays
-          open in the snow.
+          Italian central heating, heated floors, covered arrival and a 24/7 staffed resort
+          through the winter: while the hill stations close, Serene Heights is at its most
+          spectacular. The heated pool and rooftop dining stay fully operational in the snow.
         </p>
       </div>
 

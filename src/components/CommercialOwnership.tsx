@@ -78,7 +78,7 @@ export const CommercialOwnership: React.FC = () => {
             </div>
 
             <p className="font-mono text-[11px] text-[#efe9df]/50 pt-8 mt-8 border-t border-[#253129]/60 leading-relaxed">
-              Elevate Holdings runs the entire asset with 24/7 hospitality teams.
+              DM Consortium runs the entire asset with 24/7 hospitality teams.
             </p>
           </div>
 

@@ -34,11 +34,11 @@ const RESIDENCES: ResidenceUnit[] = [
     area: '390 to 416',
     priceOrStatus: 'Sold out',
     isSoldOut: true,
-    caption: 'A single, efficient mountain room; the entry into the Reserve.',
+    caption: 'A single, efficient mountain room; the entry into Serene Heights.',
     primaryImage: '/img/res-studio-lg.webp',
     primaryTag: 'STUDIO · FOREST SUITE',
-    secondaryImage: '/img/int-1bed-kitchen-lg.webp',
-    secondaryTag: 'SUITE KITCHEN',
+    secondaryImage: '/pictures/about/obj/objImg4.png',
+    secondaryTag: 'SUITE INTERIOR',
     unitIdx: 0,
   },
   {
@@ -46,14 +46,14 @@ const RESIDENCES: ResidenceUnit[] = [
     watermark: '02',
     category: '02 / 05 · PINEWOOD SUITES',
     title: '1 Bedroom',
-    subtitle: 'Framed valley views: the heart of the Reserve.',
+    subtitle: 'Framed valley views: the heart of Serene Heights.',
     residencesCount: 74,
     area: '607 to 1,170',
     priceOrStatus: 'From 3.9',
     isSoldOut: false,
     caption: 'The core of the building, and the most flexible to let.',
-    primaryImage: '/img/int-suite-living-lg.webp',
-    primaryTag: 'PINEWOOD · LIVING LOUNGE',
+    primaryImage: '/pictures/about/obj/objImg1.png',
+    primaryTag: 'PINEWOOD · 1-BED EXECUTIVE SUITE',
     secondaryImage: '/img/int-fireplace-lg.webp',
     secondaryTag: 'FIREPLACE LOUNGE',
     unitIdx: 1,
@@ -69,8 +69,8 @@ const RESIDENCES: ResidenceUnit[] = [
     priceOrStatus: 'From 7.1',
     isSoldOut: false,
     caption: 'Family scale residences with dual aspect on most floors.',
-    primaryImage: '/img/int-living-day-lg.webp',
-    primaryTag: 'MURREE · LIVING SUITE',
+    primaryImage: '/pictures/about/obj/objImg2.png',
+    primaryTag: 'MURREE · 2-BED RESIDENCE',
     secondaryImage: '/img/int-master-bath-lg.webp',
     secondaryTag: 'MASTER BATH & BED',
     unitIdx: 2,
@@ -80,14 +80,14 @@ const RESIDENCES: ResidenceUnit[] = [
     watermark: '04',
     category: '04 / 05 · SUMMIT RESIDENCES',
     title: '3 Bedroom',
-    subtitle: 'The widest valley frontage in the Reserve.',
+    subtitle: 'The widest valley frontage in Serene Heights.',
     residencesCount: 12,
     area: '1,856 to 2,189',
     priceOrStatus: 'From 12.5',
     isSoldOut: false,
     caption: 'The deepest plates in the building.',
-    primaryImage: '/img/res-3bed-lg.webp',
-    primaryTag: 'SUMMIT · VALLEY LIVING',
+    primaryImage: '/pictures/about/obj/objImg3.png',
+    primaryTag: 'SUMMIT · 3-BED SUITE',
     secondaryImage: '/img/dining-terrace-lg.webp',
     secondaryTag: 'ALPINE DINING',
     unitIdx: 3,
@@ -372,8 +372,8 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
 
                     {/* Left Editorial Body Copy */}
                     <p className="font-sans font-light text-sm sm:text-base leading-relaxed text-[#555E57] max-w-md mt-6 sm:mt-8">
-                      One hundred and thirty three residences across two towers. Every unit is sold:
-                      Elevate Holdings retains none for itself.
+                      Over one hundred and fifty executive residences across three towers. Fully
+                      furnished 5-star mountain suites managed directly under DM Consortium.
                     </p>
 
                     {/* Bottom Category Filter Row */}

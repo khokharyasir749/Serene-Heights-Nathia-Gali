@@ -39,7 +39,7 @@ export const DayCycle: React.FC = () => {
           <div>
             <div className="inline-flex items-center space-x-2 font-mono text-xs uppercase tracking-luxury text-[#c3a78e] mb-4">
               <span className="w-1.5 h-1.5 rounded-full bg-[#c3a78e]" />
-              <span>05 · One Day at the Reserve</span>
+              <span>05 · One Day at Serene Heights</span>
             </div>
             <h2 className="font-serif text-3xl sm:text-5xl md:text-6xl text-[#efe9df] leading-tight font-normal">
               From morning mist to{' '}
@@ -117,7 +117,7 @@ export const DayCycle: React.FC = () => {
             >
               <img
                 src={`/img/${current.img}-lg.webp`}
-                alt={`${current.label} at The Nathia Reserve`}
+                alt={`${current.label} at Serene Heights Nathia Gali`}
                 className="w-full h-full object-cover"
                 loading="eager"
               />

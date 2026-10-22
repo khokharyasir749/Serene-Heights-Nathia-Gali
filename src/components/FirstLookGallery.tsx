@@ -220,7 +220,7 @@ export const FirstLookGallery: React.FC = () => {
               Inside the{' '}
             </span>
             <span className="font-serif italic font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#9B8E7D] tracking-normal inline-block ml-2 sm:ml-3">
-              Reserve.
+              Serene Heights.
             </span>
           </h2>
 
