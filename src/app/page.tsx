@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
+import { Hero } from '@/components/Hero';
 import { HeroAscent } from '@/components/HeroAscent';
 import { ManifestoSection } from '@/components/ManifestoSection';
 import { ExplorerSection } from '@/components/ExplorerSection';
@@ -62,6 +63,7 @@ export default function Home() {
   // Active chapter observer
   useEffect(() => {
     const chapterIds = [
+      'hero',
       'ascent',
       'manifesto',
       'explorer',
@@ -146,6 +148,9 @@ export default function Home() {
         hidden={isResidencesActive}
         theme={isLightChapter ? 'light' : 'dark'}
       />
+
+      {/* Pinned Scroll-Scrubbed Opening Cinematic Experience */}
+      <Hero />
 
       {/* Chapter 01: The Ascent & Chapter 02: The Reserve (Seamless Pinned Scrollytelling) */}
       <HeroAscent
