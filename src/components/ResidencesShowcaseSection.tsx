@@ -17,6 +17,7 @@ interface ResidenceUnit {
   isSoldOut?: boolean;
   caption: string;
   primaryImage: string;
+  primaryTag: string;
   secondaryImage: string;
   secondaryTag: string;
   unitIdx: number;
@@ -35,8 +36,9 @@ const RESIDENCES: ResidenceUnit[] = [
     isSoldOut: true,
     caption: 'A single, efficient mountain room; the entry into the Reserve.',
     primaryImage: '/img/res-studio-lg.webp',
-    secondaryImage: '/img/int-suite-living-lg.webp',
-    secondaryTag: 'SUITE LIVING',
+    primaryTag: 'STUDIO · FOREST SUITE',
+    secondaryImage: '/img/int-1bed-kitchen-lg.webp',
+    secondaryTag: 'SUITE KITCHEN',
     unitIdx: 0,
   },
   {
@@ -50,15 +52,16 @@ const RESIDENCES: ResidenceUnit[] = [
     priceOrStatus: 'From 3.9',
     isSoldOut: false,
     caption: 'The core of the building, and the most flexible to let.',
-    primaryImage: '/img/int-1bed-living-lg.webp',
-    secondaryImage: '/img/int-1bed-fireplace-lg.webp',
+    primaryImage: '/img/int-suite-living-lg.webp',
+    primaryTag: 'PINEWOOD · LIVING LOUNGE',
+    secondaryImage: '/img/int-fireplace-lg.webp',
     secondaryTag: 'FIREPLACE LOUNGE',
     unitIdx: 1,
   },
   {
     id: '2-bedroom',
     watermark: '03',
-    category: '03 / 05 · CEDAR RESIDENCES',
+    category: '03 / 05 · MURREE RIDGE',
     title: '2 Bedroom',
     subtitle: 'For the families who summer, and now winter, in the hills.',
     residencesCount: 27,
@@ -66,9 +69,10 @@ const RESIDENCES: ResidenceUnit[] = [
     priceOrStatus: 'From 7.1',
     isSoldOut: false,
     caption: 'Family scale residences with dual aspect on most floors.',
-    primaryImage: '/img/res-2bed-lg.webp',
-    secondaryImage: '/img/int-2bed-lg.webp',
-    secondaryTag: 'MASTER SUITE',
+    primaryImage: '/img/int-living-day-lg.webp',
+    primaryTag: 'MURREE · LIVING SUITE',
+    secondaryImage: '/img/int-master-bath-lg.webp',
+    secondaryTag: 'MASTER BATH & BED',
     unitIdx: 2,
   },
   {
@@ -83,8 +87,9 @@ const RESIDENCES: ResidenceUnit[] = [
     isSoldOut: false,
     caption: 'The deepest plates in the building.',
     primaryImage: '/img/res-3bed-lg.webp',
-    secondaryImage: '/img/int-3bed-lg.webp',
-    secondaryTag: 'CORNER BEDROOM',
+    primaryTag: 'SUMMIT · VALLEY LIVING',
+    secondaryImage: '/img/dining-terrace-lg.webp',
+    secondaryTag: 'ALPINE DINING',
     unitIdx: 3,
   },
   {
@@ -100,8 +105,9 @@ const RESIDENCES: ResidenceUnit[] = [
     caption:
       'Each carries its own heated terrace pool, held over the valley: the highest private residences in the Galiyat.',
     primaryImage: '/img/res-pent-lg.webp',
+    primaryTag: 'SKY · HEATED PLUNGE POOL',
     secondaryImage: '/img/res-pent-living-lg.webp',
-    secondaryTag: 'TERRACE SALON',
+    secondaryTag: 'PENTHOUSE SALON',
     unitIdx: 4,
   },
 ];
@@ -254,10 +260,10 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
   });
 
   // Primary horizontal translation driving upper residence cards (translates left)
-  const xHigh = useTransform(smoothProgress, [0, 1], ['0%', '-78%']);
+  const xHigh = useTransform(smoothProgress, [0, 1], ['0%', '-81%']);
 
   // Dynamic counter-parallel parallax translation for the 13-item filmstrip carousel
-  const xLow = useTransform(smoothProgress, [0, 1], ['0%', '-42%']);
+  const xLow = useTransform(smoothProgress, [0, 1], ['0%', '-45%']);
 
   // Dynamic active unit index tracking for bottom filmstrip highlight
   useMotionValueEvent(smoothProgress, 'change', (latest) => {
@@ -338,40 +344,148 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
               style={{ x: xHigh }}
               className="flex items-center pl-2 md:pl-4 will-change-transform"
             >
-              {/* --- PANEL 0: INTRO EDITORIAL PANEL --- */}
-              <div className="w-[44vw] min-w-[340px] md:w-[42vw] shrink-0 flex flex-col justify-center pr-8 lg:pr-14">
-                <div className="flex items-center space-x-2 font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-2">
-                  <span>06</span>
-                  <span>·</span>
-                  <span>THE RESIDENCES</span>
-                </div>
+              {/* --- PANEL 0: EXACT INTRO SHOWCASE CARD (DUAL-IMAGE ARCHITECTURAL COMPOSITION) --- */}
+              <div className="w-[90vw] sm:w-[86vw] md:w-[82vw] lg:w-[80vw] shrink-0 mr-12 md:mr-20 flex items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 w-full items-center">
+                  {/* Left Column: Eyebrow, Display Headline, Editorial Body, Category Filter */}
+                  <div className="lg:col-span-6 xl:col-span-6 flex flex-col justify-center">
+                    {/* Top Eyebrow */}
+                    <div className="flex items-center space-x-3 mb-6 sm:mb-8">
+                      <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] text-[#7A7468] uppercase font-light">
+                        06
+                      </span>
+                      <span className="w-8 sm:w-10 h-[1px] bg-[#7A7468]/40 inline-block" />
+                      <span className="font-mono text-[11px] sm:text-xs tracking-[0.25em] text-[#7A7468] uppercase font-light">
+                        THE RESIDENCES
+                      </span>
+                    </div>
 
-                <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1E2621] leading-[0.95] tracking-tight">
-                  From studios <br />
-                  <span className="italic text-[#8C7A6B]">to penthouses.</span>
-                </h2>
+                    {/* Headline Typography (Exact Two-Tone Styling matching image_f7943f.png) */}
+                    <h2 className="tracking-tight leading-[0.92]">
+                      <span className="font-serif font-normal text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] text-[#1E2621] block leading-[0.92]">
+                        From studios
+                      </span>
+                      <span className="font-serif italic font-light text-6xl sm:text-7xl md:text-8xl lg:text-[6.8rem] text-[#9B8E7D] tracking-normal leading-[0.92] mt-1 sm:mt-2 block">
+                        to penthouses.
+                      </span>
+                    </h2>
 
-                <p className="font-sans font-light text-xs sm:text-sm md:text-base text-[#1E2621]/80 leading-relaxed mt-4 sm:mt-5 max-w-sm">
-                  One hundred and thirty three residences across two towers. Every unit is sold:
-                  Elevate Holdings retains none for itself.
-                </p>
+                    {/* Left Editorial Body Copy */}
+                    <p className="font-sans font-light text-sm sm:text-base leading-relaxed text-[#555E57] max-w-md mt-6 sm:mt-8">
+                      One hundred and thirty three residences across two towers. Every unit is sold:
+                      Elevate Holdings retains none for itself.
+                    </p>
 
-                <div className="flex items-center space-x-2 font-mono text-[9px] sm:text-[10px] tracking-[0.25em] text-[#8C7A6B] uppercase mt-6 pt-3.5 border-t border-[#1E2621]/15">
-                  <span>STUDIO · 1 BEDROOM · 2 BEDROOM · 3 BEDROOM · PENTHOUSE</span>
-                  <ArrowRight className="w-3.5 h-3.5 inline-block ml-1" />
+                    {/* Bottom Category Filter Row */}
+                    <div className="font-mono text-[10px] sm:text-xs tracking-[0.22em] uppercase text-[#7A7468] font-medium flex items-center flex-wrap gap-2 sm:gap-2.5 mt-8 sm:mt-10">
+                      <button
+                        type="button"
+                        onClick={() => handleThumbnailClick(0.18)}
+                        className="hover:text-[#1E2621] transition-colors cursor-pointer"
+                      >
+                        STUDIO
+                      </button>
+                      <span className="text-[#7A7468]/60">·</span>
+                      <button
+                        type="button"
+                        onClick={() => handleThumbnailClick(0.35)}
+                        className="hover:text-[#1E2621] transition-colors cursor-pointer"
+                      >
+                        1 BEDROOM
+                      </button>
+                      <span className="text-[#7A7468]/60">·</span>
+                      <button
+                        type="button"
+                        onClick={() => handleThumbnailClick(0.52)}
+                        className="hover:text-[#1E2621] transition-colors cursor-pointer"
+                      >
+                        2 BEDROOM
+                      </button>
+                      <span className="text-[#7A7468]/60">·</span>
+                      <button
+                        type="button"
+                        onClick={() => handleThumbnailClick(0.69)}
+                        className="hover:text-[#1E2621] transition-colors cursor-pointer"
+                      >
+                        3 BEDROOM
+                      </button>
+                      <span className="text-[#7A7468]/60">·</span>
+                      <button
+                        type="button"
+                        onClick={() => handleThumbnailClick(0.86)}
+                        className="hover:text-[#1E2621] transition-colors cursor-pointer"
+                      >
+                        PENTHOUSE
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleThumbnailClick(0.18)}
+                        className="hover:text-[#1E2621] transition-colors cursor-pointer ml-1"
+                      >
+                        <ArrowRight className="w-3.5 h-3.5 inline-block" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right Column: Imagery Composition (Primary Card + Inset Floating Card) */}
+                  <div className="lg:col-span-6 xl:col-span-6 relative flex flex-col items-center lg:items-end justify-center pr-4 sm:pr-8 md:pr-10">
+                    <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[380px] sm:h-[440px] md:h-[500px] w-full max-w-[560px] lg:max-w-[620px] bg-[#EAE6DE]">
+                      {/* Primary Bedroom Suite Render with Mountain Balcony Window */}
+                      <img
+                        src="/img/int-penthouse-bedroom-lg.webp"
+                        alt="Serene Heights Luxury Suite Bedroom"
+                        className="w-full h-full object-cover"
+                        loading="eager"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (!target.src.includes('res-studio-lg.webp')) {
+                            target.src = '/img/res-studio-lg.webp';
+                          }
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+
+                      {/* "SOLD OUT" Badge pinned top-right inside primary image */}
+                      <div className="absolute top-5 right-5 px-3.5 py-1.5 rounded-full bg-[#EAE6DE]/90 text-[#1E2621] font-mono text-[9px] tracking-[0.22em] uppercase font-semibold backdrop-blur-md shadow-sm z-10">
+                        SOLD OUT
+                      </div>
+                    </div>
+
+                    {/* Inset Floating Thumbnail overlapping bottom-right */}
+                    <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 w-40 sm:w-48 md:w-56 h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden border-[3px] border-[#F4F1EA] shadow-2xl z-20 bg-[#EAE6DE]">
+                      <img
+                        src="/img/int-suite-living-lg.webp"
+                        alt="Serene Heights Living Lounge"
+                        className="w-full h-full object-cover"
+                        loading="eager"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (!target.src.includes('int-1bed-living-lg.webp')) {
+                            target.src = '/img/int-1bed-living-lg.webp';
+                          }
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
+                      <div className="absolute bottom-3 left-3 right-3 pointer-events-none">
+                        <span className="font-mono text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-[#efe9df] font-medium drop-shadow-sm truncate block">
+                          SUITE LIVING
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              {/* --- PANELS 1–5: THE 5 RESIDENCES (DUAL-IMAGE ARCHITECTURAL LAYOUT) --- */}
+              {/* --- PANELS 1–5: THE 5 RESIDENCES (PRIMARY HERO + INSET FLOATING THUMBNAIL) --- */}
               {RESIDENCES.map((res) => {
                 return (
                   <div
                     key={res.id}
                     className="w-[90vw] sm:w-[86vw] md:w-[82vw] lg:w-[80vw] shrink-0 mr-12 md:mr-20 flex items-center"
                   >
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 xl:gap-12 w-full items-center lg:items-stretch">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 xl:gap-16 w-full items-center">
                       {/* Left Column: Editorial Copy, Watermark, Specs, CTAs */}
-                      <div className="lg:col-span-5 relative flex flex-col justify-between py-1 md:py-2">
+                      <div className="lg:col-span-6 xl:col-span-6 relative flex flex-col justify-center py-1 md:py-2">
                         {/* Giant Watermark Numeral Floating in Background */}
                         <span
                           className="absolute right-0 -top-6 md:-top-10 font-serif text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light text-transparent select-none pointer-events-none leading-none z-0"
@@ -382,24 +496,24 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                           {res.watermark}
                         </span>
 
-                        <div className="relative z-10 flex flex-col justify-between h-full">
+                        <div className="relative z-10 flex flex-col justify-center">
                           {/* Top: Category Eyebrow, Main Title & Subtitle */}
                           <div>
-                            <div className="font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#8C7A6B] uppercase mb-1.5 md:mb-2">
+                            <div className="font-mono text-[10px] sm:text-xs tracking-[0.3em] font-semibold text-[#9B8E7D] uppercase mb-1.5 md:mb-2">
                               {res.category}
                             </div>
 
-                            <h3 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-[#1E2621] tracking-tight leading-[1.05]">
+                            <h3 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-[#1E2621] tracking-tight leading-[1.02]">
                               {res.title}
                             </h3>
 
-                            <p className="font-serif italic text-sm sm:text-base md:text-lg text-[#1E2621]/75 font-light mt-1.5 mb-2">
+                            <p className="font-serif italic text-base sm:text-lg md:text-xl text-[#9B8E7D] font-light mt-1.5 mb-2">
                               {res.subtitle}
                             </p>
                           </div>
 
-                          {/* Middle: Specifications Grid & Footnote */}
-                          <div className="my-auto py-3 md:py-4">
+                          {/* Middle: Specifications Grid & Body Paragraph */}
+                          <div className="py-2 md:py-3">
                             <div className="grid grid-cols-3 gap-3 sm:gap-4 py-3 sm:py-4 md:py-5 border-y border-[#1E2621]/15">
                               <div>
                                 <span className="block font-mono text-[9px] sm:text-[10px] tracking-wider text-[#1E2621]/60 uppercase mb-1">
@@ -428,15 +542,15 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                                     Sold out
                                   </span>
                                 ) : (
-                                  <span className="font-mono text-xs sm:text-sm md:text-base text-[#8C7A6B] font-semibold block tabular-nums lining-nums leading-tight">
+                                  <span className="font-mono text-xs sm:text-sm md:text-base text-[#1E2621] font-semibold block tabular-nums lining-nums leading-tight">
                                     {res.priceOrStatus}
                                   </span>
                                 )}
                               </div>
                             </div>
 
-                            {/* Editorial Footnote */}
-                            <p className="font-sans font-light text-xs sm:text-sm md:text-base text-[#1E2621]/80 leading-relaxed mt-3.5 md:mt-4 max-w-sm lg:max-w-md">
+                            {/* Brief Architectural Summary */}
+                            <p className="font-sans font-light text-xs sm:text-sm md:text-base text-[#555E57] leading-relaxed mt-3.5 md:mt-4 max-w-sm lg:max-w-md">
                               {res.caption}
                             </p>
                           </div>
@@ -447,7 +561,7 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                               <button
                                 onClick={() => setModalResName(res.title)}
                                 type="button"
-                                className="bg-[#1E2621] text-[#F4F1EA] px-5 sm:px-6 py-2.5 sm:py-3 rounded-full text-xs font-mono tracking-wider hover:bg-black transition-colors flex items-center space-x-2 shadow-md cursor-pointer active:scale-95"
+                                className="bg-[#1E2621] text-[#EAE6DE] px-6 py-3 rounded-full text-xs font-mono tracking-wider hover:bg-black transition-colors flex items-center space-x-2 shadow-md cursor-pointer active:scale-95"
                               >
                                 <span>REQUEST THE FLOOR PLATE</span>
                                 <ArrowRight className="w-3.5 h-3.5" />
@@ -459,52 +573,57 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                               type="button"
                               className="font-mono text-xs tracking-wider text-[#1E2621] flex items-center gap-2 hover:opacity-70 transition-opacity cursor-pointer py-1.5 px-1"
                             >
-                              <Compass className="w-4 h-4 text-[#8C7A6B]" />
+                              <Compass className="w-4 h-4 text-[#9B8E7D]" />
                               <span>EXPLORE IN 3D</span>
                             </button>
                           </div>
                         </div>
                       </div>
 
-                      {/* Right Column: Dual Architectural Image Showcase (60% / 40% Split) */}
-                      <div className="lg:col-span-7 relative flex flex-col justify-center">
-                        <div className="grid grid-cols-12 gap-3 sm:gap-4 md:gap-5 w-full h-[380px] sm:h-[440px] md:h-[500px] lg:h-[540px] max-h-[58vh]">
-                          {/* Primary Hero Render (60% / col-span-7) */}
-                          <div className="col-span-7 relative h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E3DDD2] group">
-                            <img
-                              src={res.primaryImage}
-                              alt={`${res.title} Primary View`}
-                              className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
-                              loading="lazy"
-                              onError={handleImageError}
-                            />
-                            <div className="bg-gradient-to-t from-black/40 via-transparent to-transparent absolute inset-0 pointer-events-none opacity-60" />
+                      {/* Right Column: Dominant Primary Hero Image + Inset Floating Thumbnail */}
+                      <div className="lg:col-span-6 xl:col-span-6 relative flex flex-col items-center lg:items-end justify-center pr-4 sm:pr-8 md:pr-10">
+                        {/* Primary Hero Image (Dominant Window) */}
+                        <div className="relative rounded-2xl overflow-hidden shadow-2xl h-[380px] sm:h-[440px] md:h-[500px] w-full max-w-[560px] lg:max-w-[620px] bg-[#EAE6DE]">
+                          <img
+                            src={res.primaryImage}
+                            alt={`${res.title} Primary View`}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+                            loading="lazy"
+                            onError={handleImageError}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
-                            {/* Sold Out Badge if applicable */}
-                            {res.isSoldOut && (
-                              <div className="absolute top-3.5 right-3.5 bg-[#F4F1EA]/95 border border-[#8C7A6B]/30 text-[#1E2621] font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase px-3 py-1.5 rounded-full shadow-sm z-10 font-semibold">
-                                SOLD OUT
-                              </div>
-                            )}
-                          </div>
-
-                          {/* Secondary Detail Render (40% / col-span-5) */}
-                          <div className="col-span-5 relative h-full rounded-2xl md:rounded-3xl overflow-hidden shadow-xl border border-[#E3DDD2] group">
-                            <img
-                              src={res.secondaryImage}
-                              alt={`${res.title} Detail View`}
-                              className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-105"
-                              loading="lazy"
-                              onError={handleImageError}
-                            />
-                            <div className="bg-gradient-to-t from-black/60 via-transparent to-transparent absolute inset-0 pointer-events-none" />
-
-                            {/* Detail Micro Badge */}
-                            <div className="absolute bottom-3 left-3.5 right-3.5 pointer-events-none z-10">
-                              <span className="font-mono text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-[#efe9df]/90 font-medium truncate block drop-shadow-sm">
-                                {res.secondaryTag}
-                              </span>
+                          {/* "SOLD OUT" Badge pinned top-right if applicable */}
+                          {res.isSoldOut && (
+                            <div className="absolute top-5 right-5 px-3.5 py-1.5 rounded-full bg-[#EAE6DE]/90 text-[#1E2621] font-mono text-[9px] tracking-[0.22em] uppercase font-semibold backdrop-blur-md shadow-sm z-10">
+                              SOLD OUT
                             </div>
+                          )}
+
+                          {/* Subtle bottom-left room tag badge */}
+                          <div className="absolute bottom-4 left-4 z-10 pointer-events-none">
+                            <span className="font-mono text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-[#efe9df] font-medium drop-shadow-sm px-2.5 py-1 rounded bg-black/40 backdrop-blur-sm">
+                              {res.primaryTag}
+                            </span>
+                          </div>
+                        </div>
+
+                        {/* Inset Floating Secondary Thumbnail */}
+                        <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 w-40 sm:w-48 md:w-56 h-48 sm:h-56 md:h-64 rounded-xl overflow-hidden border-[3px] border-[#F4F1EA] shadow-2xl z-20 bg-[#EAE6DE]">
+                          <img
+                            src={res.secondaryImage}
+                            alt={`${res.title} Detail View`}
+                            className="w-full h-full object-cover transition-transform duration-700 ease-out hover:scale-105"
+                            loading="lazy"
+                            onError={handleImageError}
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+
+                          {/* Tag Badge anchored to bottom */}
+                          <div className="absolute bottom-3 left-3 right-3 pointer-events-none z-10">
+                            <span className="font-mono text-[8px] sm:text-[9px] tracking-[0.2em] uppercase text-[#efe9df] font-medium truncate block drop-shadow-sm">
+                              {res.secondaryTag}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -515,13 +634,13 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
 
               {/* --- PANEL 6: OUTRO PANEL --- */}
               <div className="w-[34vw] min-w-[280px] shrink-0 flex flex-col justify-center items-center text-center pr-12 group">
-                <span className="font-mono text-xs tracking-[0.3em] text-[#8C7A6B] uppercase mb-3">
+                <span className="font-mono text-xs tracking-[0.3em] text-[#9B8E7D] uppercase mb-3">
                   THE MIX
                 </span>
                 <button
                   onClick={() => setModalResName('The Complete Collection')}
                   type="button"
-                  className="font-serif italic text-3xl sm:text-4xl md:text-5xl font-light text-[#1E2621] hover:text-[#8C7A6B] transition-colors flex items-center space-x-3 cursor-pointer"
+                  className="font-serif italic text-3xl sm:text-4xl md:text-5xl font-light text-[#1E2621] hover:text-[#9B8E7D] transition-colors flex items-center space-x-3 cursor-pointer"
                 >
                   <span>The full mix</span>
                   <ArrowRight className="w-6 h-6 transform group-hover:translate-x-2 transition-transform" />
@@ -533,21 +652,36 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
             </motion.div>
           </div>
 
-          {/* ================= BOTTOM INTERACTIVE FILMSTRIP CAROUSEL (SLEEK & COMPACT) ================= */}
-          <div className="flex items-center justify-between w-full pb-4 md:pb-6 px-8 md:px-14 z-20 shrink-0 bg-transparent">
-            {/* Bottom-Left: Chapter index */}
-            <div className="flex items-center shrink-0">
-              <span className="font-mono text-xs md:text-sm tracking-[0.25em] text-[#1E2621] uppercase font-semibold">
-                06 / 12
-              </span>
-              <span className="w-8 md:w-12 h-[1px] bg-[#1E2621]/30 ml-3 inline-block" />
+          {/* ================= BOTTOM INTERACTIVE FILMSTRIP CAROUSEL (ZERO WHITE GAP) ================= */}
+          <div className="w-full z-20 shrink-0 pb-4 md:pb-6 bg-transparent">
+            {/* Indicator Row: 06 / 12 on left, Sound on right */}
+            <div className="w-full flex items-center justify-between px-6 md:px-12 mb-2 sm:mb-2.5">
+              <div className="flex items-center space-x-3">
+                <span className="font-mono text-xs md:text-sm tracking-[0.25em] text-[#1E2621] uppercase font-semibold">
+                  06 / 12
+                </span>
+                <span className="w-8 md:w-12 h-[1px] bg-[#1E2621]/30 inline-block" />
+              </div>
+
+              <div>
+                <button
+                  onClick={() => setIsSoundOn((prev) => !prev)}
+                  type="button"
+                  className="flex items-center space-x-2 font-mono text-[10px] md:text-xs tracking-[0.25em] text-[#1E2621]/70 hover:text-[#1E2621] uppercase transition-colors cursor-pointer"
+                >
+                  <span className="font-mono tracking-widest text-[#9B8E7D]">
+                    {isSoundOn ? '||||' : '....'}
+                  </span>
+                  <span>{isSoundOn ? 'SOUND ON' : 'SOUND OFF'}</span>
+                </button>
+              </div>
             </div>
 
-            {/* Bottom-Center: Sleek Compact Filmstrip Row */}
-            <div className="relative overflow-hidden py-1 max-w-full lg:max-w-[75vw] xl:max-w-[78vw]">
+            {/* Continuous Edge-to-Edge Filmstrip Track */}
+            <div className="w-full overflow-hidden">
               <motion.div
                 style={{ x: xLow }}
-                className="flex items-center space-x-2.5 sm:space-x-3 will-change-transform"
+                className="w-max flex items-center flex-nowrap gap-3 md:gap-4 px-6 md:px-12 will-change-transform"
               >
                 {FILMSTRIP_ITEMS.map((item) => {
                   const isActive = activeUnitIdx === item.unitIdx;
@@ -556,9 +690,9 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                       key={item.id}
                       onClick={() => handleThumbnailClick(item.targetRatio)}
                       type="button"
-                      className={`group w-44 sm:w-52 md:w-60 h-[90px] md:h-[105px] flex-shrink-0 relative overflow-hidden rounded-xl border transition-all duration-300 cursor-pointer shadow-md ${
+                      className={`group w-44 sm:w-52 md:w-60 h-[88px] md:h-[102px] flex-shrink-0 relative overflow-hidden rounded-xl border transition-all duration-300 cursor-pointer shadow-md ${
                         isActive
-                          ? 'ring-2 ring-[#8C7A6B] border-transparent scale-[1.02] shadow-xl'
+                          ? 'ring-2 ring-[#9B8E7D] border-transparent scale-[1.02] shadow-xl'
                           : 'border-[#1E2621]/10 opacity-85 hover:opacity-100 hover:scale-[1.01]'
                       }`}
                     >
@@ -584,20 +718,6 @@ export const ResidencesShowcaseSection: React.FC<ResidencesShowcaseSectionProps>
                   );
                 })}
               </motion.div>
-            </div>
-
-            {/* Bottom-Right: Interactive Sound Button */}
-            <div className="flex items-center ml-auto sm:ml-0 shrink-0">
-              <button
-                onClick={() => setIsSoundOn((prev) => !prev)}
-                type="button"
-                className="flex items-center space-x-2 font-mono text-[10px] md:text-xs tracking-[0.25em] text-[#1E2621]/70 hover:text-[#1E2621] uppercase transition-colors cursor-pointer"
-              >
-                <span className="font-mono tracking-widest text-[#8C7A6B]">
-                  {isSoundOn ? '||||' : '....'}
-                </span>
-                <span>{isSoundOn ? 'SOUND ON' : 'SOUND OFF'}</span>
-              </button>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { MenuDrawer } from './MenuDrawer';
 import { Menu } from 'lucide-react';
 
@@ -21,10 +21,15 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [inResidencesDom, setInResidencesDom] = useState(false);
+  const [isScrollVisible, setIsScrollVisible] = useState(true);
+  const lastScrollY = useRef(0);
   const isLight = theme === 'light';
 
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      // 1. Maintain Chapter 06 Residences Dom exclusion
       const resEl = document.getElementById('residences');
       if (resEl) {
         const rect = resEl.getBoundingClientRect();
@@ -32,13 +37,34 @@ export const Header: React.FC<HeaderProps> = ({
         const inRes = rect.top <= 100 && rect.bottom >= 100;
         setInResidencesDom(inRes);
       }
+
+      // 2. Smart Auto-Hiding scroll direction detection
+      // Always show at the top of the page
+      if (currentScrollY < 60) {
+        setIsScrollVisible(true);
+      } else if (
+        currentScrollY > lastScrollY.current &&
+        currentScrollY - lastScrollY.current > 10
+      ) {
+        // Scrolling down -> smoothly slide up and hide navbar
+        setIsScrollVisible(false);
+      } else if (
+        currentScrollY < lastScrollY.current &&
+        lastScrollY.current - currentScrollY > 10
+      ) {
+        // Scrolling up -> smoothly slide down and reveal navbar
+        setIsScrollVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const shouldShow = isVisible && !hidden && !inResidencesDom;
+  const shouldShow = isVisible && !hidden && !inResidencesDom && (isScrollVisible || isMenuOpen);
 
   return (
     <>
@@ -47,23 +73,18 @@ export const Header: React.FC<HeaderProps> = ({
           opacity: 0 !important;
           transform: translateY(-100%) !important;
           pointer-events: none !important;
-          transition: opacity 0.4s ease, transform 0.4s ease !important;
+          transition: opacity 0.35s ease, transform 0.35s ease !important;
         }
       `}</style>
       <header
-        style={
-          !shouldShow
-            ? {
-                opacity: 0,
-                transform: 'translateY(-100%)',
-                pointerEvents: 'none',
-                transition: 'opacity 0.4s ease, transform 0.4s ease',
-              }
-            : {
-                transition: 'opacity 0.4s ease, transform 0.4s ease',
-              }
-        }
-        className={`fixed top-0 left-0 right-0 z-40 w-full bg-transparent px-8 md:px-16 pt-8 pb-4 transition-all duration-500 ease-in-out ${
+        style={{
+          transform: shouldShow ? 'translateY(0)' : 'translateY(-100%)',
+          opacity: shouldShow ? 1 : 0,
+          pointerEvents: shouldShow ? 'auto' : 'none',
+          transition:
+            'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+        className={`fixed top-0 left-0 right-0 z-40 w-full bg-transparent px-8 md:px-16 pt-8 pb-4 ${
           shouldShow
             ? 'opacity-100 pointer-events-auto translate-y-0'
             : 'opacity-0 pointer-events-none -translate-y-full'

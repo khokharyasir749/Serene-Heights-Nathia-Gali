@@ -11,8 +11,8 @@ import { LocationMapSection } from '@/components/LocationMapSection';
 import { OneDaySection } from '@/components/OneDaySection';
 import { ResidencesShowcaseSection } from '@/components/ResidencesShowcaseSection';
 import { EstateAmenities } from '@/components/EstateAmenities';
-import { GalleryShowcase } from '@/components/GalleryShowcase';
-import { FourSeasonsSnow } from '@/components/FourSeasonsSnow';
+import { FirstLookGallery } from '@/components/FirstLookGallery';
+import { FourSeasonsWinter } from '@/components/FourSeasonsWinter';
 import { CommercialOwnership } from '@/components/CommercialOwnership';
 import { ReturnsCalculator } from '@/components/ReturnsCalculator';
 import { ElevateDeveloper } from '@/components/ElevateDeveloper';
@@ -36,6 +36,7 @@ export default function Home() {
     activeChapterId === 'manifesto' ||
     activeChapterId === 'explorer' ||
     activeChapterId === 'residences' ||
+    activeChapterId === 'gallery' ||
     (activeChapterId === 'ascent' && headerTheme === 'light');
   const isHeaderVisible =
     !isManifestoInView && !isMeasureInView && !isLocationInView && !isResidencesActive;
@@ -176,10 +177,10 @@ export default function Home() {
       <EstateAmenities />
 
       {/* Chapter 08: First Look (Inside the Reserve Gallery & Lightbox) */}
-      <GalleryShowcase />
+      <FirstLookGallery />
 
       {/* Chapter 09: Four Seasons High (Winter operation & snow hold) */}
-      <FourSeasonsSnow />
+      <FourSeasonsWinter />
 
       {/* Chapter 10: A Commercial Asset (Ownership structure & approvals) */}
       <CommercialOwnership />
