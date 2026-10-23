@@ -75,9 +75,11 @@ export default function Hero() {
           ref={videoRef}
           playsInline
           muted
+          autoPlay
+          loop
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-          src="/Video/serene-heights-nathia-gali.mp4"
+          src="/Video/serene heights nathia gali project.mp4"
         />
 
         {/* Contrast Overlays */}

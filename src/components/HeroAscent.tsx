@@ -272,8 +272,10 @@ export default function HeroAscent({
               playsInline
               muted={isMuted}
               preload="auto"
+              autoPlay
+              loop
               className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-              src="/Video/serene-heights-scrub-fast.mp4"
+              src="/Video/serene heights nathia gali project.mp4"
             />
           </motion.div>
         </div>
