@@ -15,7 +15,9 @@ export default function HeroAscent({
   onThemeChange,
 }: HeroAscentProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const currentFrameRef = useRef<number>(1);
   const counterRef = useRef<HTMLSpanElement>(null);
   const [isMuted, setIsMuted] = useState(true);
 
@@ -54,102 +56,121 @@ export default function HeroAscent({
     restDelta: 0.0005,
   });
 
+  const TOTAL_FRAMES = 300;
+
+  const getFramePath = (index: number) =>
+    `/pictures/home/frames/frame_${String(index).padStart(4, "0")}.jpg`;
+
+  const drawFrame = (img: HTMLImageElement) => {
+    const canvas = canvasRef.current;
+    if (!canvas || !img || !img.complete || img.naturalWidth === 0) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    const cw = canvas.width;
+    const ch = canvas.height;
+    const iw = img.naturalWidth;
+    const ih = img.naturalHeight;
+
+    const ratio = Math.max(cw / iw, ch / ih);
+    const x = (cw - iw * ratio) / 2;
+    const y = (ch - ih * ratio) / 2;
+
+    ctx.clearRect(0, 0, cw, ch);
+    ctx.drawImage(img, 0, 0, iw, ih, x, y, iw * ratio, ih * ratio);
+  };
+
+  const renderFrame = (index: number) => {
+    const frameIndex = Math.min(TOTAL_FRAMES, Math.max(1, index));
+    currentFrameRef.current = frameIndex;
+
+    const images = imagesRef.current;
+    const targetImg = images[frameIndex];
+    if (targetImg && targetImg.complete && targetImg.naturalWidth > 0) {
+      drawFrame(targetImg);
+      return;
+    }
+
+    // Nearest fallback frame to avoid any black frame or flicker
+    for (let offset = 1; offset < 40; offset++) {
+      const prev = images[frameIndex - offset];
+      if (prev && prev.complete && prev.naturalWidth > 0) {
+        drawFrame(prev);
+        return;
+      }
+      const next = images[frameIndex + offset];
+      if (next && next.complete && next.naturalWidth > 0) {
+        drawFrame(next);
+        return;
+      }
+    }
+  };
+
+  // Preload frames progressively
   useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
+    const images: HTMLImageElement[] = [];
+    imagesRef.current = images;
 
-    video.pause();
-    video.currentTime = 0;
-
-    let isSeeking = false;
-    let queuedTargetTime: number | null = null;
-    let seekSafetyTimer: ReturnType<typeof setTimeout> | null = null;
-
-    const clearSafetyTimer = () => {
-      if (seekSafetyTimer) {
-        clearTimeout(seekSafetyTimer);
-        seekSafetyTimer = null;
+    // 1. Immediately load frame 1 for instant paint
+    const firstImg = new Image();
+    firstImg.src = getFramePath(1);
+    firstImg.onload = () => {
+      if (currentFrameRef.current === 1) {
+        drawFrame(firstImg);
       }
     };
+    images[1] = firstImg;
 
-    const performSeek = (targetTime: number) => {
-      if (!video || isNaN(video.duration) || video.duration === 0) return;
-
-      const clamped = Math.min(
-        Math.max(targetTime, 0.01),
-        video.duration - 0.05
-      );
-
-      // Do not call video.currentTime if the delta between target and current time is less than 0.03s
-      if (Math.abs(clamped - video.currentTime) < 0.03) {
-        return;
-      }
-
-      // If already seeking, queue latest target time and wait for native seeked event
-      if (isSeeking || video.seeking) {
-        queuedTargetTime = clamped;
-        return;
-      }
-
-      // Strictly gate video.currentTime by native seeked event
-      isSeeking = true;
-      try {
-        video.currentTime = clamped;
-        clearSafetyTimer();
-        seekSafetyTimer = setTimeout(() => {
-          if (isSeeking && !video.seeking) {
-            isSeeking = false;
-          }
-        }, 300);
-      } catch {
-        isSeeking = false;
-      }
-    };
-
-    const onSeeked = () => {
-      clearSafetyTimer();
-      isSeeking = false;
-
-      if (queuedTargetTime !== null) {
-        const nextTarget = queuedTargetTime;
-        queuedTargetTime = null;
-
-        // Verify delta condition again before seeking queued time
-        if (Math.abs(nextTarget - video.currentTime) >= 0.03) {
-          isSeeking = true;
-          try {
-            video.currentTime = nextTarget;
-            clearSafetyTimer();
-            seekSafetyTimer = setTimeout(() => {
-              if (isSeeking && !video.seeking) {
-                isSeeking = false;
-              }
-            }, 300);
-          } catch {
-            isSeeking = false;
-          }
+    // 2. High-speed pass: every 5th frame
+    for (let i = 5; i <= TOTAL_FRAMES; i += 5) {
+      const img = new Image();
+      img.src = getFramePath(i);
+      img.onload = () => {
+        if (currentFrameRef.current === i) {
+          drawFrame(img);
         }
-      }
-    };
+      };
+      images[i] = img;
+    }
 
-    const onLoaded = () => {
-      if (video && video.duration && !isNaN(video.duration)) {
-        const initialProgress = Math.min(1, smoothProgress.get() / 0.58);
-        performSeek(initialProgress * video.duration);
-      }
-    };
+    // 3. Complete pass: load all intermediate frames
+    for (let i = 2; i <= TOTAL_FRAMES; i++) {
+      if (images[i]) continue;
+      const img = new Image();
+      img.src = getFramePath(i);
+      img.onload = () => {
+        if (currentFrameRef.current === i) {
+          drawFrame(img);
+        }
+      };
+      images[i] = img;
+    }
+  }, []);
 
-    video.addEventListener("seeked", onSeeked);
-    video.addEventListener("loadedmetadata", onLoaded);
-    video.addEventListener("canplay", onLoaded);
+  // Update canvas resolution and repaint current frame on window resize
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    canvas.width = 1920;
+    canvas.height = 1080;
 
+    const currentImg =
+      imagesRef.current[currentFrameRef.current] || imagesRef.current[1];
+    if (currentImg && currentImg.complete) {
+      drawFrame(currentImg);
+    }
+  }, [windowSize]);
+
+  // Scroll sync: scrub frames & update altitude counter
+  useEffect(() => {
     const unsubscribe = smoothProgress.on("change", (latest) => {
-      // 1. Scrub video timeline cleanly up to building peak (~58% of scroll)
-      if (video && video.duration && !isNaN(video.duration)) {
-        const videoProgress = Math.min(1, latest / 0.58);
-        const target = videoProgress * video.duration;
-        performSeek(target);
-      }
+      // 1. Scrub 300 frames cleanly up to building peak (~58% of scroll)
+      const scrubProgress = Math.min(1, Math.max(0, latest / 0.58));
+      const targetFrame = Math.min(
+        TOTAL_FRAMES,
+        Math.max(1, Math.round(scrubProgress * (TOTAL_FRAMES - 1)) + 1)
+      );
+      renderFrame(targetFrame);
 
       // 2. Direct DOM update for formatted counter (0,000 to 7,906 FT) during Phase 1
       const progressToPeak = Math.min(1, Math.max(0, latest / 0.45));
@@ -174,22 +195,12 @@ export default function HeroAscent({
     });
 
     return () => {
-      clearSafetyTimer();
-      video.removeEventListener("seeked", onSeeked);
-      video.removeEventListener("loadedmetadata", onLoaded);
-      video.removeEventListener("canplay", onLoaded);
       unsubscribe();
     };
   }, [smoothProgress, onThemeChange, onAscentRevealChange]);
 
   const toggleSound = () => {
-    setIsMuted((prev) => {
-      const next = !prev;
-      if (videoRef.current) {
-        videoRef.current.muted = next;
-      }
-      return next;
-    });
+    setIsMuted((prev) => !prev);
   };
 
   // =========================================================================
@@ -266,16 +277,12 @@ export default function HeroAscent({
             }}
             className="relative overflow-hidden shrink-0 bg-[#161B18]"
           >
-            {/* The Video element itself remains in the DOM and holds its final frame */}
-            <video
-              ref={videoRef}
-              playsInline
-              muted={isMuted}
-              preload="auto"
-              autoPlay
-              loop
+            {/* 300-Frame Scroll-Scrubbed Canvas */}
+            <canvas
+              ref={canvasRef}
+              width={1920}
+              height={1080}
               className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
-              src="/Video/serene heights nathia gali project.mp4"
             />
           </motion.div>
         </div>
