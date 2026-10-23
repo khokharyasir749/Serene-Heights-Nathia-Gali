@@ -185,29 +185,29 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
                 opacity: sideDetailsOpacity,
                 x: sideLeftX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#EFECE6]/60 backdrop-blur-sm border border-[#1C1917]/10 rounded-sm p-6 lg:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1C1D1A]/90 backdrop-blur-md border border-[#C5A880]/25 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.18)]"
             >
               {/* Eyebrow */}
-              <span className="text-[10px] tracking-[0.28em] uppercase text-[#8C7E6A] font-medium block mb-2">
+              <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
                 01 / REGIONAL MASTERPIECE
               </span>
 
               {/* Title */}
-              <h3 className="font-serif text-2xl lg:text-3xl text-[#1C1917] tracking-tight mb-3 font-normal leading-tight">
+              <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
                 Premier Winter Resort
               </h3>
 
               {/* Description */}
-              <p className="font-sans text-xs lg:text-[13px] text-[#5A554E] leading-relaxed mb-5 font-light">
+              <p className="font-sans text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed mb-5 font-light">
                 Designed for year-round mountain alpine living, featuring Pakistan&apos;s premier dedicated ski slopes, winter sports access, and panoramic Himalayan pine ridges.
               </p>
 
               {/* Footer Metric */}
-              <div className="border-t border-[#1C1917]/10 pt-3 flex items-center justify-between mt-auto">
-                <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#8C7E6A] font-medium">
+              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/20 pt-3 mt-auto">
+                <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
                   MASTERPLAN
                 </span>
-                <span className="font-mono text-xs text-[#1C1917] font-semibold tracking-wider">
+                <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
                   30+ Kanals · 3 Towers
                 </span>
               </div>
@@ -227,40 +227,40 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
                 opacity: sideDetailsOpacity,
                 x: sideRightX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#EFECE6]/60 backdrop-blur-sm border border-[#1C1917]/10 rounded-sm p-6 lg:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
+              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1C1D1A]/90 backdrop-blur-md border border-[#C5A880]/25 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.18)]"
             >
               {/* Eyebrow */}
-              <span className="text-[10px] tracking-[0.28em] uppercase text-[#8C7E6A] font-medium block mb-2">
+              <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
                 02 / ALPINE AMENITIES
               </span>
 
               {/* Title */}
-              <h3 className="font-serif text-2xl lg:text-3xl text-[#1C1917] tracking-tight mb-3 font-normal leading-tight">
+              <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
                 Four-Season Comforts
               </h3>
 
               {/* Amenity List */}
               <div className="mb-5 flex flex-col">
-                <div className="text-xs lg:text-[13px] text-[#5A554E] py-1.5 border-b border-[#1C1917]/5 flex items-center gap-2.5 font-light">
-                  <span className="text-[#8C7E6A] font-mono text-[11px] font-medium shrink-0">01</span>
+                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 font-light">
+                  <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">01</span>
                   <span>Italian Central Heating &amp; Underfloor Warmth</span>
                 </div>
-                <div className="text-xs lg:text-[13px] text-[#5A554E] py-1.5 border-b border-[#1C1917]/5 flex items-center gap-2.5 font-light">
-                  <span className="text-[#8C7E6A] font-mono text-[11px] font-medium shrink-0">02</span>
+                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 font-light">
+                  <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">02</span>
                   <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
                 </div>
-                <div className="text-xs lg:text-[13px] text-[#5A554E] py-1.5 border-b border-[#1C1917]/5 flex items-center gap-2.5 font-light">
-                  <span className="text-[#8C7E6A] font-mono text-[11px] font-medium shrink-0">03</span>
+                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 font-light">
+                  <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">03</span>
                   <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
                 </div>
               </div>
 
               {/* Footer Altitude Metric */}
-              <div className="border-t border-[#1C1917]/10 pt-3 flex items-center justify-between mt-auto">
-                <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#8C7E6A] font-medium">
+              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/20 pt-3 mt-auto">
+                <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
                   PEAK ELEVATION
                 </span>
-                <span className="font-mono text-xs text-[#1C1917] font-semibold tracking-wider">
+                <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
                   7,906 FT
                 </span>
               </div>
