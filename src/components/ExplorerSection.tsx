@@ -128,9 +128,9 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
               className="w-full h-full relative overflow-hidden will-change-transform"
             >
               <img
-                src="/pictures/home/largestResort.png"
+                src="/pictures/home/Snowy Mountain Resort Among Pines.png"
                 alt="Serene Heights Nathia Gali 3D Architectural View"
-                className="w-full h-full object-cover object-center pointer-events-none select-none"
+                className="w-full h-full object-cover rounded-md pointer-events-none select-none"
                 loading="eager"
               />
             </motion.div>
@@ -185,7 +185,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
                 opacity: sideDetailsOpacity,
                 x: sideLeftX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1C1D1A]/90 backdrop-blur-md border border-[#C5A880]/25 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.18)]"
+              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)]"
             >
               {/* Eyebrow */}
               <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
@@ -203,7 +203,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
               </p>
 
               {/* Footer Metric */}
-              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/20 pt-3 mt-auto">
+              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full mt-auto">
                 <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
                   MASTERPLAN
                 </span>
@@ -227,7 +227,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
                 opacity: sideDetailsOpacity,
                 x: sideRightX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1C1D1A]/90 backdrop-blur-md border border-[#C5A880]/25 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.18)]"
+              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)]"
             >
               {/* Eyebrow */}
               <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
@@ -241,22 +241,22 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
 
               {/* Amenity List */}
               <div className="mb-5 flex flex-col">
-                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 font-light">
+                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
                   <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">01</span>
                   <span>Italian Central Heating &amp; Underfloor Warmth</span>
                 </div>
-                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 font-light">
+                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
                   <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">02</span>
                   <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
                 </div>
-                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 font-light">
+                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
                   <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">03</span>
                   <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
                 </div>
               </div>
 
               {/* Footer Altitude Metric */}
-              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/20 pt-3 mt-auto">
+              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full mt-auto">
                 <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
                   PEAK ELEVATION
                 </span>

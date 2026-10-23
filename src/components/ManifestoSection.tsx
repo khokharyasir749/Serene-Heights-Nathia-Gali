@@ -50,7 +50,7 @@ export const ManifestoSection: React.FC = () => {
             className="w-full h-full relative overflow-hidden will-change-transform"
           >
             <img
-              src="/pictures/home/largestResort.png"
+              src="/pictures/home/Snowy Mountain Resort Among Pines.png"
               alt="Serene Heights Nathia Gali 5-Star Mountain Resort Panoramic Exterior"
               className="w-full h-full object-cover object-center pointer-events-none select-none"
               loading="eager"
