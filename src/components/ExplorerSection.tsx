@@ -47,12 +47,12 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
   // Seamless Zero-Margin Fullscreen Expansion:
   // - [0.15 -> 0.65]: Smooth expansion from compact framed card to full edge-to-edge (100vw, 100vh, 0px)
   // - [0.65 -> 0.95]: HOLD/LOCK PHASE at 100vw, 100vh, 0px border-radius
-  const initialWidth = Math.min(560, windowSize.width * 0.92);
-  const initialHeight = windowSize.width >= 1024 ? 480 : 460;
+  const initialWidth = windowSize.width >= 1024 ? 460 : Math.min(420, windowSize.width * 0.92);
+  const initialHeight = windowSize.width >= 1024 ? 360 : 340;
 
   const cardWidth = useTransform(smoothProgress, [0.15, 0.65], [initialWidth, windowSize.width]);
   const cardHeight = useTransform(smoothProgress, [0.15, 0.65], [initialHeight, windowSize.height]);
-  const cardRadius = useTransform(smoothProgress, [0.15, 0.65], [12, 0]);
+  const cardRadius = useTransform(smoothProgress, [0.15, 0.65], [8, 0]);
 
   // Parallax subtle camera zoom on the building image inside
   const imageScale = useTransform(smoothProgress, [0.15, 0.65], [1.12, 1.0]);
@@ -85,7 +85,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
       className="relative w-full h-[280vh] bg-[#F5F2EB] text-[#1C1917] z-20"
     >
       {/* Sticky Fullscreen Stage: Warm parchment background with zero-margin expansion capability */}
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center relative bg-[#F5F2EB]">
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col items-center justify-center relative bg-[#F5F2EB]">
         
         {/* Top Typography & Reveal Animation */}
         <motion.div
@@ -93,21 +93,21 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
             y: headerY,
             opacity: headerOpacity,
           }}
-          className="absolute top-5 sm:top-6 md:top-8 lg:top-9 inset-x-0 mx-auto flex flex-col items-center text-center px-6 z-30 pointer-events-none will-change-transform max-w-4xl"
+          className="relative z-20 mb-6 text-center px-4 pointer-events-none will-change-transform max-w-3xl"
         >
           {/* Eyebrow Tag */}
-          <span className="font-mono text-xs tracking-[0.3em] text-[#8C7E6A] uppercase mb-1.5">
+          <span className="font-mono text-xs tracking-[0.3em] text-[#8C7E6A] uppercase mb-1.5 block">
             3D — 3D EXPLORER
           </span>
 
           {/* Main Editorial Headline */}
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1C1917] tracking-tight max-w-3xl mb-1.5 font-normal">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1C1917] tracking-tight max-w-3xl mb-1.5 font-normal leading-tight">
             Tour all three towers{' '}
             <span className="font-serif italic font-light text-[#8C7E6A]">in 360°.</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="font-sans text-xs sm:text-sm md:text-base text-[#1C1917]/70 font-light tracking-wide text-center max-w-xl">
+          <p className="font-sans text-xs sm:text-sm md:text-base text-[#1C1917]/70 font-light tracking-wide text-center max-w-xl mx-auto">
             Browse studios, apartments and penthouses, and view floor plans
           </p>
         </motion.div>
@@ -115,158 +115,146 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
         {/* =========================================================================
             ALIGNED 3-ITEM ROW: [LEFT CARD] - [CENTER IMAGE] - [RIGHT CARD]
         ========================================================================== */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none select-none px-4 sm:px-6">
-          <div className="flex flex-row items-center justify-center gap-6 lg:gap-8 w-full max-w-7xl mx-auto">
-            
-            {/* Left Side Card: 01 / Regional Masterpiece */}
-            <motion.div
-              style={{
-                opacity: sideDetailsOpacity,
-                x: sideLeftX,
-              }}
-              className="hidden lg:flex w-full max-w-[340px] lg:w-[340px] h-[460px] lg:h-[480px] flex-col justify-between shrink-0 pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)] relative z-10"
-            >
-              <div className="flex flex-col h-full justify-between">
-                {/* Top Content */}
-                <div>
-                  {/* Eyebrow */}
-                  <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
-                    01 / REGIONAL MASTERPIECE
-                  </span>
-
-                  {/* Title */}
-                  <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
-                    Premier Winter Resort
-                  </h3>
-
-                  {/* Description */}
-                  <p className="font-sans text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed mb-5 font-light">
-                    Designed for year-round mountain alpine living, featuring Pakistan&apos;s premier dedicated ski slopes, winter sports access, and panoramic Himalayan pine ridges.
-                  </p>
-                </div>
-
-                {/* Footer Metric */}
-                <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full">
-                  <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
-                    MASTERPLAN
-                  </span>
-                  <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
-                    30+ Kanals · 3 Towers
-                  </span>
-                </div>
+        <div className="flex flex-row items-stretch justify-center gap-4 lg:gap-6 w-full max-w-6xl mx-auto px-4 relative z-20">
+          
+          {/* Left Side Card: 01 / Regional Masterpiece */}
+          <motion.div
+            style={{
+              opacity: sideDetailsOpacity,
+              x: sideLeftX,
+            }}
+            className="hidden lg:flex w-[260px] lg:w-[280px] h-[340px] lg:h-[360px] shrink-0 p-5 flex-col justify-between pointer-events-auto bg-[#1C1D1A]/95 backdrop-blur-md border border-[#C5A880]/25 rounded-md shadow-xl relative z-10"
+          >
+            <div className="flex flex-col h-full justify-between">
+              {/* Top Content */}
+              <div>
+                <span className="text-[#C5A880] text-[9px] tracking-[0.25em] uppercase font-semibold mb-1 block">
+                  01 / REGIONAL MASTERPIECE
+                </span>
+                <h3 className="text-[#FDFBF7] font-serif text-lg lg:text-xl font-medium mb-2 leading-snug">
+                  Premier Winter Resort
+                </h3>
+                <p className="text-[#C7C3B8] text-[11px] leading-relaxed font-light">
+                  Designed for year-round mountain alpine living, featuring Pakistan&apos;s premier dedicated ski slopes, winter sports access, and panoramic Himalayan pine ridges.
+                </p>
               </div>
+
+              {/* Footer Metric */}
+              <div className="border-t border-[#C5A880]/20 pt-2 flex items-center justify-between text-[10px] font-mono text-[#8C867A] w-full">
+                <span className="tracking-[0.2em] uppercase">
+                  MASTERPLAN
+                </span>
+                <span className="text-[#FDFBF7] font-medium whitespace-nowrap">
+                  30+ Kanals · 3 Towers
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Center Expanding Image Frame: Smooth Zero-Margin Fullscreen Expansion */}
+          <motion.div
+            style={{
+              width: cardWidth,
+              height: cardHeight,
+              borderRadius: cardRadius,
+            }}
+            className="relative flex items-center justify-center overflow-hidden z-20 will-change-[width,height,border-radius] shadow-lg pointer-events-auto bg-[#1C1917] w-[420px] lg:w-[460px] h-[340px] lg:h-[360px] shrink-0 rounded-lg"
+          >
+            {/* High-Resolution Architectural Facade Render */}
+            <motion.div
+              style={{ scale: imageScale }}
+              className="w-full h-full relative overflow-hidden will-change-transform"
+            >
+              <img
+                src="/pictures/home/Snowy Mountain Resort Among Pines.png"
+                alt="Serene Heights Nathia Gali 3D Architectural View"
+                className="w-full h-full object-cover pointer-events-none select-none"
+                loading="eager"
+              />
             </motion.div>
 
-            {/* Center Expanding Image Frame: Smooth Zero-Margin Fullscreen Expansion */}
+            {/* Subtle dark bottom-up shadow overlay for extreme legibility of CTAs */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+            {/* Overlay CTA Elements (Revealed at Peak Fullscreen Progress) */}
             <motion.div
               style={{
-                width: cardWidth,
-                height: cardHeight,
-                borderRadius: cardRadius,
+                opacity: ctaOpacity,
+                scale: ctaScale,
+                y: ctaY,
               }}
-              className="relative flex items-center justify-center overflow-hidden z-20 will-change-[width,height,border-radius] shadow-2xl pointer-events-auto bg-[#1C1917] shrink-0 h-[460px] lg:h-[480px] rounded-xl"
+              className="absolute bottom-12 md:bottom-16 inset-x-0 flex flex-col items-center justify-center z-20 px-4 will-change-transform"
             >
-              {/* High-Resolution Architectural Facade Render */}
-              <motion.div
-                style={{ scale: imageScale }}
-                className="w-full h-full relative overflow-hidden will-change-transform"
+              {/* Sand/Champagne Pill CTA Button */}
+              <button
+                onClick={onOpenExplorer}
+                type="button"
+                className="group bg-[#d5c3a5] text-[#121614] hover:bg-[#e4d5be] px-8 py-4 rounded-full font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl inline-flex items-center gap-3 active:scale-95 cursor-pointer"
               >
-                <img
-                  src="/pictures/home/Snowy Mountain Resort Among Pines.png"
-                  alt="Serene Heights Nathia Gali 3D Architectural View"
-                  className="w-full h-full object-cover rounded-xl pointer-events-none select-none"
-                  loading="eager"
-                />
-              </motion.div>
+                <span>ENTER THE EXPLORER</span>
+                <span className="transition-transform duration-300 group-hover:translate-x-1 font-mono">
+                  →
+                </span>
+              </button>
 
-              {/* Subtle dark bottom-up shadow overlay for extreme legibility of CTAs */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-
-              {/* Overlay CTA Elements (Revealed at Peak Fullscreen Progress) */}
-              <motion.div
-                style={{
-                  opacity: ctaOpacity,
-                  scale: ctaScale,
-                  y: ctaY,
-                }}
-                className="absolute bottom-12 md:bottom-16 inset-x-0 flex flex-col items-center justify-center z-20 px-4 will-change-transform"
+              {/* Helper Text Link */}
+              <a
+                href={explorerUrl}
+                target="_blank"
+                rel="noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="font-mono text-[10px] tracking-[0.25em] text-[#efe9df]/85 hover:text-[#efe9df] uppercase mt-2.5 text-center drop-shadow transition-colors block"
               >
-                {/* Sand/Champagne Pill CTA Button */}
-                <button
-                  onClick={onOpenExplorer}
-                  type="button"
-                  className="group bg-[#d5c3a5] text-[#121614] hover:bg-[#e4d5be] px-8 py-4 rounded-full font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl inline-flex items-center gap-3 active:scale-95 cursor-pointer"
-                >
-                  <span>ENTER THE EXPLORER</span>
-                  <span className="transition-transform duration-300 group-hover:translate-x-1 font-mono">
-                    →
-                  </span>
-                </button>
-
-                {/* Helper Text Link */}
-                <a
-                  href={explorerUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="font-mono text-[10px] tracking-[0.25em] text-[#efe9df]/85 hover:text-[#efe9df] uppercase mt-2.5 text-center drop-shadow transition-colors block"
-                >
-                  OPEN IN A NEW TAB
-                </a>
-              </motion.div>
+                OPEN IN A NEW TAB
+              </a>
             </motion.div>
+          </motion.div>
 
-            {/* Right Side Card: 02 / Alpine Amenities */}
-            <motion.div
-              style={{
-                opacity: sideDetailsOpacity,
-                x: sideRightX,
-              }}
-              className="hidden lg:flex w-full max-w-[340px] lg:w-[340px] h-[460px] lg:h-[480px] flex-col justify-between shrink-0 pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)] relative z-10"
-            >
-              <div className="flex flex-col h-full justify-between">
-                {/* Top Content */}
-                <div>
-                  {/* Eyebrow */}
-                  <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
-                    02 / ALPINE AMENITIES
-                  </span>
-
-                  {/* Title */}
-                  <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
-                    Four-Season Comforts
-                  </h3>
-
-                  {/* Amenity List */}
-                  <div className="mb-5 flex flex-col">
-                    <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
-                      <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">01</span>
-                      <span>Italian Central Heating &amp; Underfloor Warmth</span>
-                    </div>
-                    <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
-                      <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">02</span>
-                      <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
-                    </div>
-                    <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
-                      <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">03</span>
-                      <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
-                    </div>
+          {/* Right Side Card: 02 / Alpine Amenities */}
+          <motion.div
+            style={{
+              opacity: sideDetailsOpacity,
+              x: sideRightX,
+            }}
+            className="hidden lg:flex w-[260px] lg:w-[280px] h-[340px] lg:h-[360px] shrink-0 p-5 flex-col justify-between pointer-events-auto bg-[#1C1D1A]/95 backdrop-blur-md border border-[#C5A880]/25 rounded-md shadow-xl relative z-10"
+          >
+            <div className="flex flex-col h-full justify-between">
+              {/* Top Content */}
+              <div>
+                <span className="text-[#C5A880] text-[9px] tracking-[0.25em] uppercase font-semibold mb-1 block">
+                  02 / ALPINE AMENITIES
+                </span>
+                <h3 className="text-[#FDFBF7] font-serif text-lg lg:text-xl font-medium mb-2 leading-snug">
+                  Four-Season Comforts
+                </h3>
+                <div className="flex flex-col">
+                  <div className="py-1 border-b border-[#C5A880]/15 flex items-center gap-2 text-[#C7C3B8] text-[11px] leading-relaxed font-light">
+                    <span className="text-[#C5A880] font-mono text-[10px] font-semibold shrink-0">01</span>
+                    <span>Italian Central Heating &amp; Underfloor Warmth</span>
+                  </div>
+                  <div className="py-1 border-b border-[#C5A880]/15 flex items-center gap-2 text-[#C7C3B8] text-[11px] leading-relaxed font-light">
+                    <span className="text-[#C5A880] font-mono text-[10px] font-semibold shrink-0">02</span>
+                    <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
+                  </div>
+                  <div className="py-1 border-b border-[#C5A880]/15 flex items-center gap-2 text-[#C7C3B8] text-[11px] leading-relaxed font-light">
+                    <span className="text-[#C5A880] font-mono text-[10px] font-semibold shrink-0">03</span>
+                    <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
                   </div>
                 </div>
-
-                {/* Footer Altitude Metric */}
-                <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full">
-                  <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
-                    PEAK ELEVATION
-                  </span>
-                  <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
-                    7,906 FT
-                  </span>
-                </div>
               </div>
-            </motion.div>
 
-          </div>
+              {/* Footer Altitude Metric */}
+              <div className="border-t border-[#C5A880]/20 pt-2 flex items-center justify-between text-[10px] font-mono text-[#8C867A] w-full">
+                <span className="tracking-[0.2em] uppercase">
+                  PEAK ELEVATION
+                </span>
+                <span className="text-[#FDFBF7] font-medium whitespace-nowrap">
+                  7,906 FT
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
         </div>
 
         {/* Persistent Bottom Bar Indicators (03/12 & Sound Toggle) */}
