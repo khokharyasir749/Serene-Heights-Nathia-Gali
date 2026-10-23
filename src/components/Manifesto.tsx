@@ -65,9 +65,9 @@ export const Manifesto: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden border border-[#253129] shadow-2xl group">
               <img
-                src="/pictures/home/largestResort.png"
-                alt="Serene Heights Nathia Gali 5-Star Mountain Resort Panoramic Exterior"
-                className="w-full h-[420px] md:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105"
+                src="/pictures/home/frames/frame1.png"
+                alt="Serene Heights Nathia Gali Architectural Building Facade"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0c0f0d] via-transparent to-transparent opacity-80" />
