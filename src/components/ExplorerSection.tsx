@@ -48,7 +48,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
   // - [0.15 -> 0.65]: Smooth expansion from compact framed card to full edge-to-edge (100vw, 100vh, 0px)
   // - [0.65 -> 0.95]: HOLD/LOCK PHASE at 100vw, 100vh, 0px border-radius
   const initialWidth = Math.min(560, windowSize.width * 0.92);
-  const initialHeight = Math.min(410, windowSize.height * 0.46);
+  const initialHeight = Math.min(380, windowSize.height * 0.42);
 
   const cardWidth = useTransform(smoothProgress, [0.15, 0.65], [initialWidth, windowSize.width]);
   const cardHeight = useTransform(smoothProgress, [0.15, 0.65], [initialHeight, windowSize.height]);
@@ -93,15 +93,15 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
             y: headerY,
             opacity: headerOpacity,
           }}
-          className="absolute top-10 sm:top-14 md:top-16 inset-x-0 mx-auto flex flex-col items-center text-center px-6 z-30 pointer-events-none will-change-transform max-w-4xl"
+          className="absolute top-5 sm:top-6 md:top-8 lg:top-9 inset-x-0 mx-auto flex flex-col items-center text-center px-6 z-30 pointer-events-none will-change-transform max-w-4xl"
         >
           {/* Eyebrow Tag */}
-          <span className="font-mono text-xs tracking-[0.3em] text-[#8C7E6A] uppercase mb-2">
+          <span className="font-mono text-xs tracking-[0.3em] text-[#8C7E6A] uppercase mb-1.5">
             3D — 3D EXPLORER
           </span>
 
           {/* Main Editorial Headline */}
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1C1917] tracking-tight max-w-3xl mb-2 font-normal">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1C1917] tracking-tight max-w-3xl mb-1.5 font-normal">
             Tour all three towers{' '}
             <span className="font-serif italic font-light text-[#8C7E6A]">in 360°.</span>
           </h2>
