@@ -41,7 +41,7 @@ export const ManifestoSection: React.FC = () => {
     >
       <div className="w-full flex flex-col lg:flex-row items-center justify-between relative z-10">
         {/* Left Side: Scroll-Driven Expanding Architectural Image */}
-        <div className="w-full lg:w-[46%] h-[68vh] md:h-[78vh] lg:h-[86vh] relative overflow-hidden rounded-[2px] shadow-[0_20px_50px_-15px_rgba(26,34,28,0.18)] border border-[#121614]/10 shrink-0">
+        <div className="w-full lg:w-[46%] h-[68vh] md:h-[78vh] lg:h-[86vh] relative overflow-hidden rounded-[2px] shadow-[0_25px_60px_-15px_rgba(26,34,28,0.22)] border border-[#121614]/10 shrink-0">
           <motion.div
             style={{
               scale: imageScale,
@@ -50,8 +50,8 @@ export const ManifestoSection: React.FC = () => {
             className="w-full h-full relative overflow-hidden will-change-transform"
           >
             <img
-              src="/pictures/home/nathiagaliResort/nathiagaliResort.png"
-              alt="Serene Heights Nathia Gali Grand Resort Entrance"
+              src="/pictures/home/largestResort.png"
+              alt="Serene Heights Nathia Gali 5-Star Mountain Resort Panoramic Exterior"
               className="w-full h-full object-cover object-center pointer-events-none select-none"
               loading="eager"
             />

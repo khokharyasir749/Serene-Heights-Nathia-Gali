@@ -65,8 +65,8 @@ export const Manifesto: React.FC = () => {
           >
             <div className="relative rounded-2xl overflow-hidden border border-[#253129] shadow-2xl group">
               <img
-                src="/pictures/home/nathiagaliResort/nathiagaliResort.png"
-                alt="Morning at Serene Heights stone café terrace"
+                src="/pictures/home/largestResort.png"
+                alt="Serene Heights Nathia Gali 5-Star Mountain Resort Panoramic Exterior"
                 className="w-full h-[420px] md:h-[520px] object-cover transition-transform duration-700 group-hover:scale-105"
                 loading="lazy"
               />
