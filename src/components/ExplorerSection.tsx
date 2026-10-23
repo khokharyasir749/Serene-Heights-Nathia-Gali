@@ -47,11 +47,14 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
   const rightCardOpacity = useTransform(smoothProgress, [0, 0.2, 0.4], [1, 1, 0]);
   const rightCardX = useTransform(smoothProgress, [0, 0.2, 0.4], [0, 0, 80]);
 
+  // Vertical placement: shifts cards & image down to give plenty of clearance from the header subtitle
+  const cardY = useTransform(smoothProgress, [0, 0.2, 0.75, 1], [36, 36, 0, 0]);
+  const sideCardY = useTransform(smoothProgress, [0, 0.2, 0.4], [36, 36, 36]);
+
   // Center Image Container Expansion:
-  // Initial stage [0 - 0.2]: centered, rounded-2xl (16px), w-[520px] lg:w-[600px] h-[380px] lg:h-[420px]
-  // Expansion stage [0.2 - 0.75]: expands smoothly to 100vw, 100vh, rounded-0
-  const initialWidth = windowSize.width >= 1024 ? 600 : Math.min(520, windowSize.width * 0.92);
-  const initialHeight = windowSize.width >= 1024 ? 420 : 380;
+  // Decreased initial height to 340px (desktop) / 310px (mobile) to prevent any overlap with top text
+  const initialWidth = windowSize.width >= 1024 ? 540 : Math.min(460, windowSize.width * 0.92);
+  const initialHeight = windowSize.width >= 1024 ? 340 : 310;
 
   const cardWidth = useTransform(
     smoothProgress,
@@ -102,27 +105,27 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
       {/* Sticky Fullscreen Stage: Pinned 100vh viewport matching top section's warm parchment background */}
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center relative bg-[#F4F1EA]">
         
-        {/* Top Header & Typography */}
+        {/* Top Header & Typography with safe headroom */}
         <motion.div
           style={{
             opacity: headerOpacity,
             y: headerY,
           }}
-          className="absolute top-8 sm:top-10 md:top-12 inset-x-0 mx-auto flex flex-col items-center text-center px-4 z-30 pointer-events-none will-change-transform max-w-4xl"
+          className="absolute top-6 sm:top-8 md:top-10 inset-x-0 mx-auto flex flex-col items-center text-center px-4 z-30 pointer-events-none will-change-transform max-w-4xl"
         >
           {/* Eyebrow Tag */}
-          <span className="font-mono text-xs tracking-[0.3em] text-[#8C7E6A] uppercase mb-1.5 block">
+          <span className="font-mono text-[11px] sm:text-xs tracking-[0.3em] text-[#8C7E6A] uppercase mb-1.5 block">
             3D — 3D EXPLORER
           </span>
 
           {/* Main Editorial Headline */}
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1C1917] tracking-tight mb-2 font-normal leading-tight">
+          <h2 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1C1917] tracking-tight mb-2 font-normal leading-tight">
             Tour all three towers{' '}
             <span className="font-serif italic font-light text-[#8C7E6A]">in 360°.</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="font-sans text-xs sm:text-sm md:text-base text-[#1C1917]/70 font-light tracking-wide text-center max-w-xl mx-auto">
+          <p className="font-sans text-xs sm:text-sm text-[#1C1917]/70 font-light tracking-wide text-center max-w-xl mx-auto">
             Browse studios, apartments and penthouses, and view floor plans
           </p>
         </motion.div>
@@ -134,6 +137,7 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
               width: cardWidth,
               height: cardHeight,
               borderRadius: cardRadius,
+              y: cardY,
             }}
             className="relative flex items-center justify-center overflow-hidden z-10 will-change-[width,height,border-radius] shadow-2xl pointer-events-auto bg-[#1C1917]"
           >
@@ -161,26 +165,27 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
             style={{
               opacity: leftCardOpacity,
               x: leftCardX,
+              y: sideCardY,
             }}
-            className="hidden lg:flex w-[260px] lg:w-[280px] h-[380px] lg:h-[420px] shrink-0 p-5 flex-col justify-between pointer-events-auto bg-[#1C1D1A]/95 backdrop-blur-md border border-[#C5A880]/25 rounded-md shadow-2xl"
+            className="hidden lg:flex w-[270px] lg:w-[290px] h-[310px] lg:h-[340px] shrink-0 p-5 lg:p-6 flex-col justify-between pointer-events-auto bg-[#1C1D1A]/95 backdrop-blur-md border border-[#C5A880]/25 rounded-md shadow-2xl"
           >
             <div className="flex flex-col h-full justify-between">
               {/* Top Content */}
               <div>
-                <span className="text-[#C5A880] text-[9px] tracking-[0.25em] uppercase font-semibold mb-1 block">
+                <span className="text-[#C5A880] text-[10px] tracking-[0.25em] uppercase font-semibold mb-2 block">
                   01 / REGIONAL MASTERPIECE
                 </span>
-                <h3 className="text-[#FDFBF7] font-serif text-lg lg:text-xl font-medium mb-2 leading-snug">
+                <h3 className="text-[#FDFBF7] font-serif text-xl lg:text-2xl tracking-tight mb-2.5 font-normal leading-snug">
                   Premier Winter Resort
                 </h3>
-                <p className="text-[#C7C3B8] text-[11px] leading-relaxed font-light">
+                <p className="text-[#C7C3B8] text-xs lg:text-[13px] leading-relaxed font-light">
                   Designed for year-round mountain alpine living, featuring Pakistan&apos;s premier dedicated ski slopes, winter sports access, and panoramic Himalayan pine ridges.
                 </p>
               </div>
 
               {/* Footer Metric */}
-              <div className="border-t border-[#C5A880]/20 pt-2 flex items-center justify-between text-[10px] font-mono text-[#8C867A] w-full">
-                <span className="tracking-[0.2em] uppercase">
+              <div className="border-t border-[#C5A880]/20 pt-2.5 flex items-center justify-between text-xs font-mono text-[#8C867A] w-full">
+                <span className="tracking-[0.2em] uppercase text-[10px]">
                   MASTERPLAN
                 </span>
                 <span className="text-[#FDFBF7] font-medium whitespace-nowrap">
@@ -195,37 +200,38 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
             style={{
               opacity: rightCardOpacity,
               x: rightCardX,
+              y: sideCardY,
             }}
-            className="hidden lg:flex w-[260px] lg:w-[280px] h-[380px] lg:h-[420px] shrink-0 p-5 flex-col justify-between pointer-events-auto bg-[#1C1D1A]/95 backdrop-blur-md border border-[#C5A880]/25 rounded-md shadow-2xl"
+            className="hidden lg:flex w-[270px] lg:w-[290px] h-[310px] lg:h-[340px] shrink-0 p-5 lg:p-6 flex-col justify-between pointer-events-auto bg-[#1C1D1A]/95 backdrop-blur-md border border-[#C5A880]/25 rounded-md shadow-2xl"
           >
             <div className="flex flex-col h-full justify-between">
               {/* Top Content */}
               <div>
-                <span className="text-[#C5A880] text-[9px] tracking-[0.25em] uppercase font-semibold mb-1 block">
+                <span className="text-[#C5A880] text-[10px] tracking-[0.25em] uppercase font-semibold mb-2 block">
                   02 / ALPINE AMENITIES
                 </span>
-                <h3 className="text-[#FDFBF7] font-serif text-lg lg:text-xl font-medium mb-2 leading-snug">
+                <h3 className="text-[#FDFBF7] font-serif text-xl lg:text-2xl tracking-tight mb-2.5 font-normal leading-snug">
                   Four-Season Comforts
                 </h3>
                 <div className="flex flex-col">
-                  <div className="py-1 border-b border-[#C5A880]/15 flex items-center gap-2 text-[#C7C3B8] text-[11px] leading-relaxed font-light">
-                    <span className="text-[#C5A880] font-mono text-[10px] font-semibold shrink-0">01</span>
+                  <div className="py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 text-xs lg:text-[12.5px] text-[#C7C3B8] font-light">
+                    <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">01</span>
                     <span>Italian Central Heating &amp; Underfloor Warmth</span>
                   </div>
-                  <div className="py-1 border-b border-[#C5A880]/15 flex items-center gap-2 text-[#C7C3B8] text-[11px] leading-relaxed font-light">
-                    <span className="text-[#C5A880] font-mono text-[10px] font-semibold shrink-0">02</span>
+                  <div className="py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 text-xs lg:text-[12.5px] text-[#C7C3B8] font-light">
+                    <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">02</span>
                     <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
                   </div>
-                  <div className="py-1 border-b border-[#C5A880]/15 flex items-center gap-2 text-[#C7C3B8] text-[11px] leading-relaxed font-light">
-                    <span className="text-[#C5A880] font-mono text-[10px] font-semibold shrink-0">03</span>
+                  <div className="py-1.5 border-b border-[#C5A880]/15 flex items-center gap-2.5 text-xs lg:text-[12.5px] text-[#C7C3B8] font-light">
+                    <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">03</span>
                     <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
                   </div>
                 </div>
               </div>
 
               {/* Footer Altitude Metric */}
-              <div className="border-t border-[#C5A880]/20 pt-2 flex items-center justify-between text-[10px] font-mono text-[#8C867A] w-full">
-                <span className="tracking-[0.2em] uppercase">
+              <div className="border-t border-[#C5A880]/20 pt-2.5 flex items-center justify-between text-xs font-mono text-[#8C867A] w-full">
+                <span className="tracking-[0.2em] uppercase text-[10px]">
                   PEAK ELEVATION
                 </span>
                 <span className="text-[#FDFBF7] font-medium whitespace-nowrap">
