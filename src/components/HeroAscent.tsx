@@ -31,8 +31,15 @@ export default function HeroAscent({
     return () => window.removeEventListener("resize", updateSize);
   }, []);
 
-  const targetWidth = Math.min(380, windowSize.width * 0.85);
-  const targetHeight = targetWidth * (4 / 3);
+  // Standard Chapter 02 card dimensions: 380px x 520px (responsive on narrow screens)
+  const targetWidth =
+    typeof window !== "undefined" && windowSize.width < 420
+      ? Math.min(380, windowSize.width * 0.85)
+      : 380;
+  const targetHeight =
+    typeof window !== "undefined" && windowSize.width < 420
+      ? Math.round(targetWidth * (520 / 380))
+      : 520;
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -55,9 +62,17 @@ export default function HeroAscent({
     video.currentTime = 0;
 
     let isSeeking = false;
-    let queuedTime: number | null = null;
+    let queuedTargetTime: number | null = null;
+    let seekSafetyTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const requestSeek = (targetTime: number) => {
+    const clearSafetyTimer = () => {
+      if (seekSafetyTimer) {
+        clearTimeout(seekSafetyTimer);
+        seekSafetyTimer = null;
+      }
+    };
+
+    const performSeek = (targetTime: number) => {
       if (!video || isNaN(video.duration) || video.duration === 0) return;
 
       const clamped = Math.min(
@@ -65,27 +80,62 @@ export default function HeroAscent({
         video.duration - 0.05
       );
 
-      if (isSeeking || video.seeking) {
-        queuedTime = clamped;
+      // Do not call video.currentTime if the delta between target and current time is less than 0.03s
+      if (Math.abs(clamped - video.currentTime) < 0.03) {
         return;
       }
 
+      // If already seeking, queue latest target time and wait for native seeked event
+      if (isSeeking || video.seeking) {
+        queuedTargetTime = clamped;
+        return;
+      }
+
+      // Strictly gate video.currentTime by native seeked event
       isSeeking = true;
-      video.currentTime = clamped;
+      try {
+        video.currentTime = clamped;
+        clearSafetyTimer();
+        seekSafetyTimer = setTimeout(() => {
+          if (isSeeking && !video.seeking) {
+            isSeeking = false;
+          }
+        }, 300);
+      } catch {
+        isSeeking = false;
+      }
     };
 
     const onSeeked = () => {
+      clearSafetyTimer();
       isSeeking = false;
-      if (queuedTime !== null) {
-        const nextTime = queuedTime;
-        queuedTime = null;
-        requestSeek(nextTime);
+
+      if (queuedTargetTime !== null) {
+        const nextTarget = queuedTargetTime;
+        queuedTargetTime = null;
+
+        // Verify delta condition again before seeking queued time
+        if (Math.abs(nextTarget - video.currentTime) >= 0.03) {
+          isSeeking = true;
+          try {
+            video.currentTime = nextTarget;
+            clearSafetyTimer();
+            seekSafetyTimer = setTimeout(() => {
+              if (isSeeking && !video.seeking) {
+                isSeeking = false;
+              }
+            }, 300);
+          } catch {
+            isSeeking = false;
+          }
+        }
       }
     };
 
     const onLoaded = () => {
       if (video && video.duration && !isNaN(video.duration)) {
-        requestSeek(smoothProgress.get() * video.duration);
+        const initialProgress = Math.min(1, smoothProgress.get() / 0.58);
+        performSeek(initialProgress * video.duration);
       }
     };
 
@@ -94,11 +144,11 @@ export default function HeroAscent({
     video.addEventListener("canplay", onLoaded);
 
     const unsubscribe = smoothProgress.on("change", (latest) => {
-      // 1. Scrub video timeline cleanly up to peak (~58% of scroll)
+      // 1. Scrub video timeline cleanly up to building peak (~58% of scroll)
       if (video && video.duration && !isNaN(video.duration)) {
         const videoProgress = Math.min(1, latest / 0.58);
         const target = videoProgress * video.duration;
-        requestSeek(target);
+        performSeek(target);
       }
 
       // 2. Direct DOM update for formatted counter (0,000 to 7,906 FT) during Phase 1
@@ -109,7 +159,9 @@ export default function HeroAscent({
           altitude >= 1000
             ? altitude.toLocaleString("en-US")
             : `0,${altitude.toString().padStart(3, "0")}`;
-        counterRef.current.innerText = formatted;
+        if (counterRef.current.innerText !== formatted) {
+          counterRef.current.innerText = formatted;
+        }
       }
 
       // Dynamic header theme switch when transitioning into cream parchment Chapter 02
@@ -122,6 +174,7 @@ export default function HeroAscent({
     });
 
     return () => {
+      clearSafetyTimer();
       video.removeEventListener("seeked", onSeeked);
       video.removeEventListener("loadedmetadata", onLoaded);
       video.removeEventListener("canplay", onLoaded);
@@ -143,21 +196,18 @@ export default function HeroAscent({
   // SCROLL-LINKED TRANSFORMATION TIMELINE (0.00 -> 1.00 across 800vh)
   // =========================================================================
 
-  // 1. Phase 1: Massive 0,000 FT Counter (visible 0 -> 0.44, fades out to 0.50)
+  // 1. Phase 1: Massive 0,000 FT Counter (visible 0 -> 0.44, fades out to 0.50 without scaling)
   const phase1Opacity = useTransform(scrollYProgress, [0, 0.44, 0.50], [1, 1, 0]);
 
-  // 2. High-res 4K dusk render crossfade over video at peak (0.46 -> 0.54)
-  const highResImageOpacity = useTransform(scrollYProgress, [0.46, 0.54], [0, 1]);
-
-  // 3. Phase 2: Editorial Headline & CTA ("The Exceptional, Reserved For You")
+  // 2. Phase 2: Editorial Headline & CTA ("The Exceptional, Reserved For You")
   const phase2Opacity = useTransform(scrollYProgress, [0.50, 0.57, 0.65, 0.71], [0, 1, 1, 0]);
   const phase2Y = useTransform(scrollYProgress, [0.50, 0.57, 0.65, 0.71], [30, 0, 0, -30]);
 
-  // 4. Phase 3: Seamless Background Morph (#161B18 -> #F5F2EB parchment)
+  // 3. Phase 3: Seamless Background Morph (#161B18 -> #F5F2EB parchment)
   const bgColor = useTransform(scrollYProgress, [0.68, 0.78], ["#161B18", "#F5F2EB"]);
   const vignetteOpacity = useTransform(scrollYProgress, [0.68, 0.76], [1, 0]);
 
-  // 5. Phase 3: Contracting Center Media Frame (100vw/100vh -> 380px/506px 3:4 box)
+  // 4. Phase 3: Contracting Center Media Frame (100vw/100vh -> 380px/520px card)
   const frameWidth = useTransform(scrollYProgress, [0.68, 0.80], [windowSize.width, targetWidth]);
   const frameHeight = useTransform(scrollYProgress, [0.68, 0.80], [windowSize.height, targetHeight]);
   const frameBorderRadius = useTransform(scrollYProgress, [0.68, 0.80], [0, 4]);
@@ -167,17 +217,17 @@ export default function HeroAscent({
     ["0px 0px 0px rgba(0,0,0,0)", "0px 25px 60px -15px rgba(28,25,23,0.3)"]
   );
 
-  // 6. Chapter 02: 3-Column Editorial Content Reveals
-  const ch2LeftOpacity = useTransform(scrollYProgress, [0.76, 0.83], [0, 1]);
-  const ch2LeftY = useTransform(scrollYProgress, [0.76, 0.83], [25, 0]);
+  // 5. Chapter 02: 3-Column Editorial Content Reveals smoothly alongside the cropped frame
+  const ch2LeftOpacity = useTransform(scrollYProgress, [0.72, 0.80], [0, 1]);
+  const ch2LeftY = useTransform(scrollYProgress, [0.72, 0.80], [25, 0]);
 
-  const ch2CaptionOpacity = useTransform(scrollYProgress, [0.78, 0.84], [0, 1]);
-  const ch2CaptionY = useTransform(scrollYProgress, [0.78, 0.84], [15, 0]);
+  const ch2CaptionOpacity = useTransform(scrollYProgress, [0.75, 0.82], [0, 1]);
+  const ch2CaptionY = useTransform(scrollYProgress, [0.75, 0.82], [15, 0]);
 
-  const ch2RightOpacity = useTransform(scrollYProgress, [0.78, 0.85], [0, 1]);
-  const ch2RightY = useTransform(scrollYProgress, [0.78, 0.85], [25, 0]);
+  const ch2RightOpacity = useTransform(scrollYProgress, [0.74, 0.82], [0, 1]);
+  const ch2RightY = useTransform(scrollYProgress, [0.74, 0.82], [25, 0]);
 
-  // 7. Bottom Bar Crossfade (01 / 12 -> 02 / 12 and dark to parchment text)
+  // 6. Bottom Bar Crossfade (01 / 12 -> 02 / 12 and dark to parchment text)
   const ch1IndicatorOpacity = useTransform(scrollYProgress, [0.70, 0.76], [1, 0]);
   const ch2IndicatorOpacity = useTransform(scrollYProgress, [0.74, 0.80], [0, 1]);
   const bottomTextColor = useTransform(scrollYProgress, [0.70, 0.78], ["#A8A195", "#78716C"]);
@@ -203,7 +253,8 @@ export default function HeroAscent({
         className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between"
       >
         {/* =========================================================================
-            CENTER CONTRACTING MEDIA FRAME (FULL-BLEED -> 3:4 CENTER PORTRAIT)
+            CENTER CONTRACTING MEDIA FRAME (FULL-BLEED -> 380px x 520px CENTER CARD)
+            Directly holds the video's final scrubbed frame at the building peak.
         ========================================================================== */}
         <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none">
           <motion.div
@@ -215,7 +266,7 @@ export default function HeroAscent({
             }}
             className="relative overflow-hidden shrink-0 bg-[#161B18]"
           >
-            {/* Background Scrubbed Video */}
+            {/* The Video element itself remains in the DOM and holds its final frame */}
             <video
               ref={videoRef}
               playsInline
@@ -223,15 +274,6 @@ export default function HeroAscent({
               preload="auto"
               className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none"
               src="/Video/serene-heights-scrub-fast.mp4"
-            />
-
-            {/* High-Res 4K Dusk Architectural Facade (Crossfades in at summit) */}
-            <motion.img
-              style={{ opacity: highResImageOpacity }}
-              src="/pictures/home/largestResort.png"
-              alt="Serene Heights Nathia Gali - Golden Hour at 7,906 FT"
-              className="absolute inset-0 w-full h-full object-cover object-[65%_35%] pointer-events-none select-none"
-              loading="eager"
             />
           </motion.div>
         </div>
@@ -244,16 +286,32 @@ export default function HeroAscent({
 
         {/* =========================================================================
             PHASE 1: MASSIVE CENTER ALTITUDE (0,000 -> 7,906 FT)
+            - Static font size that NEVER changes or scales during scroll
+            - Tabular digits with fixed-width inline span to stop sideways vibration
         ========================================================================== */}
         <motion.div
           style={{ opacity: phase1Opacity }}
           className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none select-none"
         >
-          <div className="relative flex items-start select-none">
-            <div className="text-[13rem] sm:text-[16rem] md:text-[20rem] lg:text-[22rem] font-serif font-light leading-none tracking-tight tabular-nums select-none text-[#EDE8DF] drop-shadow-2xl">
+          <div
+            style={{ fontVariantNumeric: "tabular-nums" }}
+            className="relative flex items-start select-none"
+          >
+            <div
+              style={{ fontVariantNumeric: "tabular-nums" }}
+              className="text-[13rem] sm:text-[16rem] md:text-[20rem] lg:text-[22rem] font-serif font-light leading-none select-none text-[#EDE8DF] drop-shadow-2xl"
+            >
               <span
                 ref={counterRef}
-                className="inline-block tabular-nums [font-variant-numeric:tabular-nums]"
+                style={{
+                  fontVariantNumeric: "tabular-nums",
+                  fontFeatureSettings: '"tnum" 1, "lnum" 1',
+                  display: "inline-block",
+                  width: "4.8ch",
+                  textAlign: "right",
+                  letterSpacing: "0.02em",
+                }}
+                className="tabular-nums whitespace-nowrap select-none"
               >
                 0,000
               </span>
@@ -340,7 +398,7 @@ export default function HeroAscent({
               </h2>
             </motion.div>
 
-            {/* Column 2: Center Spacer (matches frame dimensions) + Caption below */}
+            {/* Column 2: Center Spacer (matches frame dimensions 380px x 520px) + Caption below */}
             <div className="lg:col-span-4 flex flex-col items-center justify-center">
               {/* Phantom spacer that guarantees grid column alignment */}
               <div
