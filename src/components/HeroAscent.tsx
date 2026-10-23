@@ -330,34 +330,39 @@ export default function HeroAscent({
         </motion.div>
 
         {/* =========================================================================
-            PHASE 2: EDITORIAL TITLE & CTA ("The Exceptional, Reserved For You")
+            PHASE 2: EDITORIAL TITLE & CTA (Serene Heights Summit Frame)
         ========================================================================== */}
         <motion.div
           style={{ opacity: phase2Opacity, y: phase2Y }}
-          className="absolute inset-0 z-20 flex flex-col justify-end px-8 sm:px-14 pb-16 pointer-events-none select-none"
+          className="absolute inset-0 z-20 flex flex-col justify-end px-8 sm:px-14 pb-16 pointer-events-none select-none overflow-hidden"
         >
-          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-6">
+          {/* Subtle luxury gradient scrim behind text on the left */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent lg:bg-gradient-to-r lg:from-black/75 lg:via-black/35 lg:to-transparent pointer-events-none -z-10" />
+
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-6 relative z-10">
             <div className="max-w-3xl">
-              <span className="font-mono text-xs sm:text-sm tracking-[0.3em] uppercase text-[#C9BEAE] mb-4 block">
-                NATHIA GALI · THE GALIYAT · 7,906 FT
+              <span className="font-mono text-xs tracking-[0.25em] uppercase text-[#E2D9CC] font-medium mb-4 block drop-shadow-md">
+                SERENE HEIGHTS · NATHIA GALI · 7,906 FT
               </span>
-              <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-9xl text-[#EDE8DF] font-light leading-[0.94] tracking-tight">
-                The Exceptional,<br />
-                <span className="italic font-normal">Reserved For You.</span>
+              <h1 className="font-serif text-5xl sm:text-7xl md:text-8xl lg:text-[5.5rem] xl:text-[6.25rem] text-[#FDFBF7] font-light leading-[1.02] tracking-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)]">
+                Pakistan&apos;s First &amp; Largest<br />
+                <span className="italic font-normal">Winter Resort.</span>
               </h1>
-              <p className="font-sans text-sm sm:text-base text-[#efe9df]/85 tracking-wide mt-6 leading-relaxed">
-                Pakistan’s premier 5-star mountain resort<br />
-                <span className="text-[#C9BEAE] text-xs sm:text-sm font-light">
-                  By DM Consortium
-                </span>
-              </p>
+              <div className="mt-6 space-y-1.5 drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+                <p className="font-sans text-sm sm:text-base text-[#FDFBF7]/95 tracking-wide font-normal leading-relaxed">
+                  30+ Kanals · 3 Towers · 150+ Executive Suites
+                </p>
+                <p className="font-mono text-xs tracking-[0.2em] uppercase text-[#E2D9CC] font-medium">
+                  A Project of DM Consortium
+                </p>
+              </div>
             </div>
 
             <div className="pointer-events-auto">
               <button
                 onClick={onRegisterClick}
                 type="button"
-                className="bg-[#C9BEAE] hover:bg-[#d8cfc2] text-[#161B18] font-medium text-xs sm:text-sm tracking-widest uppercase px-8 sm:px-10 py-4 sm:py-5 rounded-full flex items-center gap-4 transition-all shadow-xl group active:scale-95 cursor-pointer"
+                className="bg-[#C5A880] hover:bg-[#d4b993] text-[#121212] font-semibold text-xs sm:text-sm tracking-widest uppercase px-8 sm:px-10 py-4 sm:py-5 rounded-full flex items-center gap-4 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.35)] group active:scale-95 cursor-pointer"
               >
                 <span>Register Priority Interest</span>
                 <span className="group-hover:translate-x-1 transition-transform">→</span>
