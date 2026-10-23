@@ -179,36 +179,36 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
         <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none select-none px-6 sm:px-10 lg:px-12 pt-16">
           <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             
-            {/* Left Side Column: Pakistan's First & Largest Premier Winter Resort */}
+            {/* Left Side Card: 01 / Regional Masterpiece */}
             <motion.div
               style={{
                 opacity: sideDetailsOpacity,
                 x: sideLeftX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-left space-y-4 pointer-events-auto"
+              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#EFECE6]/60 backdrop-blur-sm border border-[#1C1917]/10 rounded-sm p-6 lg:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
             >
               {/* Eyebrow */}
-              <div className="flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8C7E6A]" />
-                <span className="font-mono text-[10px] tracking-[0.25em] text-[#8C7E6A] uppercase font-semibold">
-                  PAKISTAN&apos;S FIRST &amp; LARGEST
-                </span>
-              </div>
+              <span className="text-[10px] tracking-[0.28em] uppercase text-[#8C7E6A] font-medium block mb-2">
+                01 / REGIONAL MASTERPIECE
+              </span>
 
               {/* Title */}
-              <h3 className="font-serif text-2xl xl:text-3xl text-[#1C1917] font-normal leading-tight">
+              <h3 className="font-serif text-2xl lg:text-3xl text-[#1C1917] tracking-tight mb-3 font-normal leading-tight">
                 Premier Winter Resort
               </h3>
 
               {/* Description */}
-              <p className="font-sans text-xs xl:text-sm text-[#1C1917]/75 font-light leading-relaxed">
+              <p className="font-sans text-xs lg:text-[13px] text-[#5A554E] leading-relaxed mb-5 font-light">
                 Designed for year-round mountain alpine living, featuring Pakistan&apos;s premier dedicated ski slopes, winter sports access, and panoramic Himalayan pine ridges.
               </p>
 
-              {/* Metric Badge */}
-              <div className="pt-3 border-t border-[#1C1917]/10 flex items-center gap-2">
-                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#1C1917]/90 font-medium">
-                  30+ KANALS · 3 TOWERS
+              {/* Footer Metric */}
+              <div className="border-t border-[#1C1917]/10 pt-3 flex items-center justify-between mt-auto">
+                <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#8C7E6A] font-medium">
+                  MASTERPLAN
+                </span>
+                <span className="font-mono text-xs text-[#1C1917] font-semibold tracking-wider">
+                  30+ Kanals · 3 Towers
                 </span>
               </div>
             </motion.div>
@@ -221,47 +221,47 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
               />
             </div>
 
-            {/* Right Side Column: Alpine Comforts & Four-Season Architecture */}
+            {/* Right Side Card: 02 / Alpine Amenities */}
             <motion.div
               style={{
                 opacity: sideDetailsOpacity,
                 x: sideRightX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-right items-end space-y-4 pointer-events-auto"
+              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#EFECE6]/60 backdrop-blur-sm border border-[#1C1917]/10 rounded-sm p-6 lg:p-7 shadow-[0_8px_30px_rgb(0,0,0,0.04)]"
             >
               {/* Eyebrow */}
-              <div className="flex items-center gap-2 justify-end">
-                <span className="font-mono text-[10px] tracking-[0.25em] text-[#8C7E6A] uppercase font-semibold">
-                  ALPINE COMFORTS &amp; HEATING
-                </span>
-                <span className="w-1.5 h-1.5 rounded-full bg-[#8C7E6A]" />
-              </div>
+              <span className="text-[10px] tracking-[0.28em] uppercase text-[#8C7E6A] font-medium block mb-2">
+                02 / ALPINE AMENITIES
+              </span>
 
               {/* Title */}
-              <h3 className="font-serif text-2xl xl:text-3xl text-[#1C1917] font-normal leading-tight">
-                Four-Season Architecture
+              <h3 className="font-serif text-2xl lg:text-3xl text-[#1C1917] tracking-tight mb-3 font-normal leading-tight">
+                Four-Season Comforts
               </h3>
 
-              {/* Key Amenities */}
-              <ul className="space-y-2.5 text-right">
-                <li className="font-sans text-[11px] xl:text-xs text-[#1C1917]/80 font-light leading-relaxed flex items-start justify-end gap-2">
-                  <span>Italian-engineered central heating &amp; heated flooring throughout.</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8C7E6A] mt-1 shrink-0" />
-                </li>
-                <li className="font-sans text-[11px] xl:text-xs text-[#1C1917]/80 font-light leading-relaxed flex items-start justify-end gap-2">
-                  <span>Temperature-controlled infinity pool &amp; thermal hydrotherapy spa.</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8C7E6A] mt-1 shrink-0" />
-                </li>
-                <li className="font-sans text-[11px] xl:text-xs text-[#1C1917]/80 font-light leading-relaxed flex items-start justify-end gap-2">
-                  <span>Ski-in / ski-out lounge &amp; heated equipment lockers.</span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8C7E6A] mt-1 shrink-0" />
-                </li>
-              </ul>
+              {/* Amenity List */}
+              <div className="mb-5 flex flex-col">
+                <div className="text-xs lg:text-[13px] text-[#5A554E] py-1.5 border-b border-[#1C1917]/5 flex items-center gap-2.5 font-light">
+                  <span className="text-[#8C7E6A] font-mono text-[11px] font-medium shrink-0">01</span>
+                  <span>Italian Central Heating &amp; Underfloor Warmth</span>
+                </div>
+                <div className="text-xs lg:text-[13px] text-[#5A554E] py-1.5 border-b border-[#1C1917]/5 flex items-center gap-2.5 font-light">
+                  <span className="text-[#8C7E6A] font-mono text-[11px] font-medium shrink-0">02</span>
+                  <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
+                </div>
+                <div className="text-xs lg:text-[13px] text-[#5A554E] py-1.5 border-b border-[#1C1917]/5 flex items-center gap-2.5 font-light">
+                  <span className="text-[#8C7E6A] font-mono text-[11px] font-medium shrink-0">03</span>
+                  <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
+                </div>
+              </div>
 
-              {/* Altitude Badge */}
-              <div className="pt-3 border-t border-[#1C1917]/10 flex items-center justify-end gap-2">
-                <span className="font-mono text-[11px] tracking-[0.2em] uppercase text-[#8C7E6A] font-semibold">
-                  SUMMIT ELEVATION: 7,906 FT
+              {/* Footer Altitude Metric */}
+              <div className="border-t border-[#1C1917]/10 pt-3 flex items-center justify-between mt-auto">
+                <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-[#8C7E6A] font-medium">
+                  PEAK ELEVATION
+                </span>
+                <span className="font-mono text-xs text-[#1C1917] font-semibold tracking-wider">
+                  7,906 FT
                 </span>
               </div>
             </motion.div>
