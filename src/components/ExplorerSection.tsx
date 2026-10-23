@@ -48,11 +48,11 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
   // - [0.15 -> 0.65]: Smooth expansion from compact framed card to full edge-to-edge (100vw, 100vh, 0px)
   // - [0.65 -> 0.95]: HOLD/LOCK PHASE at 100vw, 100vh, 0px border-radius
   const initialWidth = Math.min(560, windowSize.width * 0.92);
-  const initialHeight = Math.min(380, windowSize.height * 0.42);
+  const initialHeight = windowSize.width >= 1024 ? 480 : 460;
 
   const cardWidth = useTransform(smoothProgress, [0.15, 0.65], [initialWidth, windowSize.width]);
   const cardHeight = useTransform(smoothProgress, [0.15, 0.65], [initialHeight, windowSize.height]);
-  const cardRadius = useTransform(smoothProgress, [0.15, 0.65], [16, 0]);
+  const cardRadius = useTransform(smoothProgress, [0.15, 0.65], [12, 0]);
 
   // Parallax subtle camera zoom on the building image inside
   const imageScale = useTransform(smoothProgress, [0.15, 0.65], [1.12, 1.0]);
@@ -112,72 +112,11 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
           </p>
         </motion.div>
 
-        {/* Center Expanding Image Frame: Smooth Zero-Margin Fullscreen Expansion */}
-        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none select-none">
-          <motion.div
-            style={{
-              width: cardWidth,
-              height: cardHeight,
-              borderRadius: cardRadius,
-            }}
-            className="relative flex items-center justify-center overflow-hidden z-10 will-change-[width,height,border-radius] shadow-2xl pointer-events-auto bg-[#1C1917]"
-          >
-            {/* High-Resolution Daytime Architectural Facade Render */}
-            <motion.div
-              style={{ scale: imageScale }}
-              className="w-full h-full relative overflow-hidden will-change-transform"
-            >
-              <img
-                src="/pictures/home/Snowy Mountain Resort Among Pines.png"
-                alt="Serene Heights Nathia Gali 3D Architectural View"
-                className="w-full h-full object-cover rounded-md pointer-events-none select-none"
-                loading="eager"
-              />
-            </motion.div>
-
-            {/* Subtle dark bottom-up shadow overlay for extreme legibility of CTAs */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
-
-            {/* Overlay CTA Elements (Revealed at Peak Fullscreen Progress) */}
-            <motion.div
-              style={{
-                opacity: ctaOpacity,
-                scale: ctaScale,
-                y: ctaY,
-              }}
-              className="absolute bottom-12 md:bottom-16 inset-x-0 flex flex-col items-center justify-center z-20 px-4 will-change-transform"
-            >
-              {/* Sand/Champagne Pill CTA Button */}
-              <button
-                onClick={onOpenExplorer}
-                type="button"
-                className="group bg-[#d5c3a5] text-[#121614] hover:bg-[#e4d5be] px-8 py-4 rounded-full font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl inline-flex items-center gap-3 active:scale-95 cursor-pointer"
-              >
-                <span>ENTER THE EXPLORER</span>
-                <span className="transition-transform duration-300 group-hover:translate-x-1 font-mono">
-                  →
-                </span>
-              </button>
-
-              {/* Helper Text Link */}
-              <a
-                href={explorerUrl}
-                target="_blank"
-                rel="noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="font-mono text-[10px] tracking-[0.25em] text-[#efe9df]/85 hover:text-[#efe9df] uppercase mt-2.5 text-center drop-shadow transition-colors block"
-              >
-                OPEN IN A NEW TAB
-              </a>
-            </motion.div>
-          </motion.div>
-        </div>
-
         {/* =========================================================================
-            3-COLUMN EDITORIAL CALLOUT OVERLAY (FLANKING THE CENTER 3D CARD)
+            ALIGNED 3-ITEM ROW: [LEFT CARD] - [CENTER IMAGE] - [RIGHT CARD]
         ========================================================================== */}
-        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none select-none px-6 sm:px-10 lg:px-12 pt-16">
-          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none select-none px-4 sm:px-6">
+          <div className="flex flex-row items-center justify-center gap-6 lg:gap-8 w-full max-w-7xl mx-auto">
             
             {/* Left Side Card: 01 / Regional Masterpiece */}
             <motion.div
@@ -185,41 +124,97 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
                 opacity: sideDetailsOpacity,
                 x: sideLeftX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)]"
+              className="hidden lg:flex w-full max-w-[340px] lg:w-[340px] h-[460px] lg:h-[480px] flex-col justify-between shrink-0 pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)] relative z-10"
             >
-              {/* Eyebrow */}
-              <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
-                01 / REGIONAL MASTERPIECE
-              </span>
+              <div className="flex flex-col h-full justify-between">
+                {/* Top Content */}
+                <div>
+                  {/* Eyebrow */}
+                  <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
+                    01 / REGIONAL MASTERPIECE
+                  </span>
 
-              {/* Title */}
-              <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
-                Premier Winter Resort
-              </h3>
+                  {/* Title */}
+                  <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
+                    Premier Winter Resort
+                  </h3>
 
-              {/* Description */}
-              <p className="font-sans text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed mb-5 font-light">
-                Designed for year-round mountain alpine living, featuring Pakistan&apos;s premier dedicated ski slopes, winter sports access, and panoramic Himalayan pine ridges.
-              </p>
+                  {/* Description */}
+                  <p className="font-sans text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed mb-5 font-light">
+                    Designed for year-round mountain alpine living, featuring Pakistan&apos;s premier dedicated ski slopes, winter sports access, and panoramic Himalayan pine ridges.
+                  </p>
+                </div>
 
-              {/* Footer Metric */}
-              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full mt-auto">
-                <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
-                  MASTERPLAN
-                </span>
-                <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
-                  30+ Kanals · 3 Towers
-                </span>
+                {/* Footer Metric */}
+                <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full">
+                  <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
+                    MASTERPLAN
+                  </span>
+                  <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
+                    30+ Kanals · 3 Towers
+                  </span>
+                </div>
               </div>
             </motion.div>
 
-            {/* Center Grid Spacer (Phantom placeholder matching center card width) */}
-            <div className="lg:col-span-6 flex flex-col items-center justify-center pointer-events-none">
-              <div
-                style={{ width: initialWidth, height: initialHeight }}
-                className="shrink-0 pointer-events-none"
-              />
-            </div>
+            {/* Center Expanding Image Frame: Smooth Zero-Margin Fullscreen Expansion */}
+            <motion.div
+              style={{
+                width: cardWidth,
+                height: cardHeight,
+                borderRadius: cardRadius,
+              }}
+              className="relative flex items-center justify-center overflow-hidden z-20 will-change-[width,height,border-radius] shadow-2xl pointer-events-auto bg-[#1C1917] shrink-0 h-[460px] lg:h-[480px] rounded-xl"
+            >
+              {/* High-Resolution Architectural Facade Render */}
+              <motion.div
+                style={{ scale: imageScale }}
+                className="w-full h-full relative overflow-hidden will-change-transform"
+              >
+                <img
+                  src="/pictures/home/Snowy Mountain Resort Among Pines.png"
+                  alt="Serene Heights Nathia Gali 3D Architectural View"
+                  className="w-full h-full object-cover rounded-xl pointer-events-none select-none"
+                  loading="eager"
+                />
+              </motion.div>
+
+              {/* Subtle dark bottom-up shadow overlay for extreme legibility of CTAs */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+
+              {/* Overlay CTA Elements (Revealed at Peak Fullscreen Progress) */}
+              <motion.div
+                style={{
+                  opacity: ctaOpacity,
+                  scale: ctaScale,
+                  y: ctaY,
+                }}
+                className="absolute bottom-12 md:bottom-16 inset-x-0 flex flex-col items-center justify-center z-20 px-4 will-change-transform"
+              >
+                {/* Sand/Champagne Pill CTA Button */}
+                <button
+                  onClick={onOpenExplorer}
+                  type="button"
+                  className="group bg-[#d5c3a5] text-[#121614] hover:bg-[#e4d5be] px-8 py-4 rounded-full font-sans text-xs md:text-sm font-semibold tracking-[0.2em] uppercase transition-all duration-300 shadow-2xl inline-flex items-center gap-3 active:scale-95 cursor-pointer"
+                >
+                  <span>ENTER THE EXPLORER</span>
+                  <span className="transition-transform duration-300 group-hover:translate-x-1 font-mono">
+                    →
+                  </span>
+                </button>
+
+                {/* Helper Text Link */}
+                <a
+                  href={explorerUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="font-mono text-[10px] tracking-[0.25em] text-[#efe9df]/85 hover:text-[#efe9df] uppercase mt-2.5 text-center drop-shadow transition-colors block"
+                >
+                  OPEN IN A NEW TAB
+                </a>
+              </motion.div>
+            </motion.div>
 
             {/* Right Side Card: 02 / Alpine Amenities */}
             <motion.div
@@ -227,42 +222,47 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
                 opacity: sideDetailsOpacity,
                 x: sideRightX,
               }}
-              className="hidden lg:flex lg:col-span-3 flex-col text-left pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)]"
+              className="hidden lg:flex w-full max-w-[340px] lg:w-[340px] h-[460px] lg:h-[480px] flex-col justify-between shrink-0 pointer-events-auto bg-[#1A1C19]/92 backdrop-blur-md border border-[#C5A880]/20 rounded-sm p-6 lg:p-7 shadow-[0_20px_50px_rgba(0,0,0,0.22)] relative z-10"
             >
-              {/* Eyebrow */}
-              <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
-                02 / ALPINE AMENITIES
-              </span>
+              <div className="flex flex-col h-full justify-between">
+                {/* Top Content */}
+                <div>
+                  {/* Eyebrow */}
+                  <span className="text-[#C5A880] tracking-[0.28em] text-[10px] font-semibold uppercase block mb-2">
+                    02 / ALPINE AMENITIES
+                  </span>
 
-              {/* Title */}
-              <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
-                Four-Season Comforts
-              </h3>
+                  {/* Title */}
+                  <h3 className="text-[#FDFBF7] font-serif text-2xl lg:text-3xl tracking-tight mb-3 font-normal leading-tight">
+                    Four-Season Comforts
+                  </h3>
 
-              {/* Amenity List */}
-              <div className="mb-5 flex flex-col">
-                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
-                  <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">01</span>
-                  <span>Italian Central Heating &amp; Underfloor Warmth</span>
+                  {/* Amenity List */}
+                  <div className="mb-5 flex flex-col">
+                    <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
+                      <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">01</span>
+                      <span>Italian Central Heating &amp; Underfloor Warmth</span>
+                    </div>
+                    <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
+                      <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">02</span>
+                      <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
+                    </div>
+                    <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
+                      <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">03</span>
+                      <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
+                    </div>
+                  </div>
                 </div>
-                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
-                  <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">02</span>
-                  <span>Heated Infinity Pool &amp; Hydrotherapy Spa</span>
-                </div>
-                <div className="text-xs lg:text-[13px] text-[#C7C3B8] leading-relaxed py-1.5 border-b border-[#C5A880]/10 flex items-center gap-2.5 font-light">
-                  <span className="text-[#C5A880] font-mono text-xs font-semibold shrink-0">03</span>
-                  <span>Ski-in / Ski-out Lounge &amp; Heated Lockers</span>
-                </div>
-              </div>
 
-              {/* Footer Altitude Metric */}
-              <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full mt-auto">
-                <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
-                  PEAK ELEVATION
-                </span>
-                <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
-                  7,906 FT
-                </span>
+                {/* Footer Altitude Metric */}
+                <div className="flex items-center justify-between gap-4 border-t border-[#C5A880]/15 pt-3 w-full">
+                  <span className="text-[#8C867A] text-[10px] tracking-[0.2em] font-mono uppercase">
+                    PEAK ELEVATION
+                  </span>
+                  <span className="text-[#FDFBF7] text-xs font-mono font-medium whitespace-nowrap">
+                    7,906 FT
+                  </span>
+                </div>
               </div>
             </motion.div>
 
