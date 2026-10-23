@@ -77,6 +77,19 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
   const ctaY = useTransform(smoothProgress, [0.6, 0.75, 1], [30, 0, 0]);
   const ctaScale = useTransform(smoothProgress, [0.6, 0.75, 1], [0.92, 1, 1]);
 
+  // Bottom indicator colors adaptation: transitions from dark (#1C1917) to light (#efe9df) as image expands
+  const indicatorColor = useTransform(smoothProgress, [0.20, 0.55], ['#1C1917', '#efe9df']);
+  const indicatorLineBg = useTransform(
+    smoothProgress,
+    [0.20, 0.55],
+    ['rgba(28,25,23,0.3)', 'rgba(239,233,223,0.4)']
+  );
+  const soundColor = useTransform(
+    smoothProgress,
+    [0.20, 0.55],
+    ['rgba(28,25,23,0.75)', 'rgba(239,233,223,0.75)']
+  );
+
   const explorerUrl = siteData?.project?.explorerUrl || 'https://nathia-reserve-explorer.vercel.app';
 
   return (
@@ -84,10 +97,10 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
       ref={containerRef}
       id="explorer"
       data-chapter="explorer"
-      className="relative w-full h-[250vh] bg-black text-[#efe9df] z-20"
+      className="relative w-full h-[250vh] bg-[#F4F1EA] text-[#1C1917] z-20"
     >
-      {/* Sticky Fullscreen Stage: Pinned 100vh viewport */}
-      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center relative bg-black">
+      {/* Sticky Fullscreen Stage: Pinned 100vh viewport matching top section's warm parchment background */}
+      <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center relative bg-[#F4F1EA]">
         
         {/* Top Header & Typography */}
         <motion.div
@@ -98,18 +111,18 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
           className="absolute top-8 sm:top-10 md:top-12 inset-x-0 mx-auto flex flex-col items-center text-center px-4 z-30 pointer-events-none will-change-transform max-w-4xl"
         >
           {/* Eyebrow Tag */}
-          <span className="font-mono text-xs tracking-[0.3em] text-[#C5A880] uppercase mb-1.5 block drop-shadow">
+          <span className="font-mono text-xs tracking-[0.3em] text-[#8C7E6A] uppercase mb-1.5 block">
             3D — 3D EXPLORER
           </span>
 
           {/* Main Editorial Headline */}
-          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#FDFBF7] tracking-tight mb-2 font-normal leading-tight drop-shadow-[0_4px_16px_rgba(0,0,0,0.8)]">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1C1917] tracking-tight mb-2 font-normal leading-tight">
             Tour all three towers{' '}
-            <span className="font-serif italic font-light text-[#C5A880]">in 360°.</span>
+            <span className="font-serif italic font-light text-[#8C7E6A]">in 360°.</span>
           </h2>
 
           {/* Subtitle */}
-          <p className="font-sans text-xs sm:text-sm md:text-base text-[#C7C3B8] font-light tracking-wide text-center max-w-xl mx-auto drop-shadow-md">
+          <p className="font-sans text-xs sm:text-sm md:text-base text-[#1C1917]/70 font-light tracking-wide text-center max-w-xl mx-auto">
             Browse studios, apartments and penthouses, and view floor plans
           </p>
         </motion.div>
@@ -260,21 +273,28 @@ export const ExplorerSection: React.FC<ExplorerSectionProps> = ({ onOpenExplorer
         <div className="absolute bottom-6 md:bottom-8 left-0 w-full px-8 md:px-16 flex items-end justify-between pointer-events-none select-none z-30">
           {/* Bottom-Left: Chapter index "03 / 12" + slender line */}
           <div className="flex items-center pointer-events-auto">
-            <span className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase font-medium text-[#efe9df]">
+            <motion.span
+              style={{ color: indicatorColor }}
+              className="font-mono text-xs md:text-sm tracking-[0.2em] uppercase font-medium transition-colors"
+            >
               03 / 12
-            </span>
-            <span className="w-12 md:w-16 h-[1.5px] ml-4 inline-block align-middle bg-[#efe9df]/40" />
+            </motion.span>
+            <motion.span
+              style={{ backgroundColor: indicatorLineBg }}
+              className="w-12 md:w-16 h-[1.5px] ml-4 inline-block align-middle transition-colors"
+            />
           </div>
 
           {/* Bottom-Right: Audio Indicator */}
           <div className="flex items-center pointer-events-auto ml-auto">
-            <button
+            <motion.button
+              style={{ color: soundColor }}
               onClick={() => setIsMuted((prev) => !prev)}
               type="button"
-              className="font-mono text-[10px] md:text-xs tracking-[0.25em] text-[#efe9df]/75 hover:text-[#efe9df] uppercase transition-colors"
+              className="font-mono text-[10px] md:text-xs tracking-[0.25em] hover:opacity-100 uppercase transition-colors"
             >
               {isMuted ? '.... SOUND OFF' : '.... SOUND ON'}
-            </button>
+            </motion.button>
           </div>
         </div>
 
